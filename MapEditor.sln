@@ -7,9 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapEditor", "MapEditor\MapE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapEditorViewModels", "MapEditorViewModels\MapEditorViewModels.csproj", "{EC152090-7562-4E86-A691-CF42E0199FDF}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "MapEditorCoreContent", "MapEditorContent\MapEditorCoreContent.contentproj", "{29EE05A3-F602-4A83-BA96-C2FC100E21FD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapEditorCoreContent", "MapEditorContent\MapEditorCoreContent.contentproj", "{29EE05A3-F602-4A83-BA96-C2FC100E21FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapEditorCore", "DummyGame\DummyGame\MapEditorCore.csproj", "{36EB711E-3CD9-4A33-BA13-DFA8D1275BB8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapEditorCore", "MapEditorCore\MapEditorCore\MapEditorCore.csproj", "{8A724488-F344-4A79-A7D0-D0D95174752B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,16 +47,16 @@ Global
 		{29EE05A3-F602-4A83-BA96-C2FC100E21FD}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{29EE05A3-F602-4A83-BA96-C2FC100E21FD}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{29EE05A3-F602-4A83-BA96-C2FC100E21FD}.Release|x86.ActiveCfg = Debug|Any CPU
-		{36EB711E-3CD9-4A33-BA13-DFA8D1275BB8}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{36EB711E-3CD9-4A33-BA13-DFA8D1275BB8}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{36EB711E-3CD9-4A33-BA13-DFA8D1275BB8}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{36EB711E-3CD9-4A33-BA13-DFA8D1275BB8}.Debug|x86.ActiveCfg = Debug|x86
-		{36EB711E-3CD9-4A33-BA13-DFA8D1275BB8}.Debug|x86.Build.0 = Debug|x86
-		{36EB711E-3CD9-4A33-BA13-DFA8D1275BB8}.Release|Any CPU.ActiveCfg = Release|x86
-		{36EB711E-3CD9-4A33-BA13-DFA8D1275BB8}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{36EB711E-3CD9-4A33-BA13-DFA8D1275BB8}.Release|Mixed Platforms.Build.0 = Release|x86
-		{36EB711E-3CD9-4A33-BA13-DFA8D1275BB8}.Release|x86.ActiveCfg = Release|x86
-		{36EB711E-3CD9-4A33-BA13-DFA8D1275BB8}.Release|x86.Build.0 = Release|x86
+		{8A724488-F344-4A79-A7D0-D0D95174752B}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{8A724488-F344-4A79-A7D0-D0D95174752B}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{8A724488-F344-4A79-A7D0-D0D95174752B}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{8A724488-F344-4A79-A7D0-D0D95174752B}.Debug|x86.ActiveCfg = Debug|x86
+		{8A724488-F344-4A79-A7D0-D0D95174752B}.Debug|x86.Build.0 = Debug|x86
+		{8A724488-F344-4A79-A7D0-D0D95174752B}.Release|Any CPU.ActiveCfg = Release|x86
+		{8A724488-F344-4A79-A7D0-D0D95174752B}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{8A724488-F344-4A79-A7D0-D0D95174752B}.Release|Mixed Platforms.Build.0 = Release|x86
+		{8A724488-F344-4A79-A7D0-D0D95174752B}.Release|x86.ActiveCfg = Release|x86
+		{8A724488-F344-4A79-A7D0-D0D95174752B}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

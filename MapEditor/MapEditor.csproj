@@ -181,8 +181,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DummyGame\DummyGame\MapEditorCore.csproj">
-      <Project>{36eb711e-3cd9-4a33-ba13-dfa8d1275bb8}</Project>
+    <ProjectReference Include="..\MapEditorCore\MapEditorCore\MapEditorCore.csproj">
+      <Project>{8a724488-f344-4a79-a7d0-d0d95174752b}</Project>
       <Name>MapEditorCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\MapEditorViewModels\MapEditorViewModels.csproj">
@@ -192,6 +192,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Style rules.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MapEditorCore.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
