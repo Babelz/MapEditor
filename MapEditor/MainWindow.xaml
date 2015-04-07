@@ -1,0 +1,54 @@
+﻿<Window x:Class="MapEditor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:avalon="http://schemas.xceed.com/wpf/xaml/avalondock"
+        Title="MainWindow" Height="720" Width="1280">
+    
+    <Window.Resources>
+        <ResourceDictionary Source="Themes\ExpressionDark.xaml"/>
+    </Window.Resources>
+ 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Menu>
+            <MenuItem Header="File">
+                <MenuItem Header="New project" Name="newProjectMenuItem" Click="newProjectMenuItem_Click"/>
+                <MenuItem Header="Load project" Name="loadProjectMenuItem" Click="loadProjectMenuItem_Click"/>
+                <MenuItem Header="Save project" Name="saveProjectMenuItem" Click="saveProjectMenuItem_Click"/>
+                <Separator/>
+                <MenuItem Header="Exit" Name="exitProgramMenuItem"/>
+            </MenuItem>
+            <MenuItem Header="Edit"/>
+            <MenuItem Header="Properties"/>
+            <MenuItem Header="Help"/>
+        </Menu>
+
+        <avalon:DockingManager x:Name="dockingManager" Grid.Row="1">
+            <avalon:LayoutRoot>
+                <avalon:LayoutPanel Orientation="Horizontal">
+                    <avalon:LayoutAnchorablePane DockWidth="200" Name="projectExplorerPanel">  
+                        <avalon:LayoutAnchorable Title="Project explorer">
+                            <Canvas Name="projectExplorerRoot" Background="{StaticResource NormalBorderBrush}"/>
+                        </avalon:LayoutAnchorable>
+                    </avalon:LayoutAnchorablePane>
+                    
+                    <avalon:LayoutAnchorablePane DockWidth="880" Name="editorPanel">
+                        <avalon:LayoutAnchorable Title="Editor">
+                            <Canvas Name="editorPanelRoot" Background="{StaticResource NormalBorderBrush}"/>
+                        </avalon:LayoutAnchorable>
+                    </avalon:LayoutAnchorablePane>
+
+                    <avalon:LayoutAnchorablePane DockMinWidth="200" Name="propertiesPanel">
+                        <avalon:LayoutAnchorable Title="Properties">
+                            <Canvas Name="propertiesRoot" Background="{StaticResource NormalBorderBrush}"/>
+                        </avalon:LayoutAnchorable>
+                    </avalon:LayoutAnchorablePane>
+                </avalon:LayoutPanel>
+            </avalon:LayoutRoot>
+        </avalon:DockingManager>
+    </Grid>
+</Window>

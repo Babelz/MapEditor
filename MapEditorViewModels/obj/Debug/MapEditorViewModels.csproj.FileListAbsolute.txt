@@ -1,0 +1,5 @@
+C:\Users\ttv14snikos\documents\visual studio 2013\Projects\MapEditor\MapEditorViewModels\bin\Debug\MapEditorViewModels.dll
+C:\Users\ttv14snikos\documents\visual studio 2013\Projects\MapEditor\MapEditorViewModels\bin\Debug\MapEditorViewModels.pdb
+C:\Users\ttv14snikos\documents\visual studio 2013\Projects\MapEditor\MapEditorViewModels\obj\Debug\MapEditorViewModels.csprojResolveAssemblyReference.cache
+C:\Users\ttv14snikos\documents\visual studio 2013\Projects\MapEditor\MapEditorViewModels\obj\Debug\MapEditorViewModels.dll
+C:\Users\ttv14snikos\documents\visual studio 2013\Projects\MapEditor\MapEditorViewModels\obj\Debug\MapEditorViewModels.pdb
