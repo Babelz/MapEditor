@@ -14,8 +14,6 @@ namespace MapEditorCore.Components
     public sealed class BasicView : IView
     {
         #region Fields
-        private readonly EditorGame game;
-
         private Point position;
         private Point size;
         #endregion

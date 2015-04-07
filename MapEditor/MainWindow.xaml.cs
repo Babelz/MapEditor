@@ -45,7 +45,7 @@ namespace MapEditor
             // Show new project dialog to the user.
             if (newProjectDialog.ShowDialog().Value)
             {
-                // Dialog OK, create new project.
+                // Dialog OK, got some correct properties for creating editor.
                 
                 // Dispose old project and show warning dialog to the user.
                 if (project != null)

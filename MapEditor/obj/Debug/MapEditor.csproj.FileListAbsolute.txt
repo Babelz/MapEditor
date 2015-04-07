@@ -69,9 +69,6 @@ C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\MapEditor.exe
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\MapEditor.pdb
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\MapEditorCore.dll
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\MapEditorViewModels.dll
-C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Microsoft.Xna.Framework.dll
-C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Microsoft.Xna.Framework.Game.dll
-C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Microsoft.Xna.Framework.Graphics.dll
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Xceed.Wpf.AvalonDock.dll
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Aero.dll
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Metro.dll
@@ -85,9 +82,6 @@ C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Xceed.Wpf.Themes.O
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Xceed.Wpf.Toolkit.dll
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\MapEditorCore.pdb
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\MapEditorViewModels.pdb
-C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Microsoft.Xna.Framework.xml
-C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Microsoft.Xna.Framework.Game.xml
-C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Microsoft.Xna.Framework.Graphics.xml
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\de\Xceed.Wpf.AvalonDock.resources.dll
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\es\Xceed.Wpf.AvalonDock.resources.dll
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\fr\Xceed.Wpf.AvalonDock.resources.dll

@@ -1,6 +1,7 @@
 ﻿using MapEditorCore.Abstractions;
 using MapEditorCore.Components;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace MapEditorCore.TileEditor
 {
-    public sealed class TileEditor : IEditor
+    public sealed class TileEditor : Editor
     {
         #region Fields
         private readonly LayerManager<TileLayer> layers;
@@ -19,17 +20,20 @@ namespace MapEditorCore.TileEditor
         private readonly BasicView view;
 
         private Color backgroundColor;
+
+        private SpriteBatch spriteBatch;
+        private ContentManager content;
         #endregion
 
         #region Properties
-        public IEnumerable<Layer> Layers
+        public override IEnumerable<Layer> Layers
         {
             get
             {
                 return layers.Layers;
             }
         }
-        public Color BackgroundColor
+        public override Color BackgroundColor
         {
             get
             {
@@ -43,6 +47,7 @@ namespace MapEditorCore.TileEditor
         #endregion
 
         public TileEditor(TileEngine tileEngine)
+            : base()
         {
             this.tileEngine = tileEngine;
 
@@ -52,41 +57,38 @@ namespace MapEditorCore.TileEditor
             backgroundColor = Color.CornflowerBlue;
         }
 
-        public void Initialize()
+        protected override void OnInitialize()
         {
+            // TODO: initialize components.
         }
 
-        public void LoadContent()
-        {
-        }
-
-        public void UnloadContent()
-        {
-        }
-
-        public void MakeLayerActive(string name)
+        public override void MakeLayerActive(string name)
         {
             layers.MakeActive(name);
         }
 
-        public void AddLayer(string name, Point size)
+        public override void AddLayer(string name, Point size)
         {
             TileLayer layer = new TileLayer(name, size, tileEngine);
 
             layers.AddLayer(layer);
         }
-
-        public void RemoveLayer(string name)
+        public override void RemoveLayer(string name)
         {
             layers.RemoveLayer(name);
         }
 
-        public void Update(GameTime gameTime)
+        public override Rectangle GetMapBounds()
+        {
+            return tileEngine.PixelBounds;
+        }
+
+        public override void Update(GameTime gameTime)
         {
             layers.Update(gameTime);
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
 

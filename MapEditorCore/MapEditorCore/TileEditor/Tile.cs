@@ -59,6 +59,8 @@ namespace MapEditorCore.TileEditor
         {
             X = x;
             Y = y;
+
+            color = Color.White;
         }
 
         public Tile(TileEngine tileEngine)

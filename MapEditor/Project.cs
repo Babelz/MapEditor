@@ -18,7 +18,7 @@ namespace MapEditor
 
         private readonly IGUIConfigurer configurer;
         private readonly EditorGame game;
-        private readonly IEditor editor;
+        private readonly Editor editor;
 
         private string name;
         private string mapName;
@@ -75,7 +75,7 @@ namespace MapEditor
         /// <summary>
         /// Editor used for this project.
         /// </summary>
-        public IEditor Editor
+        public Editor Editor
         {
             get
             {
@@ -101,7 +101,7 @@ namespace MapEditor
         }
         #endregion
 
-        public Project(IGUIConfigurer configurer, EditorGame game, IEditor editor, string name, string mapName, string mapTypename)
+        public Project(IGUIConfigurer configurer, EditorGame game, Editor editor, string name, string mapName, string mapTypename)
         {
             this.configurer = configurer;
             this.game = game;

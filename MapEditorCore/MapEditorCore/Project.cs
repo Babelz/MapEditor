@@ -15,7 +15,7 @@ namespace MapEditorCore
         private readonly string mapTypename;
 
         private readonly EditorGame game;
-        private readonly IEditor editor;
+        private readonly Editor editor;
 
         private string name;
         private string mapName;
@@ -65,7 +65,7 @@ namespace MapEditorCore
         /// <summary>
         /// Editor used for this project.
         /// </summary>
-        public IEditor Editor
+        public Editor Editor
         {
             get
             {
@@ -91,7 +91,7 @@ namespace MapEditorCore
         }
         #endregion
 
-        public Project(EditorGame game, IEditor editor, string name, string mapName, string mapTypename)
+        public Project(EditorGame game, Editor editor, string name, string mapName, string mapTypename)
         {
             this.game = game;
             this.editor = editor;

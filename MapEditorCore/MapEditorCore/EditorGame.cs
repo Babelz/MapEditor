@@ -8,57 +8,26 @@ using System.Threading.Tasks;
 
 namespace MapEditorCore
 {
+    /// <summary>
+    /// Adapter class for editors. No editor should have reference to an instance
+    /// of this class.
+    /// </summary>
     public sealed class EditorGame : XNAControl.XNAControlGame
     {
         #region Fields
-        private readonly IEditor editor;
+        private readonly Editor editor;
         
         private SpriteBatch spriteBatch;
         #endregion
 
-        public EditorGame(IntPtr windowHandle, IEditor editor)
+        public EditorGame(IntPtr windowHandle, Editor editor)
             : base(windowHandle, "Content")
         {
             this.editor = editor;
 
-            // TODO: hax. XNAControl calls these override methods inside
-            // its own constructor. Cant allow that cause editor is still 
-            // null at that point...
-            Initialize();
-            LoadContent();
-        }
-
-        /*
-         * THESE TWO METHODS!
-         * are not overrides from xna game class. Since XNA control
-         * is calling these methods at constructor, we need to create 
-         * our own initialize and load content methods that we will
-         * call in the constructor. 
-         * 
-         * TODO: maybe get the source and modify it to serve your needs better?
-         */
-
-        private new void Initialize()
-        {
-            editor.Initialize();
-        }
-        private new void LoadContent()
-        {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            editor.LoadContent();
-        }
-
-        /*
-         * UNLOAD, DRAW AND UPDATE 
-         * are overrides from xna game class. 
-         */
-
-        protected override void UnloadContent()
-        {
-            base.UnloadContent();
-
-            editor.UnloadContent();
+            // Just initialize the editor, XNA control has already called
+            // load content, initialize etc...
+            editor.Initialize(Content, spriteBatch);
         }
 
         protected override void Update(GameTime gameTime)
