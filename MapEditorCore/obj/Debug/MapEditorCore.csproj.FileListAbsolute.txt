@@ -13,3 +13,18 @@ C:\Users\ttv14snikos\documents\visual studio 2013\Projects\MapEditor\MapEditorCo
 C:\Users\ttv14snikos\documents\visual studio 2013\Projects\MapEditor\MapEditorCore\obj\Debug\MapEditorCore.dll
 C:\Users\ttv14snikos\documents\visual studio 2013\Projects\MapEditor\MapEditorCore\obj\Debug\MapEditorCore.pdb
 C:\Users\ttv14snikos\documents\visual studio 2013\Projects\MapEditor\MapEditorCore\obj\Debug\MapEditorCore.csprojResolveAssemblyReference.cache
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditorCore\bin\Debug\MapEditorCore.dll
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditorCore\bin\Debug\MapEditorCore.pdb
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditorCore\bin\Debug\MonoGame.Framework.dll
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditorCore\bin\Debug\SharpDX.MediaFoundation.dll
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditorCore\bin\Debug\SharpDX.dll
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditorCore\bin\Debug\SharpDX.XAudio2.dll
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditorCore\bin\Debug\SharpDX.Direct3D11.dll
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditorCore\bin\Debug\SharpDX.DXGI.dll
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditorCore\bin\Debug\SharpDX.Direct2D1.dll
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditorCore\bin\Debug\SharpDX.XInput.dll
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditorCore\bin\Debug\SharpDX.RawInput.dll
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditorCore\bin\Debug\SharpDX.Direct3D9.dll
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditorCore\obj\Debug\MapEditorCore.csprojResolveAssemblyReference.cache
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditorCore\obj\Debug\MapEditorCore.dll
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditorCore\obj\Debug\MapEditorCore.pdb

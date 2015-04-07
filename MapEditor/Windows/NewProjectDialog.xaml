@@ -5,12 +5,13 @@
         Title="New Project" Width="400" Height="320" ResizeMode="NoResize">
 
     <Window.Resources>
-        <ResourceDictionary Source="C:\Users\ttv14snikos\documents\visual studio 2013\Projects\MapEditor\MapEditor\Themes\ExpressionDark.xaml"/>
+        <ResourceDictionary Source="C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\Themes\ExpressionDark.xaml"/>
     </Window.Resources>
     
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="125"/>
+            <RowDefinition Height="125"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -18,6 +19,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         
+        <!-- Basic project properties group box -->
         <GroupBox Header="Project" Margin="5" Grid.ColumnSpan="2">
             <Grid Margin="5">
                 <Grid.RowDefinitions>
@@ -35,14 +37,15 @@
                 <TextBlock Text="Map name: " Grid.Row="1" VerticalAlignment="Center"/>
                 <TextBlock Text="Type: " Grid.Row="2" VerticalAlignment="Center"/>
 
-                <TextBox Text="{Binding Path=ProjectName}" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="0, 1, 0, 0" Name="JEESUS"/>
-                <TextBox Text="{Binding Path=MapName}" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="0, 1, 0, 0"/>
-                <ComboBox Text="{Binding Path=MapType}" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="0, 1, 0, 0" SelectedIndex="0" 
+                <TextBox Text="{Binding Path=ProjectName, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="0, 1, 0, 0"/>
+                <TextBox Text="{Binding Path=MapName, Mode=TwoWay}" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="0, 1, 0, 0"/>
+                <ComboBox Text="{Binding Path=MapType, Mode=TwoWay}" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="0, 1, 0, 0" SelectedIndex="0" 
                           Name="mapTypeComboBox" SelectionChanged="mapTypeComboBox_SelectionChanged">
                 </ComboBox>
             </Grid>
         </GroupBox>
         
+        <!-- Map properties group box -->
         <GroupBox Header="Map" Margin="5" Grid.Row="1">
             <Grid Margin="5">
                 <Grid.RowDefinitions>
@@ -62,12 +65,35 @@
                 <TextBlock Text="Height: " Grid.Row="2" VerticalAlignment="Center"/>
 
                 <TextBlock Text="tiles" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="0, 1, 0, 0" Name="sizeUnitTextBlock"/>
-                <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="0, 1, 0, 0"/>
-                <TextBox Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="0, 1, 0, 0"/>
+                
+                <!-- Map width and height text boxes -->
+                <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="0, 1, 0, 0" TextChanged="TextBox_ValidateInput" Text="{Binding Path=MapWidth, Mode=TwoWay}"/>
+                <TextBox Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="0, 1, 0, 0" TextChanged="TextBox_ValidateInput" Text="{Binding Path=MapHeight, Mode=TwoWay}"/>
             </Grid>
         </GroupBox>
 
-        <GroupBox Header="Tiles" Margin="5" Grid.Row="1" Grid.Column="1">
+        <GroupBox Header="Tiles" Margin="5" Grid.Row="1" Grid.Column="1" IsEnabled="{Binding RequiresTileProperties}">
+            <Grid Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="20"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="85"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Width: " Grid.Row="0" VerticalAlignment="Center"/>
+                <TextBlock Text="Height: " Grid.Row="1" VerticalAlignment="Center"/>
+
+                <!-- Map width and height text boxes -->
+                <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="0, 1, 0, 0" TextChanged="TextBox_ValidateInput" Text="{Binding Path=TileWidth, Mode=TwoWay}"/>
+                <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="0, 1, 0, 0" TextChanged="TextBox_ValidateInput" Text="{Binding Path=TileHeight, Mode=TwoWay}"/>
+            </Grid>
         </GroupBox>
+
+        <Button Name="createProjectButton" Content="Create project" Grid.Row="2" Grid.ColumnSpan="2" Margin="5" IsEnabled="{Binding Path=HasValidProperties}" Click="createProjectButton_Click"/>
     </Grid>
 </Window>

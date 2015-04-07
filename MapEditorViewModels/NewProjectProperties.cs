@@ -6,11 +6,25 @@ using System.Threading.Tasks;
 
 namespace MapEditorViewModels
 {
+    /// <summary>
+    /// Map type.
+    /// </summary>
     public enum MapType
     {
+        /// <summary>
+        /// Tile based map.
+        /// </summary>
         Tile,
+
+        /// <summary>
+        /// Object or texture based map.
+        /// </summary>
         Object,
-        Hexa
+
+        /// <summary>
+        /// Hexa based map.
+        /// </summary>
+        Hex
     }
 
     public sealed class NewProjectProperties
@@ -32,14 +46,21 @@ namespace MapEditorViewModels
         {
         }
 
-        public bool IsValidMapModel()
+        /// <summary>
+        /// Returns true if all properties are valid for selected map type.
+        /// </summary>
+        public bool HasValidMapProperties()
         {
             return !string.IsNullOrEmpty(ProjectName) && !string.IsNullOrEmpty(MapName) &&
                     MapHeight != 0 && MapWidth != 0;
         }
-        public bool IsValidTileMapModel()
+        /// <summary>
+        /// Returns true if all properties are valid for tile maps.
+        /// </summary>
+        /// <returns></returns>
+        public bool HasValidTileMapProperties()
         {
-            return IsValidMapModel() && TileHeight != 0 && TileWidth != 0;
+            return HasValidMapProperties() && TileHeight != 0 && TileWidth != 0;
         }
     }
 }

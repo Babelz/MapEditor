@@ -33,18 +33,21 @@ namespace MapEditor
         {
             NewProjectDialog newProjectDialog = new NewProjectDialog();
             
+            // Show new project dialog to the user.
             if (newProjectDialog.ShowDialog().Value)
             {
-
+                // Dialog OK, create new project.
             }
+
+            // Invalid results, continue.
         }
         private void loadProjectMenuItem_Click(object sender, RoutedEventArgs e)
         {
-
+            // TODO: load project.
         }
         private void saveProjectMenuItem_Click(object sender, RoutedEventArgs e)
         {
-
+            // TODO: save project.
         }
         #endregion
 

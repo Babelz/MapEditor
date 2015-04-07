@@ -1,4 +1,5 @@
-﻿using MapEditorViewModels;
+﻿using MapEditor.Components;
+using MapEditorViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,22 +61,45 @@ namespace MapEditor.Windows
         }
         
         #region Event handlers
+        /// <summary>
+        /// Show the wanted unit for this map type. Can be tiles of pixels.
+        /// </summary>
         private void mapTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // Get the map type.
             MapType mapType = (MapType)mapTypeComboBox.SelectedValue;
             
+            // Change unit.
             switch (mapType)
             {
                 case MapType.Tile:
-                case MapType.Hexa:
+                case MapType.Hex:
                     sizeUnitTextBlock.Text = "tiles";
                     break;
                 case MapType.Object:
                     sizeUnitTextBlock.Text = "pixels";
                     break;
                 default:
-                    break;
+                    throw new InvalidOperationException("Unsupported map type.");
             }
+        }
+        /// <summary>
+        /// Validate that the input only contains digits.
+        /// </summary>
+        private void TextBox_ValidateInput(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            
+            if (!StringHelper.OnlyContainsDigits(textBox.Text)) textBox.Text = StringHelper.RemoveAllNonDigitCharacters(textBox.Text);
+        }
+        /// <summary>
+        /// Return positive dialog results.
+        /// </summary>
+        private void createProjectButton_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+
+            Close();
         }
         #endregion
     }
