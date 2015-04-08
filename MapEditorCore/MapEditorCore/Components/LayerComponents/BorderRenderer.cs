@@ -8,7 +8,10 @@ using System.Threading.Tasks;
 
 namespace MapEditorCore.Components
 {
-    public sealed class BorderRenderer
+    /// <summary>
+    /// Component for rendering borders of maps.
+    /// </summary>
+    public sealed class BorderRenderer : EditorComponent
     {
         #region Constants
         private const int BORDER_THICKNESS = 5;
@@ -16,19 +19,17 @@ namespace MapEditorCore.Components
 
         #region Fields
         private readonly Texture2D temp;
-
-        private readonly Editor editor;
         #endregion
 
         public BorderRenderer(Editor editor, Texture2D temp)
+            : base(editor)
         {
-            this.editor = editor;
             this.temp = temp;
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        protected override void OnDraw(SpriteBatch spriteBatch)
         {
-            Rectangle bounds = editor.GetMapBounds();
+            Rectangle bounds = Editor.GetMapBounds();
 
             // Top.
             spriteBatch.Draw(temp, new Rectangle(0, 0, bounds.Width, BORDER_THICKNESS), Color.Black);

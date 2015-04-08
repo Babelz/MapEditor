@@ -83,13 +83,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstractions\DrawOrder.cs" />
     <Compile Include="Abstractions\Layer.cs" />
     <Compile Include="Abstractions\LayerManager.cs" />
     <Compile Include="Abstractions\LayerObject.cs" />
     <Compile Include="Components\BasicView.cs" />
-    <Compile Include="Components\BorderRenderer.cs" />
-    <Compile Include="Components\ComponentCollection.cs" />
-    <Compile Include="Components\EditorComponent.cs" />
+    <Compile Include="Components\LayerComponents\BorderRenderer.cs" />
+    <Compile Include="Components\LayerComponents\ComponentCollection.cs" />
+    <Compile Include="Components\LayerComponents\EditorComponent.cs" />
     <Compile Include="Components\IView.cs" />
     <Compile Include="EditorGame.cs" />
     <Compile Include="Editor.cs" />

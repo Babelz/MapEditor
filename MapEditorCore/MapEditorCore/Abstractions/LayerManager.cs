@@ -44,6 +44,24 @@ namespace MapEditorCore.Abstractions
             layers = new List<T>();
         }
 
+        #region Event handlers
+        private void DrawOrder_Changed()
+        {
+            SortLayers();
+        }
+        #endregion
+
+        private void SortLayers()
+        {
+            layers.Sort((a, b) =>
+            {
+                if (a.DrawOrder == b.DrawOrder) return 0;
+                if (a.DrawOrder > b.DrawOrder) return -1;
+
+                return 1;
+            });
+        }
+
         /// <summary>
         /// Adds the given layer.
         /// </summary>
@@ -51,6 +69,8 @@ namespace MapEditorCore.Abstractions
         public void AddLayer(T layer)
         {
             layers.Add(layer);
+
+            layer.DrawOrder.Changed += DrawOrder_Changed;
         }
         /// <summary>
         /// Removes the given layer.
@@ -59,6 +79,8 @@ namespace MapEditorCore.Abstractions
         public void RemoveLayer(T layer)
         {
             layers.Remove(layer);
+
+            layer.DrawOrder.Changed -= DrawOrder_Changed;
 
             if (ReferenceEquals(layer, activeLayer)) activeLayer = null;
         }

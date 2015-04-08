@@ -20,9 +20,6 @@ namespace MapEditorCore.TileEditor
         private readonly BasicView view;
 
         private Color backgroundColor;
-
-        private SpriteBatch spriteBatch;
-        private ContentManager content;
         #endregion
 
         #region Properties

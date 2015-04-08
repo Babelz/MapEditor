@@ -15,15 +15,17 @@ namespace MapEditorCore
     public sealed class EditorGame : XNAControl.XNAControlGame
     {
         #region Fields
+        private readonly SpriteBatch spriteBatch;
+
         private readonly Editor editor;
-        
-        private SpriteBatch spriteBatch;
         #endregion
 
         public EditorGame(IntPtr windowHandle, Editor editor)
             : base(windowHandle, "Content")
         {
             this.editor = editor;
+
+            spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // Just initialize the editor, XNA control has already called
             // load content, initialize etc...

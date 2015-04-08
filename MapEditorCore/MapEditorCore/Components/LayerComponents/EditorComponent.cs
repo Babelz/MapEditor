@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using MapEditorCore.Abstractions;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -7,27 +8,22 @@ using System.Text;
 
 namespace MapEditorCore.Components
 {
+    /// <summary>
+    /// Base class for editor related components.
+    /// </summary>
     public abstract class EditorComponent
     {
         #region Fields
-        private readonly string displayName;
         private readonly Editor editor;
 
-        private int drawOrder;
+        private DrawOrder drawOrder;
 
         private bool enabled;
         private bool visible;
         #endregion
 
         #region Properties
-        public string DisplayName
-        {
-            get
-            {
-                return displayName;
-            }
-        }
-        public int DrawOrder
+        public DrawOrder DrawOrder
         {
             get
             {
@@ -71,18 +67,25 @@ namespace MapEditorCore.Components
         #endregion
 
 
-        public EditorComponent(string displayName, Editor editor)
+        public EditorComponent(Editor editor)
         {
-            this.displayName = displayName;
             this.editor = editor;
 
             enabled = true;
             visible = true;
+
+            drawOrder = new DrawOrder();
         }
 
+        /// <summary>
+        /// Called once every update if component is enabled.
+        /// </summary>
         protected virtual void OnUpdate(GameTime gameTime)
         {
         }
+        /// <summary>
+        /// Called once every draw if component is visible.
+        /// </summary>
         protected virtual void OnDraw(SpriteBatch spriteBatch)
         {
         }

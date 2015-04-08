@@ -44,7 +44,7 @@ namespace MapEditorCore.Abstractions
         private Point position;
         private Point size;
 
-        private int drawOrder;
+        private DrawOrder drawOrder;
         #endregion
 
         #region Properties
@@ -184,15 +184,11 @@ namespace MapEditorCore.Abstractions
                 }
             }
         }
-        public int DrawOrder
+        public DrawOrder DrawOrder
         {
             get
             {
                 return drawOrder;
-            }
-            set
-            {
-                drawOrder = value;
             }
         }
         #endregion
@@ -212,6 +208,10 @@ namespace MapEditorCore.Abstractions
 
             enabled = true;
             visible = true;
+
+            type = LayerType.Dynamic;
+
+            drawOrder = new DrawOrder();
         }
         
         /// <summary>

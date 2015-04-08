@@ -28,10 +28,15 @@ namespace MapEditorCore.Components
             components = new List<EditorComponent>();
         }
 
-        public void AddComponent(EditorComponent component)
+        #region Event handlers
+        private void DrawOrder_Changed()
         {
-            components.Add(component);
+            SortComponents();
+        }
+        #endregion
 
+        private void SortComponents()
+        {
             components.Sort((a, b) =>
             {
                 if (a.DrawOrder == b.DrawOrder) return 0;
@@ -40,9 +45,19 @@ namespace MapEditorCore.Components
                 return 1;
             });
         }
+        public void AddComponent(EditorComponent component)
+        {
+            components.Add(component);
+
+            component.DrawOrder.Changed += DrawOrder_Changed;
+        }
+
         public void RemoveComponent(EditorComponent component)
         {
             components.Remove(component);
+
+            // Remove events so component gets collected by GC.
+            component.DrawOrder.Changed -= DrawOrder_Changed;
         }
 
         public void Update(GameTime gameTime)

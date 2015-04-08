@@ -5,6 +5,5 @@ C:\Users\ttv14snikos\documents\visual studio 2013\Projects\MapEditor\MapEditorVi
 C:\Users\ttv14snikos\documents\visual studio 2013\Projects\MapEditor\MapEditorViewModels\obj\Debug\MapEditorViewModels.pdb
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditorViewModels\bin\Debug\MapEditorViewModels.dll
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditorViewModels\bin\Debug\MapEditorViewModels.pdb
-C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditorViewModels\obj\Debug\MapEditorViewModels.csprojResolveAssemblyReference.cache
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditorViewModels\obj\Debug\MapEditorViewModels.dll
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditorViewModels\obj\Debug\MapEditorViewModels.pdb
