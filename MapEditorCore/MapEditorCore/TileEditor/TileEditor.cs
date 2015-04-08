@@ -15,6 +15,7 @@ namespace MapEditorCore.TileEditor
     {
         #region Fields
         private readonly LayerManager<TileLayer> layers;
+        private readonly ComponentCollection components;
 
         private readonly TileEngine tileEngine;
         private readonly BasicView view;
@@ -28,6 +29,13 @@ namespace MapEditorCore.TileEditor
             get
             {
                 return layers.Layers;
+            }
+        }
+        public override IEnumerable<EditorComponent> Components
+        {
+            get
+            {
+                return components.Components;
             }
         }
         public override Color BackgroundColor
@@ -49,6 +57,7 @@ namespace MapEditorCore.TileEditor
             this.tileEngine = tileEngine;
 
             layers = new LayerManager<TileLayer>();
+            components = new ComponentCollection();
             view = new BasicView();
 
             backgroundColor = Color.CornflowerBlue;
@@ -56,12 +65,12 @@ namespace MapEditorCore.TileEditor
 
         protected override void OnInitialize()
         {
-            // TODO: initialize components.
+            components.AddComponent(new BorderRenderer(this, Content.Load<Texture2D>("temp")));
         }
 
-        public override void MakeLayerActive(string name)
+        public override void SelectLayer(string name)
         {
-            layers.MakeActive(name);
+            layers.SelectLayer(name);
         }
 
         public override void AddLayer(string name, Point size)
@@ -90,6 +99,8 @@ namespace MapEditorCore.TileEditor
             spriteBatch.Begin();
 
             layers.Draw(spriteBatch, view.Bounds);
+
+            components.Draw(spriteBatch, view.Bounds);
 
             spriteBatch.End();
         }

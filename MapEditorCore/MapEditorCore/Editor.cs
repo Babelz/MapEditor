@@ -1,4 +1,5 @@
 ﻿using MapEditorCore.Abstractions;
+using MapEditorCore.Components;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -24,6 +25,10 @@ namespace MapEditorCore
         {
             get;
         }
+        public abstract IEnumerable<EditorComponent> Components
+        {
+            get;
+        }
         public abstract Color BackgroundColor
         {
             get;
@@ -43,7 +48,7 @@ namespace MapEditorCore
             {
                 return spriteBatch;
             }
-        } 
+        }
         #endregion
 
         public Editor()
@@ -69,7 +74,7 @@ namespace MapEditorCore
             OnInitialize();
         }
 
-        public abstract void MakeLayerActive(string name);
+        public abstract void SelectLayer(string name);
         public abstract void AddLayer(string name, Point size);
         public abstract void RemoveLayer(string name);
 

@@ -74,8 +74,8 @@ namespace MapEditorCore.TileEditor
         {
             tileBounds = new Rectangle(0, 0, maxLayerSizeInTiles.X, maxLayerSizeInTiles.Y);
 
-            pixelBounds = new Rectangle(0, 0, tileBounds.X * tileSizeInPixels.X,
-                                              tileBounds.Y * tileSizeInPixels.Y);
+            pixelBounds = new Rectangle(0, 0, tileBounds.Width * tileSizeInPixels.X,
+                                              tileBounds.Height * tileSizeInPixels.Y);
         }
     }
 }

@@ -119,4 +119,5 @@ C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Xceed.Wpf.AvalonDo
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Metro.pdb
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Xceed.Wpf.AvalonDock.Themes.VS2010.pdb
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\MapEditor_Content.g.cs
-C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\MapEditorCoreContent\temp.xnb
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Content\temp.xnb
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Content\temp.png

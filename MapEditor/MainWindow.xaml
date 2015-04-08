@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:avalon="http://schemas.xceed.com/wpf/xaml/avalondock"
         xmlns:xnaControl="clr-namespace:XNAControl;assembly=XNAControl"
-        Title="MainWindow" Height="720" Width="1280">
+        Title="MainWindow" Height="720" Width="1280"
+        Closing="Window_Closing">
     
     <Window.Resources>
         <ResourceDictionary Source="Themes\ExpressionDark.xaml"/>
@@ -23,6 +24,11 @@
                 <Separator/>
                 <MenuItem Header="Exit" Name="exitProgramMenuItem"/>
             </MenuItem>
+            <MenuItem Header="View">
+                <MenuItem Header="Project explorer" Name="viewProjectExplorerMenuItem" Click="viewProjectExplorerMenuItem_Click"/>
+                <MenuItem Header="Map" Name="viewMapMenuItem" Click="viewMapMenuItem_Click"/>
+                <MenuItem Header="Properties" Name="viewPropertiesMenuItem" Click="viewPropertiesMenuItem_Click"/>
+            </MenuItem>
             <MenuItem Header="Edit"/>
             <MenuItem Header="Properties"/>
             <MenuItem Header="Help"/>
@@ -31,20 +37,20 @@
         <avalon:DockingManager x:Name="dockingManager" Grid.Row="1">
             <avalon:LayoutRoot>
                 <avalon:LayoutPanel Orientation="Horizontal">
-                    <avalon:LayoutAnchorablePane DockWidth="200" x:Name="projectExplorerPanel">  
-                        <avalon:LayoutAnchorable Title="Project explorer">
+                    <avalon:LayoutAnchorablePane DockWidth="200">
+                        <avalon:LayoutAnchorable Title="Project explorer" x:Name="projectExplorerView" Closing="view_Closing">
                             <Canvas Name="projectExplorerRoot" Background="{StaticResource NormalBorderBrush}"/>
                         </avalon:LayoutAnchorable>
                     </avalon:LayoutAnchorablePane>
                     
-                    <avalon:LayoutAnchorablePane DockWidth="880" x:Name="editorPanel">
-                        <avalon:LayoutAnchorable Title="Editor">
+                    <avalon:LayoutAnchorablePane DockWidth="880">
+                        <avalon:LayoutAnchorable Title="Map" x:Name="mapView" Closing="view_Closing">
                             <xnaControl:UserControl1 x:Name="xnaControl"/>
                         </avalon:LayoutAnchorable>
                     </avalon:LayoutAnchorablePane>
 
-                    <avalon:LayoutAnchorablePane DockMinWidth="200" x:Name="propertiesPanel">
-                        <avalon:LayoutAnchorable Title="Properties">
+                    <avalon:LayoutAnchorablePane DockMinWidth="200">
+                        <avalon:LayoutAnchorable Title="Properties" x:Name="propertiesView" Closing="view_Closing">
                             <Canvas Name="propertiesRoot" Background="{StaticResource NormalBorderBrush}"/>
                         </avalon:LayoutAnchorable>
                     </avalon:LayoutAnchorablePane>

@@ -3,6 +3,7 @@ using MapEditorCore;
 using MapEditorViewModels;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using Xceed.Wpf.AvalonDock.Layout;
 using XNAUserControl = XNAControl.UserControl1;
 
 namespace MapEditor
@@ -28,6 +29,9 @@ namespace MapEditor
     {
         #region Fields
         private Project project;
+
+        // Is the main window (this) exiting.
+        private bool exiting;
         #endregion
 
         public MainWindow()
@@ -85,6 +89,36 @@ namespace MapEditor
         }
         #endregion
 
+        #region View menu event handlers
+        private void viewProjectExplorerMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            projectExplorerView.Show();
+        }
+        private void viewMapMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            mapView.Show();
+        }
+        private void viewPropertiesMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            propertiesView.Show();
+        }
+
+        /// <summary>
+        /// Just hides views if user is trying to close them. Will allow them
+        /// to close if application is exiting.
+        /// </summary>
+        private void view_Closing(object sender, CancelEventArgs e)
+        {
+            if (exiting) return;
+
+            e.Cancel = true;
+
+            LayoutAnchorable layoutAnchorable = sender as LayoutAnchorable;
+            
+            layoutAnchorable.Hide();
+        }
+        #endregion
+
         #endregion
 
         private void CleanupLastProject()
@@ -97,6 +131,14 @@ namespace MapEditor
         private void InitializeNewProject()
         {
             project.Configurer.Configure(this);
+        }
+
+        /// <summary>
+        /// Event to allow views to exit.
+        /// </summary>
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            exiting = true;
         }
     }
 }

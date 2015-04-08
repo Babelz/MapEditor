@@ -13,7 +13,7 @@ namespace MapEditorCore.Abstractions
         #region Fields
         private readonly List<T> layers;
 
-        private T activeLayer;
+        private T selectedLayer;
         #endregion
 
         #region Properties
@@ -34,7 +34,7 @@ namespace MapEditorCore.Abstractions
         {
             get
             {
-                return activeLayer;
+                return selectedLayer;
             }
         }
         #endregion
@@ -70,6 +70,8 @@ namespace MapEditorCore.Abstractions
         {
             layers.Add(layer);
 
+            SortLayers();
+
             layer.DrawOrder.Changed += DrawOrder_Changed;
         }
         /// <summary>
@@ -82,7 +84,7 @@ namespace MapEditorCore.Abstractions
 
             layer.DrawOrder.Changed -= DrawOrder_Changed;
 
-            if (ReferenceEquals(layer, activeLayer)) activeLayer = null;
+            if (ReferenceEquals(layer, selectedLayer)) selectedLayer = null;
         }
         /// <summary>
         /// Removes layer with given name.
@@ -96,12 +98,19 @@ namespace MapEditorCore.Abstractions
         }
 
         /// <summary>
-        /// Activates given layer.
+        /// Selects given layer.
         /// </summary>
-        /// <param name="name">name of the layer to activate</param>
-        public void MakeActive(string name)
+        /// <param name="name">name of the layer to activate, if name is empty or null, clears selection</param>
+        public void SelectLayer(string name)
         {
-            activeLayer = layers.FirstOrDefault(l => l.Name == name);
+            if (!string.IsNullOrEmpty(name))
+            {
+                selectedLayer = null;
+                
+                return;
+            }
+
+            selectedLayer = layers.FirstOrDefault(l => l.Name == name);
         }
 
         /// <summary>

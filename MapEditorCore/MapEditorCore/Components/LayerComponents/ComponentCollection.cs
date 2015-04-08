@@ -49,6 +49,8 @@ namespace MapEditorCore.Components
         {
             components.Add(component);
 
+            SortComponents();
+
             component.DrawOrder.Changed += DrawOrder_Changed;
         }
 
@@ -64,9 +66,9 @@ namespace MapEditorCore.Components
         {
             for (int i = 0; i < components.Count; i++) components[i].Update(gameTime);
         }
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, Rectangle viewBounds)
         {
-            for (int i = 0; i < components.Count; i++) components[i].Draw(spriteBatch);
+            for (int i = 0; i < components.Count; i++) components[i].Draw(spriteBatch, viewBounds);
         }
     }
 }

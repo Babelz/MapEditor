@@ -86,7 +86,7 @@ namespace MapEditorCore.Components
         /// <summary>
         /// Called once every draw if component is visible.
         /// </summary>
-        protected virtual void OnDraw(SpriteBatch spriteBatch)
+        protected virtual void OnDraw(SpriteBatch spriteBatch, Rectangle viewBounds)
         {
         }
 
@@ -96,11 +96,11 @@ namespace MapEditorCore.Components
 
             OnUpdate(gameTime);
         }
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, Rectangle viewBounds)
         {
             if (!visible) return;
 
-            OnDraw(spriteBatch);
+            OnDraw(spriteBatch, viewBounds);
         }
     }
 }
