@@ -1,4 +1,4 @@
-﻿using MapEditor.Components;
+﻿using MapEditor.Helpers;
 using MapEditorViewModels;
 using System;
 using System.Collections.Generic;

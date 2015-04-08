@@ -1,5 +1,6 @@
 ﻿using MapEditorCore.Abstractions;
 using MapEditorCore.Components;
+using MapEditorCore.Components.EditorComponents;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -65,7 +66,11 @@ namespace MapEditorCore.TileEditor
 
         protected override void OnInitialize()
         {
-            components.AddComponent(new BorderRenderer(this, Content.Load<Texture2D>("temp")));
+            // 1x1 white texture.
+            Texture2D temp = Content.Load<Texture2D>("temp");
+
+            components.AddComponent(new BorderRenderer(this, temp));
+            components.AddComponent(new Grid(this, temp, new Point(tileEngine.TileBounds.Width, tileEngine.TileBounds.Height)));
         }
 
         public override void SelectLayer(string name)

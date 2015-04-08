@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MapEditorCore.Components
+namespace MapEditorCore.Components.EditorComponents
 {
     /// <summary>
     /// Component for rendering borders of maps.

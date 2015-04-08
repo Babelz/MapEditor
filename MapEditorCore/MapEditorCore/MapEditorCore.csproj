@@ -88,10 +88,11 @@
     <Compile Include="Abstractions\LayerManager.cs" />
     <Compile Include="Abstractions\LayerObject.cs" />
     <Compile Include="Components\BasicView.cs" />
-    <Compile Include="Components\LayerComponents\BorderRenderer.cs" />
-    <Compile Include="Components\LayerComponents\ComponentCollection.cs" />
-    <Compile Include="Components\LayerComponents\EditorComponent.cs" />
+    <Compile Include="Components\EditorComponents\BorderRenderer.cs" />
+    <Compile Include="Components\EditorComponents\ComponentCollection.cs" />
+    <Compile Include="Components\EditorComponents\EditorComponent.cs" />
     <Compile Include="Components\IView.cs" />
+    <Compile Include="Components\EditorComponents\Grid.cs" />
     <Compile Include="EditorGame.cs" />
     <Compile Include="Editor.cs" />
     <Compile Include="Project.cs" />

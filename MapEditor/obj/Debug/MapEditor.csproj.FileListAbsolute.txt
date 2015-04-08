@@ -62,15 +62,16 @@ C:\Users\ttv14snikos\documents\visual studio 2013\Projects\MapEditor\MapEditor\o
 C:\Users\ttv14snikos\documents\visual studio 2013\Projects\MapEditor\MapEditor\obj\Debug\Windows\NewProjectDialog.g.cs
 C:\Users\ttv14snikos\documents\visual studio 2013\Projects\MapEditor\MapEditor\bin\Debug\MapEditorViewModels.dll
 C:\Users\ttv14snikos\documents\visual studio 2013\Projects\MapEditor\MapEditor\bin\Debug\MapEditorViewModels.pdb
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Content\temp.xnb
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Content\temp.png
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\MapEditor.exe.config
-C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\MapEditor.exe
-C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\MapEditor.pdb
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\MapEditor.exe
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\MapEditor.pdb
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\MapEditorCore.dll
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\MapEditorViewModels.dll
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Xceed.Wpf.AvalonDock.dll
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Aero.dll
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Expression.dll
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Metro.dll
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Xceed.Wpf.AvalonDock.Themes.MetroAccent.dll
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Office2007.dll
@@ -80,8 +81,15 @@ C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Xceed.Wpf.Themes.d
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Xceed.Wpf.Themes.Metro.dll
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Xceed.Wpf.Themes.Office2007.dll
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Xceed.Wpf.Toolkit.dll
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\XNAControl.dll
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\MapEditorCore.pdb
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\MapEditorViewModels.pdb
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Xceed.Wpf.AvalonDock.pdb
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Xceed.Wpf.AvalonDock.xml
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Aero.pdb
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Expression.pdb
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Metro.pdb
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Xceed.Wpf.AvalonDock.Themes.VS2010.pdb
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\de\Xceed.Wpf.AvalonDock.resources.dll
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\es\Xceed.Wpf.AvalonDock.resources.dll
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\fr\Xceed.Wpf.AvalonDock.resources.dll
@@ -106,18 +114,10 @@ C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\App.baml
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\MainWindow.g.cs
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\Windows\NewProjectDialog.g.cs
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\App.g.cs
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\MapEditor_Content.g.cs
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\MapEditor_MarkupCompile.cache
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\MapEditor.g.resources
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\MapEditor.Properties.Resources.resources
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\MapEditor.csproj.GenerateResource.Cache
-C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Expression.dll
-C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\XNAControl.dll
-C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Xceed.Wpf.AvalonDock.pdb
-C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Xceed.Wpf.AvalonDock.xml
-C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Aero.pdb
-C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Expression.pdb
-C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Metro.pdb
-C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Xceed.Wpf.AvalonDock.Themes.VS2010.pdb
-C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\MapEditor_Content.g.cs
-C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Content\temp.xnb
-C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\Content\temp.png
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\MapEditor.exe
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\MapEditor.pdb

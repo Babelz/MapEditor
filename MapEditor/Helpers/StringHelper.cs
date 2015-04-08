@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MapEditor.Components
+namespace MapEditor.Helpers
 {
     public static class StringHelper
     {

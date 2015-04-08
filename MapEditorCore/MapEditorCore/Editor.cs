@@ -1,5 +1,6 @@
 ﻿using MapEditorCore.Abstractions;
 using MapEditorCore.Components;
+using MapEditorCore.Components.EditorComponents;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;

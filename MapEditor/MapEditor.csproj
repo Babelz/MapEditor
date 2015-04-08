@@ -114,7 +114,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Components\StringHelper.cs" />
+    <Compile Include="Helpers\ChildHelper.cs" />
+    <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Configurers\IGUIConfigurer.cs" />
     <Compile Include="Configurers\TileEditorGUIConfigurer.cs" />
     <Compile Include="Project.cs" />

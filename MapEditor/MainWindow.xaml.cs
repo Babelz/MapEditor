@@ -1,4 +1,5 @@
-﻿using MapEditor.Windows;
+﻿using MapEditor.Helpers;
+using MapEditor.Windows;
 using MapEditorCore;
 using MapEditorViewModels;
 using System;

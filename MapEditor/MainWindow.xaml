@@ -10,28 +10,28 @@
         <ResourceDictionary Source="Themes\ExpressionDark.xaml"/>
     </Window.Resources>
  
-    <Grid>
+    <Grid Name="root">
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
-        <Menu>
-            <MenuItem Header="File">
+        <Menu Name="menu">
+            <MenuItem Header="File" Name="fileMenuItem">
                 <MenuItem Header="New project" Name="newProjectMenuItem" Click="newProjectMenuItem_Click"/>
                 <MenuItem Header="Load project" Name="loadProjectMenuItem" Click="loadProjectMenuItem_Click"/>
                 <MenuItem Header="Save project" Name="saveProjectMenuItem" Click="saveProjectMenuItem_Click"/>
                 <Separator/>
                 <MenuItem Header="Exit" Name="exitProgramMenuItem"/>
             </MenuItem>
-            <MenuItem Header="View">
+            <MenuItem Header="View" Name="viewMenuItem">
                 <MenuItem Header="Project explorer" Name="viewProjectExplorerMenuItem" Click="viewProjectExplorerMenuItem_Click"/>
                 <MenuItem Header="Map" Name="viewMapMenuItem" Click="viewMapMenuItem_Click"/>
                 <MenuItem Header="Properties" Name="viewPropertiesMenuItem" Click="viewPropertiesMenuItem_Click"/>
             </MenuItem>
-            <MenuItem Header="Edit"/>
-            <MenuItem Header="Properties"/>
-            <MenuItem Header="Help"/>
+            <MenuItem Header="Edit" Name="editMenuItem"/>
+            <MenuItem Header="Properties" Name="propertiesMenuItem"/>
+            <MenuItem Header="Help" Name="helpMenuItem"/>
         </Menu>
 
         <avalon:DockingManager x:Name="dockingManager" Grid.Row="1">
