@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MapEditorViewModels
 {
-    public sealed class NewTileLayerViewModel : INotifyPropertyChanged
+    public sealed class NewTileLayerPropertiesViewModel : INotifyPropertyChanged
     {
         #region Fields
         private readonly NewTileLayerProperties properties;
@@ -77,7 +77,7 @@ namespace MapEditorViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
-        public NewTileLayerViewModel(NewTileLayerProperties properties)
+        public NewTileLayerPropertiesViewModel(NewTileLayerProperties properties)
         {
             this.properties = properties;
         }

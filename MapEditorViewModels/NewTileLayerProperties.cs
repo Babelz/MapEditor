@@ -12,12 +12,14 @@ namespace MapEditorViewModels
         private readonly string[] takenNames;
 
         public string Name;
+
         public int Width;
         public int Height;
         #endregion
 
-        public NewTileLayerProperties(string[] takenName)
+        public NewTileLayerProperties(string[] takenNames)
         {
+            this.takenNames = takenNames;
         }
 
         public bool HasValidProperties()
