@@ -28,6 +28,8 @@ namespace MapEditorViewModels
         }
         public bool HasUniqueName()
         {
+            if (takenNames.Length == 0) return true;
+            
             for (int i = 0; i < takenNames.Length; i++) if (takenNames[i] == Name) return false;
 
             return true;
