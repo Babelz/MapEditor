@@ -1,5 +1,6 @@
 ﻿using MapEditor.Helpers;
 using MapEditor.Windows;
+using MapEditorCore.TileEditor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace MapEditor.Configurers
          */
 
         #region Fields
+        private readonly TileEditor tileEditor;
         // Root menu item.
         private MenuItem editMenuItem;
         private MenuItem addMenuItem;
@@ -30,14 +32,25 @@ namespace MapEditor.Configurers
         private MenuItem addMetadataObjectSetMenuItem;
         #endregion
 
-        public TileEditorGUIConfigurer()
+        /// <summary>
+        /// Creates new Tile editor GUI configurer. 
+        /// </summary>
+        /// <param name="tileEditor">tile editor instance that windows and user controls will need</param>
+        public TileEditorGUIConfigurer(TileEditor tileEditor)
         {
+            this.tileEditor = tileEditor;
         }
 
         #region Event handlers
         private void addLayerMenuItem_Click(object sender, RoutedEventArgs e)
         {
+            NewTileLayerDialog newTileLayerDialog = new NewTileLayerDialog(tileEditor);
 
+            // Show the dialog, ask for layer properties.
+            if (newTileLayerDialog.ShowDialog().Value)
+            {
+                // Dialog OK, create new layer.
+            }
         }
         #endregion
 

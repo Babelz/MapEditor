@@ -26,7 +26,7 @@ namespace MapEditor
             TileEditor editor = new TileEditor(tileEngine);
             EditorGame game = new EditorGame(windowHandle, editor);
             
-            return new Project(new TileEditorGUIConfigurer(),
+            return new Project(new TileEditorGUIConfigurer(editor),
                                game, editor, 
                                properties.ProjectName, 
                                properties.MapName, 

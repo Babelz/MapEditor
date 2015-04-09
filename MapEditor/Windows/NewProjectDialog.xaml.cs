@@ -28,19 +28,19 @@ namespace MapEditor.Windows
         #endregion
 
         #region Properties
+        private NewProjectPropertiesViewModel NewProjectPropertiesViewModel
+        {
+            get
+            {
+                return newProjectPropertiesViewModel;
+            }
+        }
+
         public NewProjectProperties NewProjectProperties
         {
             get
             {
                 return newProjectProperties;
-            }
-        }
-
-        public NewProjectPropertiesViewModel NewProjectPropertiesViewModel
-        {
-            get
-            {
-                return newProjectPropertiesViewModel;
             }
         }
         #endregion
@@ -51,7 +51,7 @@ namespace MapEditor.Windows
             newProjectProperties = new NewProjectProperties();
             newProjectPropertiesViewModel = new NewProjectPropertiesViewModel(newProjectProperties);
 
-            // Set data context of this window.
+            // Set data context for this window.
             DataContext = newProjectPropertiesViewModel;
 
             InitializeComponent();

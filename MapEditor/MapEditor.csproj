@@ -120,8 +120,8 @@
     <Compile Include="Configurers\TileEditorGUIConfigurer.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="ProjectBuilder.cs" />
-    <Compile Include="Windows\NewLayerDialog.xaml.cs">
-      <DependentUpon>NewLayerDialog.xaml</DependentUpon>
+    <Compile Include="Windows\NewTileLayerDialog.xaml.cs">
+      <DependentUpon>NewTileLayerDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\NewProjectDialog.xaml.cs">
       <DependentUpon>NewProjectDialog.xaml</DependentUpon>
@@ -166,7 +166,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Windows\NewLayerDialog.xaml">
+    <Page Include="Windows\NewTileLayerDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

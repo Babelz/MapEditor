@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MapEditorCore.TileEditor;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,8 +20,14 @@ namespace MapEditor.Windows
     /// </summary>
     public partial class NewTileLayerDialog : Window
     {
-        public NewTileLayerDialog()
+        #region Fields
+        private readonly TileEditor tileEditor;
+        #endregion
+
+        public NewTileLayerDialog(TileEditor tileEditor)
         {
+            this.tileEditor = tileEditor;
+            
             InitializeComponent();
         }
     }

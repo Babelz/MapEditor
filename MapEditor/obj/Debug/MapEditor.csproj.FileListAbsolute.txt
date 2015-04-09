@@ -121,5 +121,5 @@ C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\MapEditor.Properti
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\MapEditor.csproj.GenerateResource.Cache
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\MapEditor.exe
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\MapEditor.pdb
-C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\Windows\NewLayerDialog.baml
-C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\Windows\NewLayerDialog.g.cs
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\Windows\NewTileLayerDialog.baml
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\Windows\NewTileLayerDialog.g.cs
