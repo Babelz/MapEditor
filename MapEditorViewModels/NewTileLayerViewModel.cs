@@ -68,7 +68,7 @@ namespace MapEditorViewModels
         {
             get
             {
-                return properties.HasUniqueName();
+                return !properties.HasUniqueName();
             }
         }
         #endregion
