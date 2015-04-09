@@ -1,4 +1,5 @@
-﻿using MapEditorCore.TileEditor;
+﻿using MapEditor.Helpers;
+using MapEditorCore.TileEditor;
 using MapEditorViewModels;
 using System;
 using System.Collections.Generic;
@@ -22,11 +23,11 @@ namespace MapEditor.Windows
     public partial class NewTileLayerDialog : Window
     {
         #region Fields
+        private readonly TileEditor tileEditor;
+
         private readonly NewTileLayerProperties newTileLayerProperties;
 
         private readonly NewTileLayerPropertiesViewModel newTileLayerPropertiesViewModel;
-
-        private readonly TileEditor tileEditor;
         #endregion
 
         #region Properties
@@ -50,6 +51,8 @@ namespace MapEditor.Windows
 
         public NewTileLayerDialog(TileEditor tileEditor)
         {
+            this.tileEditor = tileEditor;
+
             // Initialize model and view.
             string[] takenNames = tileEditor.Layers
                 .Select(s => s.Name)
@@ -58,14 +61,25 @@ namespace MapEditor.Windows
             newTileLayerProperties = new NewTileLayerProperties(takenNames, tileEditor.TileEngine.MaxLayerSizeInTiles.X, tileEditor.TileEngine.MaxLayerSizeInTiles.Y);
             newTileLayerPropertiesViewModel = new NewTileLayerPropertiesViewModel(newTileLayerProperties);
 
-            //newTileLayerProperties = new NewTileLayerProperties()
-            this.tileEditor = tileEditor;
-
             // Set data context for this window.
-
             DataContext = newTileLayerPropertiesViewModel;
             
             InitializeComponent();
         }
+
+        #region Event handlers
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            if (!StringHelper.OnlyContainsDigits(textBox.Text)) textBox.Text = StringHelper.RemoveAllNonDigitCharacters(textBox.Text);
+        }
+        private void createLayerButton_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+
+            Close();
+        }
+        #endregion
     }
 }

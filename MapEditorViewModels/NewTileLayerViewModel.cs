@@ -41,6 +41,7 @@ namespace MapEditorViewModels
 
                 OnPropertyChanged("Width");
                 OnPropertyChanged("HasValidProperties");
+                OnPropertyChanged("WidthInBounds");
             }
         }
         public string Height
@@ -55,6 +56,7 @@ namespace MapEditorViewModels
 
                 OnPropertyChanged("Height");
                 OnPropertyChanged("HasValidProperties");
+                OnPropertyChanged("HeightInBounds");
             }
         }
         public bool HasValidProperties

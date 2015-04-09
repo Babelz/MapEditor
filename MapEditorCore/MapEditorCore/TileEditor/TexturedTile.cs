@@ -21,10 +21,12 @@ namespace MapEditorCore.TileEditor
         public TexturedTile(TileEngine tileEngine, int x, int y)
             : base(tileEngine, x, y)
         {
+            sourceIndex = new Point(-1, -1);
         }
         public TexturedTile(TileEngine tileEngine)
             : base(tileEngine)
         {
+            sourceIndex = new Point(-1, -1);
         }
 
         protected override void OnMoved(Point oldPosition, Point newPosition)

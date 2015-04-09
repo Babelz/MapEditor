@@ -1,6 +1,7 @@
 ﻿using MapEditor.Helpers;
 using MapEditor.Windows;
 using MapEditorCore.TileEditor;
+using MapEditorViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+
+using Point = Microsoft.Xna.Framework.Point;
 
 namespace MapEditor.Configurers
 {
@@ -50,6 +53,9 @@ namespace MapEditor.Configurers
             if (newTileLayerDialog.ShowDialog().Value)
             {
                 // Dialog OK, create new layer.
+                NewTileLayerProperties newTileLayerProperties = newTileLayerDialog.NewTileLayerProperties;
+
+                tileEditor.AddLayer(newTileLayerProperties.Name, new Point(newTileLayerProperties.Width, newTileLayerProperties.Height));
             }
         }
         #endregion
