@@ -10,18 +10,21 @@
         <ResourceDictionary Source="Themes\ExpressionDark.xaml"/>
     </Window.Resources>
  
-    <Grid Name="root">
+    <Grid Name="root" Background="{StaticResource NormalBrush}">
         <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
             <RowDefinition Height="25"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        
+        <ToolBar Name="toolBar" Grid.Row="1"/>
         
         <Menu Name="menu">
             <MenuItem Header="File" Name="fileMenuItem">
                 <MenuItem Header="New project" Name="newProjectMenuItem" Click="newProjectMenuItem_Click"/>
                 <MenuItem Header="Load project" Name="loadProjectMenuItem" Click="loadProjectMenuItem_Click"/>
                 <MenuItem Header="Save project" Name="saveProjectMenuItem" Click="saveProjectMenuItem_Click"/>
-                <Separator/>
+            <Separator/>
                 <MenuItem Header="Exit" Name="exitProgramMenuItem"/>
             </MenuItem>
             <MenuItem Header="View" Name="viewMenuItem">
@@ -30,11 +33,11 @@
                 <MenuItem Header="Properties" Name="viewPropertiesMenuItem" Click="viewPropertiesMenuItem_Click"/>
             </MenuItem>
             <MenuItem Header="Edit" Name="editMenuItem"/>
-            <MenuItem Header="Properties" Name="propertiesMenuItem"/>
+            <MenuItem Header="Add" Name="addMenuItem"/>
             <MenuItem Header="Help" Name="helpMenuItem"/>
         </Menu>
 
-        <avalon:DockingManager x:Name="dockingManager" Grid.Row="1">
+        <avalon:DockingManager x:Name="dockingManager" Grid.Row="2">
             <avalon:LayoutRoot>
                 <avalon:LayoutPanel Orientation="Horizontal">
                     <avalon:LayoutAnchorablePane DockWidth="200">

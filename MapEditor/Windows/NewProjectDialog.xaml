@@ -7,8 +7,8 @@
     <Window.Resources>
         <ResourceDictionary Source="C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\Themes\ExpressionDark.xaml"/>
     </Window.Resources>
-    
-    <Grid>
+
+    <Grid Background="{StaticResource NormalBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="125"/>
             <RowDefinition Height="125"/>

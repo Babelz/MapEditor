@@ -120,6 +120,9 @@
     <Compile Include="Configurers\TileEditorGUIConfigurer.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="ProjectBuilder.cs" />
+    <Compile Include="Windows\NewLayerDialog.xaml.cs">
+      <DependentUpon>NewLayerDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\NewProjectDialog.xaml.cs">
       <DependentUpon>NewProjectDialog.xaml</DependentUpon>
     </Compile>
@@ -162,6 +165,10 @@
     <Page Include="Themes\WhistlerBlue.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\NewLayerDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\NewProjectDialog.xaml">
       <SubType>Designer</SubType>

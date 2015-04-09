@@ -1,4 +1,5 @@
 ﻿using MapEditor.Helpers;
+using MapEditor.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,32 +12,67 @@ namespace MapEditor.Configurers
 {
     public sealed class TileEditorGUIConfigurer : IGUIConfigurer
     {
+        /*
+         * Some of the windows are used like dialogs, so no need to instantiate them at the
+         * class scope level.
+         */
+
         #region Fields
         // Root menu item.
         private MenuItem editMenuItem;
+        private MenuItem addMenuItem;
 
-        // Menu items added.
-        private MenuItem editLayersMenuItem;
-        private MenuItem editSheetsMenuItem;
+        private MenuItem editMapMenuItem;
+        private MenuItem editMetaObjectsMenuItem;
+
+        private MenuItem addLayerMenuItem;
+        private MenuItem addTileSheetMenuItem;
+        private MenuItem addMetadataObjectSetMenuItem;
         #endregion
 
         public TileEditorGUIConfigurer()
         {
         }
 
+        #region Event handlers
+        private void addLayerMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        #endregion
+
         private void InsertUserControls(Window window)
         {
         }
         private void InsertMenuItems(Window window)
         {
-            editLayersMenuItem = new MenuItem()
+            // Edit menu items.
+            editMapMenuItem = new MenuItem()
             {
-                Header = "Layers"
+                Header = "Map"
             };
 
-            editSheetsMenuItem = new MenuItem()
+            editMetaObjectsMenuItem = new MenuItem()
             {
-                Header = "Sheets"
+                Header = "Metadata objects"
+            };
+
+            // Add menu items.
+            addLayerMenuItem = new MenuItem()
+            {
+                Header = "Layer"
+            };
+
+            addLayerMenuItem.Click += addLayerMenuItem_Click;
+
+            addTileSheetMenuItem = new MenuItem()
+            {
+                Header = "Sheet"
+            };
+
+            addMetadataObjectSetMenuItem = new MenuItem()
+            {
+                Header = "Metadata object set"
             };
 
             // Get root.
@@ -48,8 +84,19 @@ namespace MapEditor.Configurers
             // Insert new menu items.
             editMenuItem = ChildHelper.FindMenuItem(menu, "editMenuItem");
 
-            editMenuItem.Items.Add(editLayersMenuItem);
-            editMenuItem.Items.Add(editSheetsMenuItem);
+            editMenuItem.Items.Add(editMapMenuItem);
+            editMenuItem.Items.Add(editMetaObjectsMenuItem);
+
+            // Insert new menu items.
+            addMenuItem = ChildHelper.FindMenuItem(menu, "addMenuItem");
+
+            addMenuItem.Items.Add(addLayerMenuItem);
+            addMenuItem.Items.Add(addTileSheetMenuItem);
+            addMenuItem.Items.Add(addMetadataObjectSetMenuItem);
+        }
+        private void InitializeToolBar(Window window)
+        {
+
         }
         private void ConfigurePropertiesWindow(Window window)
         {
@@ -61,6 +108,7 @@ namespace MapEditor.Configurers
         public void Configure(Window window)
         {
             InsertUserControls(window);
+            InitializeToolBar(window);
             InsertMenuItems(window);
 
             ConfigurePropertiesWindow(window);
@@ -68,8 +116,12 @@ namespace MapEditor.Configurers
         }
         public void RemoveConfiguration(Window window)
         {
-            editMenuItem.Items.Remove(editLayersMenuItem);
-            editMenuItem.Items.Remove(editSheetsMenuItem);
+            editMenuItem.Items.Remove(editMapMenuItem);
+            editMenuItem.Items.Remove(editMetaObjectsMenuItem);
+
+            addMenuItem.Items.Remove(addLayerMenuItem);
+            addMenuItem.Items.Remove(addTileSheetMenuItem);
+            addMenuItem.Items.Remove(addMetadataObjectSetMenuItem);
         }
     }
 }
