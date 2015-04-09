@@ -57,6 +57,8 @@
   <ItemGroup>
     <Compile Include="NewProjectProperties.cs" />
     <Compile Include="NewProjectPropertiesViewModel.cs" />
+    <Compile Include="NewTileLayerProperties.cs" />
+    <Compile Include="NewTileLayerViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

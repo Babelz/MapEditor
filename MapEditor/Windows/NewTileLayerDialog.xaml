@@ -4,14 +4,35 @@
         Title="NewLayerDialog" Height="200" Width="300">
 
     <Window.Resources>
-        <ResourceDictionary Source="C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\Themes\ExpressionDark.xaml"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\Themes\ExpressionDark.xaml"/>
+                
+                <ResourceDictionary>
+                    <Style TargetType="TextBlock" x:Key="warningTextBoxStyle">
+                        <Setter Property="Visibility" Value="Hidden"/>
+
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding HasUniqueName}" Value="false">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding HasUniqueName}" Value="true">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Window.Resources>
 
-    <Grid Margin="5" Background="{StaticResource ControlBackgroundBrush}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+    <Grid Margin="10" Background="{StaticResource ControlBackgroundBrush}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
@@ -20,15 +41,18 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Rectangle Fill="{StaticResource NormalBrush}" Margin="-5" Grid.RowSpan="5" Grid.ColumnSpan="2"/>
+        <Rectangle Fill="{StaticResource NormalBrush}" Margin="-10" Grid.RowSpan="5" Grid.ColumnSpan="2"/>
 
-        <TextBlock Text="Name: " VerticalAlignment="Center" Foreground="White" Grid.Row="0"/>
-        <TextBox Grid.Column="1" Margin="0, 1, 0, 0" Grid.Row="0"/>
+        <TextBlock Text="Name: " VerticalAlignment="Center" Foreground="White" Grid.Row="0" Margin="0, 5, 0, 0"/>
+        <TextBox Grid.Column="1" Margin="0, 1, 0, 0" Grid.Row="0" Text="{Binding Name}"/>
 
-        <TextBlock Text="Width: " VerticalAlignment="Center" Foreground="White" Grid.Row="1"/>
-        <TextBox Grid.Column="1" Margin="0, 1, 0, 0" Grid.Row="1"/>
+        <TextBlock Text="Layer with given name already exists" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center"
+                   Foreground="White" Visibility="Visible" Style="{StaticResource warningTextBoxStyle}"/>
 
-        <TextBlock Text="Height: " VerticalAlignment="Center" Foreground="White" Grid.Row="2"/>
-        <TextBox Grid.Column="1" Margin="0, 1, 0, 0" Grid.Row="2"/>
+        <TextBlock Text="Width: " VerticalAlignment="Center" Foreground="White" Grid.Row="2" Margin="0, 5, 0, 0"/>
+        <TextBox Grid.Column="2" Margin="0, 6, 0, 0" Grid.Row="2" Text="{Binding Width}"/>
+
+        <TextBlock Text="Height: " VerticalAlignment="Center" Foreground="White" Grid.Row="3" Margin="0, 5, 0, 0"/>
+        <TextBox Grid.Column="2" Margin="0, 6, 0, 0" Grid.Row="3" Text="{Binding Height}"/>
     </Grid>
 </Window>

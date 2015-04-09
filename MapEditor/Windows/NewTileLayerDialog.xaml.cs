@@ -34,6 +34,7 @@ namespace MapEditor.Windows
         {
             get
             {
+                
                 return newTileLayerPropertiesViewModel;
             }
         } 
