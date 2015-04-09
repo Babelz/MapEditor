@@ -10,6 +10,9 @@ namespace MapEditorViewModels
     {
         #region Fields
         private readonly string[] takenNames;
+        
+        public readonly int maxWidth;
+        public readonly int maxHeight;
 
         public string Name;
 
@@ -17,14 +20,18 @@ namespace MapEditorViewModels
         public int Height;
         #endregion
 
-        public NewTileLayerProperties(string[] takenNames)
+        public NewTileLayerProperties(string[] takenNames, int maxWidth, int maxHeight)
         {
+            this.maxHeight = maxHeight;
+            this.maxWidth = maxWidth;
+
             this.takenNames = takenNames;
         }
 
         public bool HasValidProperties()
         {
-            return !string.IsNullOrEmpty(Name) && Width != 0 && Height != 0 && HasUniqueName();
+            return !string.IsNullOrEmpty(Name) && Width != 0 && Height != 0 && HasUniqueName() &&
+                   WidthInBounds() && HeightInBounds();
         }
         public bool HasUniqueName()
         {
@@ -33,6 +40,15 @@ namespace MapEditorViewModels
             for (int i = 0; i < takenNames.Length; i++) if (takenNames[i] == Name) return false;
 
             return true;
+        }
+
+        public bool WidthInBounds()
+        {
+            return Width <= maxWidth && Width > 0;
+        }
+        public bool HeightInBounds()
+        {
+            return Height <= maxHeight && Height > 0;
         }
     }
 }

@@ -71,6 +71,34 @@ namespace MapEditorViewModels
                 return !properties.HasUniqueName();
             }
         }
+        public bool WidthInBounds
+        {
+            get
+            {
+                return !properties.WidthInBounds();
+            }
+        }
+        public bool HeightInBounds
+        {
+            get
+            {
+                return !properties.HeightInBounds();
+            }
+        }
+        public string MaxWidth
+        {
+            get
+            {
+                return "Max width: " + properties.maxWidth.ToString();
+            }
+        }
+        public string MaxHeight
+        {
+            get
+            {
+                return "Max height: " + properties.maxHeight.ToString();
+            }
+        }
         #endregion
 
         #region Events

@@ -55,7 +55,7 @@ namespace MapEditor.Windows
                 .Select(s => s.Name)
                 .ToArray();
 
-            newTileLayerProperties = new NewTileLayerProperties(takenNames);
+            newTileLayerProperties = new NewTileLayerProperties(takenNames, tileEditor.TileEngine.MaxLayerSizeInTiles.X, tileEditor.TileEngine.MaxLayerSizeInTiles.Y);
             newTileLayerPropertiesViewModel = new NewTileLayerPropertiesViewModel(newTileLayerProperties);
 
             //newTileLayerProperties = new NewTileLayerProperties()

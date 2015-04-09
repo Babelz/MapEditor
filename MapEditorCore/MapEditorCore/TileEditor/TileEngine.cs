@@ -40,6 +40,16 @@ namespace MapEditorCore.TileEditor
             }
         }
         /// <summary>
+        /// Returns tile size in pixels.
+        /// </summary>
+        public Point TileSizeInPixels
+        {
+            get
+            {
+                return tileSizeInPixels;
+            }
+        }
+        /// <summary>
         /// Gets or sets max layer size in tiles.
         /// </summary>
         public Point MaxLayerSizeInTiles

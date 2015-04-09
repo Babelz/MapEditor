@@ -50,6 +50,13 @@ namespace MapEditorCore.TileEditor
                 backgroundColor = value;
             }
         }
+        public TileEngine TileEngine
+        {
+            get
+            {
+                return tileEngine;
+            }
+        }
         #endregion
 
         public TileEditor(TileEngine tileEngine)
@@ -70,7 +77,7 @@ namespace MapEditorCore.TileEditor
             Texture2D temp = Content.Load<Texture2D>("temp");
 
             components.AddComponent(new BorderRenderer(this, temp));
-            components.AddComponent(new Grid(this, temp, new Point(tileEngine.TileBounds.Width, tileEngine.TileBounds.Height)));
+            components.AddComponent(new Grid(this, temp, new Point(tileEngine.TileSizeInPixels.X, tileEngine.TileSizeInPixels.Y)));
         }
 
         public override void SelectLayer(string name)
