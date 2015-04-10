@@ -15,7 +15,7 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid Margin="10" Background="{StaticResource ControlBackgroundBrush}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+    <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
             <RowDefinition Height="25"/>

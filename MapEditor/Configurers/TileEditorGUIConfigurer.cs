@@ -32,6 +32,7 @@ namespace MapEditor.Configurers
 
         private MenuItem addLayerMenuItem;
         private MenuItem addTileSheetMenuItem;
+        private MenuItem addTileAnimationMenuItem;
         private MenuItem addMetadataObjectSetMenuItem;
         #endregion
 
@@ -89,6 +90,11 @@ namespace MapEditor.Configurers
                 Header = "Sheet"
             };
 
+            addTileAnimationMenuItem = new MenuItem()
+            {
+                Header = "Tile animation"
+            };
+
             addMetadataObjectSetMenuItem = new MenuItem()
             {
                 Header = "Metadata object set"
@@ -111,6 +117,7 @@ namespace MapEditor.Configurers
 
             addMenuItem.Items.Add(addLayerMenuItem);
             addMenuItem.Items.Add(addTileSheetMenuItem);
+            addMenuItem.Items.Add(addTileAnimationMenuItem);
             addMenuItem.Items.Add(addMetadataObjectSetMenuItem);
         }
         private void InitializeToolBar(Window window)
@@ -140,6 +147,7 @@ namespace MapEditor.Configurers
 
             addMenuItem.Items.Remove(addLayerMenuItem);
             addMenuItem.Items.Remove(addTileSheetMenuItem);
+            addMenuItem.Items.Remove(addTileAnimationMenuItem);
             addMenuItem.Items.Remove(addMetadataObjectSetMenuItem);
         }
     }
