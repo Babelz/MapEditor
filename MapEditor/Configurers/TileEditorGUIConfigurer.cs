@@ -61,10 +61,13 @@ namespace MapEditor.Configurers
         }
         private void addTilesetMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            NewTilesetDialog newTilesetDialog = new NewTilesetDialog();
+            NewTilesetDialog newTilesetDialog = new NewTilesetDialog(tileEditor);
 
             // Show the dialog, ask for tileset properties.
-
+            if (newTilesetDialog.ShowDialog().Value)
+            {
+                // Dialog OK, create new tileset.
+            }
         }
         #endregion
 

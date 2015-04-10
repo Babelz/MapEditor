@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MapEditorViewModels
 {
-    public sealed class NewTilesetViewModel : INotifyPropertyChanged
+    public sealed class NewTilesetPropertiesViewModel : INotifyPropertyChanged
     {
         #region Fields
         private readonly NewTilesetProperties properties;
@@ -119,7 +119,7 @@ namespace MapEditorViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
-        public NewTilesetViewModel(NewTilesetProperties properties)
+        public NewTilesetPropertiesViewModel(NewTilesetProperties properties)
         {
             this.properties = properties;
         }

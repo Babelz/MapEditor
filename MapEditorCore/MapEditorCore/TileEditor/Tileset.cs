@@ -16,11 +16,25 @@ namespace MapEditorCore.TileEditor
         #region Fields
         private readonly Texture2D texture;
         private readonly Point sourceSize;
+        private readonly Point offset;
+
+        private string name;
 
         private bool disposed;
         #endregion
 
         #region Properties
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                name = value;
+            }
+        }
         public bool Disposed
         {
             get
@@ -38,11 +52,24 @@ namespace MapEditorCore.TileEditor
                 return texture;
             }
         }
+        /// <summary>
+        /// Size of one source on the set.
+        /// </summary>
         protected Point SourceSize
         {
             get
             {
                 return sourceSize;
+            }
+        }
+        /// <summary>
+        /// Offset of indices.
+        /// </summary>
+        protected Point Offset
+        {
+            get
+            {
+                return offset;
             }
         }
         #endregion
@@ -51,10 +78,12 @@ namespace MapEditorCore.TileEditor
         public event EventHandler Disposing;
         #endregion
 
-        public Tileset(Texture2D texture, Point sourceSize)
+        public Tileset(string name, Texture2D texture, Point sourceSize, Point offset)
         {
+            this.name = name;
             this.texture = texture;
             this.sourceSize = sourceSize;
+            this.offset = offset;
 
             GenerateSources();
         }

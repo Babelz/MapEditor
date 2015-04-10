@@ -1,4 +1,6 @@
-﻿using Microsoft.Win32;
+﻿using MapEditorCore.TileEditor;
+using MapEditorViewModels;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,15 +23,42 @@ namespace MapEditor.Windows
     public partial class NewTilesetDialog : Window
     {
         #region Fields
+        private readonly TileEditor tileEditor;
 
+        private readonly NewTilesetProperties newTilesetProperties;
+
+        private readonly NewTilesetPropertiesViewModel newTilesetPropertiesViewModel;
         #endregion
 
         #region Properties
+        private NewTilesetPropertiesViewModel NewTilesetPropertiesViewModel
+        {
+            get
+            {
+                return newTilesetPropertiesViewModel;
+            }
+        }
 
+        public NewTilesetProperties NewTilesetProperties
+        {
+            get
+            {
+                return newTilesetProperties;
+            }
+        }
         #endregion
 
-        public NewTilesetDialog()
+        public NewTilesetDialog(TileEditor tileEditor)
         {
+            this.tileEditor = tileEditor;
+
+            // Get taken names.
+            string[] takenNames = new string[1];
+
+            // Initialize view model.
+            newTilesetProperties = new MapEditorViewModels.NewTilesetProperties(takenNames);
+            newTilesetPropertiesViewModel = new NewTilesetPropertiesViewModel(newTilesetProperties);
+
             InitializeComponent();
         }
 
