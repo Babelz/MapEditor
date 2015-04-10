@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:components="clr-namespace:MapEditor.Components"
         xmlns:controls="clr-namespace:MapEditor.UserControls"
-        Title="Create New Tileset" Height="500" Width="600" ResizeMode="NoResize">
+        Title="Create New Tileset" Height="500" Width="600">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -100,7 +100,7 @@
         </GroupBox>
 
         <GroupBox Header="Preview" Grid.Column="1" Grid.RowSpan="4" Grid.ColumnSpan="2" Margin="5">
-            <controls:SheetPreviewView x:Name="sheetPreviewView" 
+            <controls:SheetPreviewView x:Name="sheetPreviewView"
                                        GridOffsetX="{Binding OffsetX}"
                                        GridOffsetY="{Binding OffsetY}"
                                        CellWidth="{Binding TileWidth}"

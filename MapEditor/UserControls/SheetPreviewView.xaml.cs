@@ -23,6 +23,9 @@ namespace MapEditor.UserControls
     public partial class SheetPreviewView : UserControl
     {
         #region Fields
+        private readonly List<RowDefinition> currentRows;
+        private readonly List<ColumnDefinition> currentColumns;
+
         private BitmapImage image;
         #endregion
 
@@ -30,7 +33,7 @@ namespace MapEditor.UserControls
         public int GridOffsetX
         {
             get { return (int)GetValue(GridOffsetXProperty); }
-            set { ResizeGrid(); SetValue(GridOffsetXProperty, value); }
+            set { SetValue(GridOffsetXProperty, value); }
         }
 
         public static readonly DependencyProperty GridOffsetXProperty =
@@ -39,7 +42,7 @@ namespace MapEditor.UserControls
         public int GridOffsetY
         {
             get { return (int)GetValue(GridOffsetYProperty); }
-            set { ResizeGrid(); SetValue(GridOffsetYProperty, value); }
+            set { SetValue(GridOffsetYProperty, value); }
         }
 
         public static readonly DependencyProperty GridOffsetYProperty =
@@ -48,7 +51,7 @@ namespace MapEditor.UserControls
         public int CellWidth
         {
             get { return (int)GetValue(CellWidthProperty); }
-            set { ResizeGrid(); SetValue(CellWidthProperty, value); }
+            set { SetValue(CellWidthProperty, value); }
         }
 
         public static readonly DependencyProperty CellWidthProperty =
@@ -57,7 +60,7 @@ namespace MapEditor.UserControls
         public int CellHeight
         {
             get { return (int)GetValue(CellHeightProperty); }
-            set { ResizeGrid(); SetValue(CellHeightProperty, value); }
+            set { SetValue(CellHeightProperty, value); }
         }
 
         public static readonly DependencyProperty CellHeightProperty =
@@ -67,8 +70,6 @@ namespace MapEditor.UserControls
         {
             set
             {
-                ResizeGrid();
-
                 // Capture image.
                 image = value;
 
@@ -77,6 +78,9 @@ namespace MapEditor.UserControls
                 previewRootCanvas.UpdateLayout();
 
                 tileSheetPreviewImage.Source = image;
+
+                // Resize grid.
+                ResizeGrid();
             }
         }
         #endregion
@@ -84,7 +88,17 @@ namespace MapEditor.UserControls
         public SheetPreviewView()
         {
             InitializeComponent();
+
+            currentRows = new List<RowDefinition>();
+            currentColumns = new List<ColumnDefinition>();
         }
+
+        #region Event handlers
+        private void newTilesetPropertiesViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            ResizeGrid();
+        }
+        #endregion
 
         /// <summary>
         /// Resize the grid. Might create new cells or remove some.
@@ -97,24 +111,39 @@ namespace MapEditor.UserControls
             
             // If image is null, we need to wait for it to
             // get a proper value before we can resize the grid.
-            if (image == null || CellWidth == 0 || CellHeight == 0) return;
+            if (image == null || cellWidth == 0 || cellHeight == 0) return;
 
             // Calculate space for the grid.
-            int modColumns = (int)image.Width / CellWidth;
-            int modRows = (int)image.Height / CellHeight;
+            int modColumns = (int)image.Width / cellWidth;
+            int modRows = (int)image.Height / cellHeight;
 
             int columnSpace = (int)image.Width;
             int rowSpace = (int)image.Height;
 
             // If modifier is not zero, we need to overlap the image.
-            if (modColumns != 0) columnSpace += CellWidth;
-            if (modRows != 0) rowSpace += CellHeight;
+            if (modColumns != 0) columnSpace += cellWidth;
+            if (modRows != 0) rowSpace += cellHeight;
 
-            int columns = columnSpace / CellWidth;
-            int rows = rowSpace / CellHeight;
+            int columns = columnSpace / cellWidth;
+            int rows = rowSpace / cellHeight;
 
-            int spacePerColumn = columns / columns;
+            int spacePerColumn = columnSpace / columns;
             int spacePerRow = rowSpace / rows;
+
+            // Remove old rows and columns.
+            if (currentRows.Count > 0)
+            {
+                for (int i = 0; i < currentRows.Count; i++) tileGrid.RowDefinitions.Remove(currentRows[i]);
+
+                currentRows.Clear();
+            }
+
+            if (currentColumns.Count > 0)
+            {
+                for (int i = 0; i < currentColumns.Count; i++) tileGrid.ColumnDefinitions.Remove(currentColumns[i]);
+
+                currentColumns.Clear();
+            }
 
             // Resize the grid.
             for (int i = 0; i < rows; i++)
@@ -125,17 +154,23 @@ namespace MapEditor.UserControls
 
                 // Add new row.
                 tileGrid.RowDefinitions.Add(rowDefinition);
+
+                currentRows.Add(rowDefinition);
             }
 
             for (int i = 0; i < columns; i++)
             {
                 // Create new column.
                 ColumnDefinition columnDefinition = new ColumnDefinition();
-                columnDefinition.Width = new GridLength(columnSpace);
+                columnDefinition.Width = new GridLength(spacePerColumn);
 
                 // Add new column.
                 tileGrid.ColumnDefinitions.Add(columnDefinition);
+                
+                currentColumns.Add(columnDefinition);
             }
+
+            tileGrid.UpdateLayout();
         }
     }
 }

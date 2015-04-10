@@ -80,7 +80,6 @@ namespace MapEditor.Windows
 
             // Set path for the model.
             newTilesetProperties.Path = openFileDialog.FileName;
-
         }
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
