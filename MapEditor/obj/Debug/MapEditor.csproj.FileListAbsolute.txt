@@ -63,3 +63,5 @@ C:\Users\ttv14snikos\Desktop\MapEditor\MapEditor\bin\Debug\zh-Hans\Xceed.Wpf.Ava
 C:\Users\ttv14snikos\Desktop\MapEditor\MapEditor\obj\Debug\MapEditor.Properties.Resources.resources
 C:\Users\ttv14snikos\Desktop\MapEditor\MapEditor\obj\Debug\MapEditor.csproj.GenerateResource.Cache
 C:\Users\ttv14snikos\Desktop\MapEditor\MapEditor\obj\Debug\MapEditor.exe
+C:\Users\ttv14snikos\Desktop\MapEditor\MapEditor\obj\Debug\UserControls\SheetPreviewView.g.cs
+C:\Users\ttv14snikos\Desktop\MapEditor\MapEditor\obj\Debug\UserControls\SheetPreviewView.baml

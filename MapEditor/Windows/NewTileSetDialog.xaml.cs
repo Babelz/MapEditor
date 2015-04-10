@@ -1,4 +1,5 @@
-﻿using MapEditorCore.TileEditor;
+﻿using MapEditor.Helpers;
+using MapEditorCore.TileEditor;
 using MapEditorViewModels;
 using Microsoft.Win32;
 using System;
@@ -59,6 +60,9 @@ namespace MapEditor.Windows
             newTilesetProperties = new MapEditorViewModels.NewTilesetProperties(takenNames);
             newTilesetPropertiesViewModel = new NewTilesetPropertiesViewModel(newTilesetProperties);
 
+            // Set data context.
+            DataContext = NewTilesetPropertiesViewModel;
+
             InitializeComponent();
         }
 
@@ -66,14 +70,35 @@ namespace MapEditor.Windows
         private void loadTextureButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Images (*.png)|*.png|(*.jpeg)|*.jpeg|(*.jpg)|*.jpg";
+            openFileDialog.Filter = "Images *.png *.jpeg *.jpg";
 
             // Loading the file failed, return.
             if (!openFileDialog.ShowDialog().Value) return;
 
             // Got file, load it.
-            tilesetImagePreview.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+            sheetPreviewView.Image = new BitmapImage(new Uri(openFileDialog.FileName));
 
+            // Set path for the model.
+            newTilesetProperties.Path = openFileDialog.FileName;
+
+        }
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            if (textBox.Text.Length > 0) textBox.Select(0, textBox.Text.Length);
+        }
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            if (!StringHelper.OnlyContainsDigits(textBox.Text)) textBox.Text = StringHelper.RemoveAllNonDigitCharacters(textBox.Text);
+        }
+        private void createTilesetButton_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+
+            Close();
         }
         #endregion
     }

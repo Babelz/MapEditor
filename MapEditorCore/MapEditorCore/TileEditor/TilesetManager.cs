@@ -5,6 +5,10 @@ using System.Text;
 
 namespace MapEditorCore.TileEditor
 {
+    /// <summary>
+    /// Class for managing and storing tilesets. Handles their removal and
+    /// disposing.
+    /// </summary>
     public sealed class TilesetManager
     {
         #region Fields

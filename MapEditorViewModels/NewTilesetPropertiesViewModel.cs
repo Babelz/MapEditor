@@ -83,6 +83,7 @@ namespace MapEditorViewModels
 
                 OnPropertyChanged("TileWidth");
                 OnPropertyChanged("HasValidProperties");
+                OnPropertyChanged("HasValidTileWidth");
             }
         }
         public string TileHeight
@@ -97,13 +98,14 @@ namespace MapEditorViewModels
 
                 OnPropertyChanged("TileHeight");
                 OnPropertyChanged("HasValidProperties");
+                OnPropertyChanged("HasValidTileHeight");
             }
         }
         public bool HasUniqueName
         {
             get
             {
-                return properties.HasUniqueName();
+                return !properties.HasUniqueName();
             }
         }
         public bool HasValidProperties
@@ -111,6 +113,20 @@ namespace MapEditorViewModels
             get
             {
                 return properties.HasValidProperties();
+            }
+        }
+        public bool HasValidTileWidth
+        {
+            get
+            {
+                return !(properties.TileWidth > 0);
+            }
+        }
+        public bool HasValidTileHeight
+        {
+            get
+            {
+                return !(properties.TileHeight > 0);
             }
         }
         #endregion

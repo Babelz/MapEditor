@@ -29,6 +29,8 @@ namespace MapEditorViewModels
 
         public bool HasUniqueName()
         {
+            if (string.IsNullOrEmpty(Name)) return true;
+
             for (int i = 0; i < takenNames.Length; i++) if (takenNames[i] == Name) return false;
 
             return true;
@@ -36,7 +38,7 @@ namespace MapEditorViewModels
 
         public bool HasValidProperties()
         {
-            return !string.IsNullOrEmpty(Name) && !File.Exists(Path) && TileWidth != 0 && TileHeight != 0;
+            return !string.IsNullOrEmpty(Name) && File.Exists(Path) && HasUniqueName() && TileWidth > 0 && TileHeight > 0;
         }
     }
 }
