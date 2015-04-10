@@ -54,7 +54,9 @@ namespace MapEditor.Windows
             this.tileEditor = tileEditor;
 
             // Get taken names.
-            string[] takenNames = new string[1];
+            string[] takenNames = tileEditor.Layers
+                .Select(s => s.Name)
+                .ToArray();
 
             // Initialize view model.
             newTilesetProperties = new MapEditorViewModels.NewTilesetProperties(takenNames);

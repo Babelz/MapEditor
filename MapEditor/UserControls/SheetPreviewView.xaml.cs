@@ -111,7 +111,7 @@ namespace MapEditor.UserControls
         /// </summary>
         private void ReconstructGrid()
         {
-            // Avoid casts.
+            // To avoid casts.
             int gridOffsetX = GridOffsetX;
             int gridOffsetY = GridOffsetY;
 
@@ -119,8 +119,8 @@ namespace MapEditor.UserControls
             int cellHeight = CellHeight;
 
             // Move view of the grid to new location.
-            Canvas.SetTop(gridBorder, gridOffsetX);
-            Canvas.SetLeft(gridBorder, gridOffsetY);
+            Canvas.SetTop(gridBorder, gridOffsetY);
+            Canvas.SetLeft(gridBorder, gridOffsetX);
 
             gridBorder.Width = image.Width;
             gridBorder.Height = image.Height;
@@ -129,6 +129,7 @@ namespace MapEditor.UserControls
             double newWidth = gridBorder.Width - Canvas.GetLeft(gridBorder);
             double newHeight = gridBorder.Height - Canvas.GetTop(gridBorder);
 
+            // Check if new size properties are valid.
             if (newWidth > 0.0) gridBorder.Width = newWidth;
             if (newHeight > 0.0) gridBorder.Height = newHeight; 
 
