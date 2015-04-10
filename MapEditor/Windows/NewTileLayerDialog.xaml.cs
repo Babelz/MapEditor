@@ -80,6 +80,12 @@ namespace MapEditor.Windows
 
             Close();
         }
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            if (textBox.Text.Length > 0) textBox.Select(0, textBox.Text.Length);
+        }
         #endregion
     }
 }

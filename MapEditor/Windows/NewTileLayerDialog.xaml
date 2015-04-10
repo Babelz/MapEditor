@@ -7,7 +7,7 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\Themes\ExpressionDark.xaml"/>
+                <ResourceDictionary Source="/Themes/ExpressionDark.xaml"/>
                 <ResourceDictionary>
                     <components:BoolToVisibilityConverter x:Key="converter"/>
                 </ResourceDictionary>
@@ -38,18 +38,18 @@
 
         <!-- Name section -->
         <TextBlock Text="Name: " VerticalAlignment="Center" Foreground="White" Grid.Row="0" Margin="0, 5, 0, 0"/>
-        <TextBox Grid.Column="1" Margin="0, 5, 0, 0" Grid.Row="0" Text="{Binding Name}"/>
+        <TextBox Grid.Column="1" Margin="0, 5, 0, 0" Grid.Row="0" Text="{Binding Name}" GotFocus="TextBox_GotFocus"/>
         <TextBlock Text="layer with given name already exists" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Top"
                    Foreground="White" Visibility="{Binding HasUniqueName, Converter={StaticResource converter}}"/>
 
         <!-- Width section -->
         <TextBlock Text="Width: " VerticalAlignment="Center" Foreground="White" Grid.Row="2" Margin="0, 5, 0, 0"/>
-        <TextBox Grid.Column="2" Margin="0, 5, 0, 0" Grid.Row="2" Text="{Binding Width}" TextChanged="TextBox_TextChanged"/>
+        <TextBox Grid.Column="2" Margin="0, 5, 0, 0" Grid.Row="2" Text="{Binding Width}" TextChanged="TextBox_TextChanged" GotFocus="TextBox_GotFocus"/>
         <TextBlock Text="width cant be smaller or equal to zero and cant be greater than width of the map" Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Top"
                    Foreground="White" Visibility="{Binding WidthInBounds, Converter={StaticResource converter}}"/>
         
         <TextBlock Text="Height: " VerticalAlignment="Center" Foreground="White" Grid.Row="4" Margin="0, 5, 0, 0"/>
-        <TextBox Grid.Column="2" Margin="0, 5, 0, 0" Grid.Row="4" Text="{Binding Height}"/>
+        <TextBox Grid.Column="2" Margin="0, 5, 0, 0" Grid.Row="4" Text="{Binding Height}" GotFocus="TextBox_GotFocus"/>
         <TextBlock Text="height cant be smaller or equal to zero and cant be greater than height of the map" Grid.Row="5" Grid.ColumnSpan="2" VerticalAlignment="Top"
                    Foreground="White" Visibility="{Binding HeightInBounds, Converter={StaticResource converter}}"/>
         

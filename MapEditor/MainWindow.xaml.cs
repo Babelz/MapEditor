@@ -76,6 +76,9 @@ namespace MapEditor
 
                 // Initialize the project.
                 InitializeNewProject();
+
+                // Set resolution.
+                project.Game.ChangeGraphics((int)xnaControl.Width, (int)xnaControl.Height);
             }
 
             // Invalid results, continue.
@@ -119,6 +122,11 @@ namespace MapEditor
             layoutAnchorable.Hide();
         }
         #endregion
+
+        private void xnaControl_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (project != null) project.Game.ChangeGraphics((int)e.NewSize.Width, (int)e.NewSize.Height);
+        }
 
         #endregion
 

@@ -5,7 +5,7 @@
         Title="Create New Project" Width="400" Height="320" ResizeMode="NoResize">
 
     <Window.Resources>
-        <ResourceDictionary Source="C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\Themes\ExpressionDark.xaml"/>
+        <ResourceDictionary Source="/Themes/ExpressionDark.xaml"/>
     </Window.Resources>
 
     <Grid Background="{StaticResource NormalBrush}">
@@ -37,8 +37,11 @@
                 <TextBlock Text="Map name: " Grid.Row="1" VerticalAlignment="Center"/>
                 <TextBlock Text="Type: " Grid.Row="2" VerticalAlignment="Center"/>
 
-                <TextBox Text="{Binding Path=ProjectName, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="0, 1, 0, 0"/>
-                <TextBox Text="{Binding Path=MapName, Mode=TwoWay}" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="0, 1, 0, 0"/>
+                <TextBox Text="{Binding Path=ProjectName, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="0, 1, 0, 0"
+                         GotFocus="TextBox_GotFocus"/>
+                <TextBox Text="{Binding Path=MapName, Mode=TwoWay}" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="0, 1, 0, 0"
+                         GotFocus="TextBox_GotFocus"/>
+                
                 <ComboBox Text="{Binding Path=MapType, Mode=TwoWay}" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="0, 1, 0, 0" SelectedIndex="0" 
                           Name="mapTypeComboBox" SelectionChanged="mapTypeComboBox_SelectionChanged">
                 </ComboBox>
@@ -67,8 +70,10 @@
                 <TextBlock Text="tiles" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="0, 1, 0, 0" Name="sizeUnitTextBlock"/>
                 
                 <!-- Map width and height text boxes -->
-                <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="0, 1, 0, 0" TextChanged="TextBox_ValidateInput" Text="{Binding Path=MapWidth, Mode=TwoWay}"/>
-                <TextBox Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="0, 1, 0, 0" TextChanged="TextBox_ValidateInput" Text="{Binding Path=MapHeight, Mode=TwoWay}"/>
+                <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="0, 1, 0, 0" TextChanged="TextBox_ValidateInput" Text="{Binding Path=MapWidth, Mode=TwoWay}"
+                         GotFocus="TextBox_GotFocus"/>
+                <TextBox Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="0, 1, 0, 0" TextChanged="TextBox_ValidateInput" Text="{Binding Path=MapHeight, Mode=TwoWay}"
+                         GotFocus="TextBox_GotFocus"/>
             </Grid>
         </GroupBox>
 
@@ -89,8 +94,10 @@
                 <TextBlock Text="Height: " Grid.Row="1" VerticalAlignment="Center"/>
 
                 <!-- Map width and height text boxes -->
-                <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="0, 1, 0, 0" TextChanged="TextBox_ValidateInput" Text="{Binding Path=TileWidth, Mode=TwoWay}"/>
-                <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="0, 1, 0, 0" TextChanged="TextBox_ValidateInput" Text="{Binding Path=TileHeight, Mode=TwoWay}"/>
+                <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="0, 1, 0, 0" TextChanged="TextBox_ValidateInput" Text="{Binding Path=TileWidth, Mode=TwoWay}"
+                         GotFocus="TextBox_GotFocus"/>
+                <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="0, 1, 0, 0" TextChanged="TextBox_ValidateInput" Text="{Binding Path=TileHeight, Mode=TwoWay}"
+                         GotFocus="TextBox_GotFocus"/>
             </Grid>
         </GroupBox>
 

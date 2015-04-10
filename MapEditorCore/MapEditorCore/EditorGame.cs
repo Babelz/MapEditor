@@ -3,8 +3,10 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using XNAControl;
 
 namespace MapEditorCore
 {
@@ -12,7 +14,7 @@ namespace MapEditorCore
     /// Adapter class for editors. No editor should have reference to an instance
     /// of this class.
     /// </summary>
-    public sealed class EditorGame : XNAControl.XNAControlGame
+    public sealed class EditorGame : XNAControlGame
     {
         #region Fields
         private readonly SpriteBatch spriteBatch;
