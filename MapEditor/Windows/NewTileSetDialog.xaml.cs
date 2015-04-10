@@ -70,7 +70,7 @@ namespace MapEditor.Windows
         private void loadTextureButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Images *.png *.jpeg *.jpg";
+            openFileDialog.Filter = "Images|*.png;*.jpeg;*.jpg";
 
             // Loading the file failed, return.
             if (!openFileDialog.ShowDialog().Value) return;

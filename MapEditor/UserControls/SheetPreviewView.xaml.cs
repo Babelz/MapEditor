@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MapEditorViewModels;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,40 +30,36 @@ namespace MapEditor.UserControls
         public int GridOffsetX
         {
             get { return (int)GetValue(GridOffsetXProperty); }
-            set { SetValue(GridOffsetXProperty, value); }
+            set { ResizeGrid(); SetValue(GridOffsetXProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for OffsetX.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty GridOffsetXProperty =
-            DependencyProperty.Register("GridOffsetX", typeof(int), typeof(SheetPreviewView), new PropertyMetadata(default(int), new PropertyChangedCallback((a, b) => { })));
+            DependencyProperty.Register("GridOffsetX", typeof(int), typeof(SheetPreviewView), new PropertyMetadata(0));
 
         public int GridOffsetY
         {
             get { return (int)GetValue(GridOffsetYProperty); }
-            set { SetValue(GridOffsetYProperty, value); }
+            set { ResizeGrid(); SetValue(GridOffsetYProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for OffsetY.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty GridOffsetYProperty =
             DependencyProperty.Register("GridOffsetY", typeof(int), typeof(SheetPreviewView), new PropertyMetadata(0));
 
         public int CellWidth
         {
             get { return (int)GetValue(CellWidthProperty); }
-            set { SetValue(CellWidthProperty, value); }
+            set { ResizeGrid(); SetValue(CellWidthProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for TileWidth.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CellWidthProperty =
             DependencyProperty.Register("CellWidth", typeof(int), typeof(SheetPreviewView), new PropertyMetadata(0));
 
         public int CellHeight
         {
             get { return (int)GetValue(CellHeightProperty); }
-            set { SetValue(CellHeightProperty, value); }
+            set { ResizeGrid(); SetValue(CellHeightProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for TileHeight.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CellHeightProperty =
             DependencyProperty.Register("CellHeight", typeof(int), typeof(SheetPreviewView), new PropertyMetadata(0));
 
@@ -69,7 +67,16 @@ namespace MapEditor.UserControls
         {
             set
             {
+                ResizeGrid();
+
+                // Capture image.
                 image = value;
+
+                previewRootCanvas.Width = image.Width;
+                previewRootCanvas.Height = image.Height;
+                previewRootCanvas.UpdateLayout();
+
+                tileSheetPreviewImage.Source = image;
             }
         }
         #endregion
@@ -84,12 +91,13 @@ namespace MapEditor.UserControls
         /// </summary>
         private void ResizeGrid()
         {
+            // Avoid casts.
+            int cellWidth = CellWidth;
+            int cellHeight = CellHeight;
+            
             // If image is null, we need to wait for it to
             // get a proper value before we can resize the grid.
             if (image == null || CellWidth == 0 || CellHeight == 0) return;
-            
-            previewRootCanvas.Width = image.Width;
-            previewRootCanvas.Height = image.Height;
 
             // Calculate space for the grid.
             int modColumns = (int)image.Width / CellWidth;
