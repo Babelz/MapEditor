@@ -17,7 +17,7 @@ namespace MapEditorCore.TileEditor
         #region Fields
         private readonly TileEngine tileEngine;
 
-        private TileSheet currentSheet;
+        private Tileset currentTileset;
 
         private Color color;
         #endregion
@@ -41,15 +41,15 @@ namespace MapEditorCore.TileEditor
                 return tileEngine;
             }
         }
-        protected TileSheet CurrentSheet
+        protected Tileset CurrentTileset
         {
             get
             {
-                return currentSheet;
+                return currentTileset;
             }
             set
             {
-                currentSheet = value;
+                currentTileset = value;
             }
         }
         #endregion

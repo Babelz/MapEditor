@@ -8,10 +8,10 @@ using System.Text;
 namespace MapEditorCore.TileEditor
 {
     /// <summary>
-    /// Base class for all tile sheets. Can be used for texture or 
+    /// Base class for all tile sets. Can be used for texture or 
     /// animation mapping.
     /// </summary>
-    public abstract class TileSheet : IDisposable
+    public abstract class Tileset : IDisposable
     {
         #region Fields
         private readonly Texture2D texture;
@@ -29,7 +29,7 @@ namespace MapEditorCore.TileEditor
             }
         }
         /// <summary>
-        /// Texture this sheet is using.
+        /// Texture this set is using.
         /// </summary>
         public Texture2D Texture
         {
@@ -51,7 +51,7 @@ namespace MapEditorCore.TileEditor
         public event EventHandler Disposing;
         #endregion
 
-        public TileSheet(Texture2D texture, Point sourceSize)
+        public Tileset(Texture2D texture, Point sourceSize)
         {
             this.texture = texture;
             this.sourceSize = sourceSize;
@@ -60,7 +60,7 @@ namespace MapEditorCore.TileEditor
         }
 
         /// <summary>
-        /// Called when sheet gets disposed.
+        /// Called when set gets disposed.
         /// </summary>
         protected virtual void OnDispose()
         {
@@ -71,7 +71,7 @@ namespace MapEditorCore.TileEditor
         public abstract Rectangle GetSource(Point sourceIndex);
 
         /// <summary>
-        /// Dispose the sheet.
+        /// Dispose the set.
         /// </summary>
         public void Dispose()
         {
@@ -83,7 +83,14 @@ namespace MapEditorCore.TileEditor
 
             OnDispose();
 
+            GC.SuppressFinalize(this);
+
             disposed = true;
+        }
+
+        ~Tileset()
+        {
+            Dispose();
         }
     }
 }

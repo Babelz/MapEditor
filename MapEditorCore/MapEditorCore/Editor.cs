@@ -14,11 +14,13 @@ namespace MapEditorCore
     /// <summary>
     /// Common interface for every editor.
     /// </summary>
-    public abstract class Editor
+    public abstract class Editor : IDisposable
     {
         #region Fields
         private ContentManager content;
         private SpriteBatch spriteBatch;
+        
+        private bool disposed;
         #endregion
 
         #region Properties
@@ -75,6 +77,10 @@ namespace MapEditorCore
             OnInitialize();
         }
 
+        protected virtual void OnDispose()
+        {
+        }
+
         public abstract void SelectLayer(string name);
         public abstract void AddLayer(string name, Point size);
         public abstract void RemoveLayer(string name);
@@ -83,5 +89,22 @@ namespace MapEditorCore
 
         public abstract void Update(GameTime gameTime);
         public abstract void Draw(SpriteBatch spriteBatch);
+
+        public void Dispose()
+        {
+            if (disposed) return;
+
+            OnDispose();
+
+            // No need to finalize.
+            GC.SuppressFinalize(this);
+
+            disposed = true;
+        }
+
+        ~Editor()
+        {
+            Dispose();
+        }
     }
 }

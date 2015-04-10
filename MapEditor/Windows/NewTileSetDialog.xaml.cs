@@ -15,13 +15,18 @@ using System.Windows.Shapes;
 namespace MapEditor.Windows
 {
     /// <summary>
-    /// Interaction logic for NewTileSheetDialog.xaml
+    /// Interaction logic for NewTilesetDialog.xaml
     /// </summary>
-    public partial class NewTileSheetDialog : Window
+    public partial class NewTilesetDialog : Window
     {
-        public NewTileSheetDialog()
+        public NewTilesetDialog()
         {
             InitializeComponent();
+        }
+
+        private void loadTextureButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

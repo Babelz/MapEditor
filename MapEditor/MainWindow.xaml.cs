@@ -147,6 +147,14 @@ namespace MapEditor
         /// </summary>
         private void Window_Closing(object sender, CancelEventArgs e)
         {
+            if (project != null)
+            {
+                // TODO: show warning dialog.
+
+                // Dispose the project to avoid process locks and leaks.
+                CleanupLastProject();
+            }
+
             exiting = true;
         }
     }

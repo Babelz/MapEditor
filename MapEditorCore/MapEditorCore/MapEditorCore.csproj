@@ -103,7 +103,7 @@
     <Compile Include="TileEditor\TileEditor.cs" />
     <Compile Include="TileEditor\TileEngine.cs" />
     <Compile Include="TileEditor\TileLayer.cs" />
-    <Compile Include="TileEditor\TileSheet.cs" />
+    <Compile Include="TileEditor\Tileset.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">

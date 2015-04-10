@@ -35,11 +35,11 @@ namespace MapEditorCore.TileEditor
         }
 
         #region Event handlers
-        private void CurrentSheet_Disposing(object sender, EventArgs e)
+        private void CurrentTileset_Disposing(object sender, EventArgs e)
         {
-            // Reset tile. Sheet has been disposed.
-            CurrentSheet.Disposing -= CurrentSheet_Disposing;
-            CurrentSheet = null;
+            // Reset tile. Set has been disposed.
+            CurrentTileset.Disposing -= CurrentTileset_Disposing;
+            CurrentTileset = null;
 
             Clear();
         }
@@ -53,29 +53,29 @@ namespace MapEditorCore.TileEditor
         protected override void OnDraw(SpriteBatch spriteBatch)
         {
             // If tile has source, draw it. No need to check for
-            // null sheets because there cant be invalid indices 
-            // if tile has sheet.
+            // null set because there cant be invalid indices 
+            // if tile has set.
             if (sourceIndex.X != -1)
             {
-                spriteBatch.Draw(CurrentSheet.Texture, destination, source, Color);
+                spriteBatch.Draw(CurrentTileset.Texture, destination, source, Color);
             }
         }
 
         public override void Paint(PaintArgs args)
         {
-            // Swap sheet if needed.
-            if(CurrentSheet != null)
-                CurrentSheet.Disposing -= CurrentSheet_Disposing;
+            // Swap set if needed.
+            if(CurrentTileset != null)
+                CurrentTileset.Disposing -= CurrentTileset_Disposing;
 
-            CurrentSheet = args.TexturePaintArgs.TileSheet;
+            CurrentTileset = args.TexturePaintArgs.Tileset;
 
-            // Hook new event if args contain new sheet.
-            if(ReferenceEquals(CurrentSheet, args.TexturePaintArgs.TileSheet))
-                CurrentSheet.Disposing += CurrentSheet_Disposing;
+            // Hook new event if args contain new set.
+            if(ReferenceEquals(CurrentTileset, args.TexturePaintArgs.Tileset))
+                CurrentTileset.Disposing += CurrentTileset_Disposing;
 
             // Get new index and source.
             sourceIndex = args.TexturePaintArgs.SourceIndex;
-            source = CurrentSheet.GetSource(sourceIndex);
+            source = CurrentTileset.GetSource(sourceIndex);
         }
     }
 }

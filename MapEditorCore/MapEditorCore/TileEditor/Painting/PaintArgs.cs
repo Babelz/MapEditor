@@ -16,9 +16,9 @@ namespace MapEditorCore.TileEditor.Painting
         public Point SourceIndex;
 
         /// <summary>
-        /// Tile sheet that contains texture data.
+        /// Tileset that contains texture data.
         /// </summary>
-        public TileSheet TileSheet;
+        public Tileset Tileset;
 
         /// <summary>
         /// Color to paint with.

@@ -118,6 +118,7 @@ namespace MapEditor
         {
             if (disposed) return;
 
+            editor.Dispose();
             game.Dispose();
 
             disposed = true;

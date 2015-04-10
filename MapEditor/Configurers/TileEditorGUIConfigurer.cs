@@ -31,7 +31,7 @@ namespace MapEditor.Configurers
         private MenuItem editMetaObjectsMenuItem;
 
         private MenuItem addLayerMenuItem;
-        private MenuItem addTileSheetMenuItem;
+        private MenuItem addTilesetMenuItem;
         private MenuItem addTileAnimationMenuItem;
         private MenuItem addMetadataObjectSetMenuItem;
         #endregion
@@ -59,6 +59,13 @@ namespace MapEditor.Configurers
                 tileEditor.AddLayer(newTileLayerProperties.Name, new Point(newTileLayerProperties.Width, newTileLayerProperties.Height));
             }
         }
+        private void addTilesetMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            NewTilesetDialog newTilesetDialog = new NewTilesetDialog();
+
+            // Show the dialog, ask for tileset properties.
+
+        }
         #endregion
 
         private void InsertUserControls(Window window)
@@ -85,10 +92,12 @@ namespace MapEditor.Configurers
 
             addLayerMenuItem.Click += addLayerMenuItem_Click;
 
-            addTileSheetMenuItem = new MenuItem()
+            addTilesetMenuItem = new MenuItem()
             {
-                Header = "Sheet"
+                Header = "Tileset"
             };
+
+            addTilesetMenuItem.Click += addTilesetMenuItem_Click;
 
             addTileAnimationMenuItem = new MenuItem()
             {
@@ -116,10 +125,11 @@ namespace MapEditor.Configurers
             addMenuItem = ChildHelper.FindMenuItem(menu, "addMenuItem");
 
             addMenuItem.Items.Add(addLayerMenuItem);
-            addMenuItem.Items.Add(addTileSheetMenuItem);
+            addMenuItem.Items.Add(addTilesetMenuItem);
             addMenuItem.Items.Add(addTileAnimationMenuItem);
             addMenuItem.Items.Add(addMetadataObjectSetMenuItem);
         }
+
         private void InitializeToolBar(Window window)
         {
 
@@ -146,7 +156,7 @@ namespace MapEditor.Configurers
             editMenuItem.Items.Remove(editMetaObjectsMenuItem);
 
             addMenuItem.Items.Remove(addLayerMenuItem);
-            addMenuItem.Items.Remove(addTileSheetMenuItem);
+            addMenuItem.Items.Remove(addTilesetMenuItem);
             addMenuItem.Items.Remove(addTileAnimationMenuItem);
             addMenuItem.Items.Remove(addMetadataObjectSetMenuItem);
         }
