@@ -26,8 +26,12 @@
 
         <ScrollViewer BorderBrush="Black" Margin="5" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
                 <Canvas Name="previewRootCanvas">
-                    <Image Name="tileSheetPreviewImage"/>
-                <Grid Name="tileGrid" Visibility="{Binding showBordersCheckBox.IsChecked, Converter={StaticResource converter}}" ShowGridLines="True"/>
+                <Image Name="tileSheetPreviewImage"/>
+
+                <Border Name="gridBorder" BorderBrush="Black" BorderThickness="2" Visibility="{Binding IsChecked, ElementName=showBordersCheckBox, Converter={StaticResource converter}}">
+                    <Grid Name="tileGrid"  ShowGridLines="True"/>
+                </Border>
+                    
             </Canvas>
         </ScrollViewer>
 

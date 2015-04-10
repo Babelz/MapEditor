@@ -37,7 +37,7 @@ namespace MapEditor.UserControls
         }
 
         public static readonly DependencyProperty GridOffsetXProperty =
-            DependencyProperty.Register("GridOffsetX", typeof(int), typeof(SheetPreviewView), new PropertyMetadata(0));
+            DependencyProperty.Register("GridOffsetX", typeof(int), typeof(SheetPreviewView), new PropertyMetadata(0, Changed));
 
         public int GridOffsetY
         {
@@ -46,7 +46,7 @@ namespace MapEditor.UserControls
         }
 
         public static readonly DependencyProperty GridOffsetYProperty =
-            DependencyProperty.Register("GridOffsetY", typeof(int), typeof(SheetPreviewView), new PropertyMetadata(0));
+            DependencyProperty.Register("GridOffsetY", typeof(int), typeof(SheetPreviewView), new PropertyMetadata(0, Changed));
 
         public int CellWidth
         {
@@ -55,7 +55,7 @@ namespace MapEditor.UserControls
         }
 
         public static readonly DependencyProperty CellWidthProperty =
-            DependencyProperty.Register("CellWidth", typeof(int), typeof(SheetPreviewView), new PropertyMetadata(0));
+            DependencyProperty.Register("CellWidth", typeof(int), typeof(SheetPreviewView), new PropertyMetadata(0, Changed));
 
         public int CellHeight
         {
@@ -64,7 +64,7 @@ namespace MapEditor.UserControls
         }
 
         public static readonly DependencyProperty CellHeightProperty =
-            DependencyProperty.Register("CellHeight", typeof(int), typeof(SheetPreviewView), new PropertyMetadata(0));
+            DependencyProperty.Register("CellHeight", typeof(int), typeof(SheetPreviewView), new PropertyMetadata(0, Changed));
 
         public BitmapImage Image
         {
@@ -80,7 +80,7 @@ namespace MapEditor.UserControls
                 tileSheetPreviewImage.Source = image;
 
                 // Resize grid.
-                ResizeGrid();
+                ReconstructGrid();
             }
         }
         #endregion
@@ -93,29 +93,52 @@ namespace MapEditor.UserControls
             currentColumns = new List<ColumnDefinition>();
         }
 
-        #region Event handlers
-        private void newTilesetPropertiesViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        #region Static methods
+        private static void Changed(DependencyObject d, DependencyPropertyChangedEventArgs e) 
         {
-            ResizeGrid();
+            SheetPreviewView sheetPreviewView = d as SheetPreviewView;
+
+            sheetPreviewView.ReconstructGrid();
         }
         #endregion
 
+        // TODO: could use the mouse to set offset values? Bet some people would find it to be a nice feature.
+
         /// <summary>
-        /// Resize the grid. Might create new cells or remove some.
+        /// Reconstruct the grid.
+        /// WARNING: could use some optimization. Grid is reconstructed every time
+        /// something gets changed.
         /// </summary>
-        private void ResizeGrid()
+        private void ReconstructGrid()
         {
             // Avoid casts.
+            int gridOffsetX = GridOffsetX;
+            int gridOffsetY = GridOffsetY;
+
             int cellWidth = CellWidth;
             int cellHeight = CellHeight;
-            
+
+            // Move view of the grid to new location.
+            Canvas.SetTop(gridBorder, gridOffsetX);
+            Canvas.SetLeft(gridBorder, gridOffsetY);
+
+            gridBorder.Width = image.Width;
+            gridBorder.Height = image.Height;
+
+            // Resize the grid canvas.
+            double newWidth = gridBorder.Width - Canvas.GetLeft(gridBorder);
+            double newHeight = gridBorder.Height - Canvas.GetTop(gridBorder);
+
+            if (newWidth > 0.0) gridBorder.Width = newWidth;
+            if (newHeight > 0.0) gridBorder.Height = newHeight; 
+
             // If image is null, we need to wait for it to
             // get a proper value before we can resize the grid.
             if (image == null || cellWidth == 0 || cellHeight == 0) return;
 
             // Calculate space for the grid.
-            int modColumns = (int)image.Width / cellWidth;
-            int modRows = (int)image.Height / cellHeight;
+            int modColumns = (int)image.Width % cellWidth;
+            int modRows = (int)image.Height % cellHeight;
 
             int columnSpace = (int)image.Width;
             int rowSpace = (int)image.Height;
@@ -126,6 +149,9 @@ namespace MapEditor.UserControls
 
             int columns = columnSpace / cellWidth;
             int rows = rowSpace / cellHeight;
+
+            // Return to avoid divide by zero.
+            if (columns == 0 || rows == 0) return;
 
             int spacePerColumn = columnSpace / columns;
             int spacePerRow = rowSpace / rows;

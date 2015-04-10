@@ -101,6 +101,6 @@
             </Grid>
         </GroupBox>
 
-        <Button Name="createProjectButton" Content="Create project" Grid.Row="2" Grid.ColumnSpan="2" Margin="5" IsEnabled="{Binding Path=HasValidProperties}" Click="createProjectButton_Click"/>
+        <Button Name="createProjectButton" Content="Create project" Grid.Row="2" Grid.ColumnSpan="2" Margin="5, 5, 5, 10" IsEnabled="{Binding Path=HasValidProperties}" Click="createProjectButton_Click"/>
     </Grid>
 </Window>

@@ -35,7 +35,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20"/>
                     <RowDefinition Height="20"/>
-                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="*"/>
                     <RowDefinition Height="20"/>
                 </Grid.RowDefinitions>
                 
@@ -51,7 +51,7 @@
                 <TextBlock Text="Name already in use" Visibility="{Binding HasUniqueName, Converter={StaticResource converter}}"
                            Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
                 
-                <Button Name="loadTextureButton" Content="Load texture" Grid.Row="3" Grid.ColumnSpan="2"
+                <Button Name="loadTextureButton" Content="Load texture" Grid.Row="4" Grid.ColumnSpan="2"
                         Click="loadTextureButton_Click"/>
             </Grid>
         </GroupBox>
@@ -101,10 +101,10 @@
 
         <GroupBox Header="Preview" Grid.Column="1" Grid.RowSpan="4" Grid.ColumnSpan="2" Margin="5">
             <controls:SheetPreviewView x:Name="sheetPreviewView"
-                                       GridOffsetX="{Binding OffsetX}"
-                                       GridOffsetY="{Binding OffsetY}"
-                                       CellWidth="{Binding TileWidth}"
-                                       CellHeight="{Binding TileHeight}"/>
+                                       GridOffsetX="{Binding OffsetX, UpdateSourceTrigger=PropertyChanged}"
+                                       GridOffsetY="{Binding OffsetY, UpdateSourceTrigger=PropertyChanged}"
+                                       CellWidth="{Binding TileWidth, UpdateSourceTrigger=PropertyChanged}"
+                                       CellHeight="{Binding TileHeight, UpdateSourceTrigger=PropertyChanged}"/>
         </GroupBox>
         
         <Button Name="createTilesetButton" Content="Create tileset" Grid.Row="3" Margin="5, 0, 5, 5"
