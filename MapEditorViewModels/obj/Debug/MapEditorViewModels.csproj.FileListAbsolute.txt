@@ -12,3 +12,4 @@ C:\Users\ttv14snikos\Desktop\MapEditor\MapEditorViewModels\bin\Debug\MapEditorVi
 C:\Users\ttv14snikos\Desktop\MapEditor\MapEditorViewModels\bin\Debug\MapEditorViewModels.pdb
 C:\Users\ttv14snikos\Desktop\MapEditor\MapEditorViewModels\obj\Debug\MapEditorViewModels.dll
 C:\Users\ttv14snikos\Desktop\MapEditor\MapEditorViewModels\obj\Debug\MapEditorViewModels.pdb
+C:\Users\ttv14snikos\Desktop\MapEditor\MapEditorViewModels\obj\Debug\MapEditorViewModels.csprojResolveAssemblyReference.cache

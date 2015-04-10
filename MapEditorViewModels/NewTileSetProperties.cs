@@ -10,18 +10,28 @@ namespace MapEditorViewModels
     public sealed class NewTilesetProperties
     {
         #region Fields
+        private readonly string[] takenNames;
+
         public string Name;
         public string Path;
 
-        public int OffSetX;
-        public int OffSetY;
+        public int OffsetX;
+        public int OffsetY;
 
         public int TileWidth;
         public int TileHeight;
         #endregion
 
-        public NewTilesetProperties()
+        public NewTilesetProperties(string[] takenNames)
         {
+            this.takenNames = takenNames;
+        }
+
+        public bool HasUniqueName()
+        {
+            for (int i = 0; i < takenNames.Length; i++) if (takenNames[i] == Name) return false;
+
+            return true;
         }
 
         public bool HasValidProperties()

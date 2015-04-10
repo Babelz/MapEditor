@@ -112,7 +112,7 @@ namespace MapEditor
             this.mapTypename = mapTypename;
         }
 
-        // TODO: loading and saving...
+        // TODO: loading and saving... or?
 
         public void Dispose()
         {
