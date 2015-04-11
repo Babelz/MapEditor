@@ -7,6 +7,22 @@ using System.Threading.Tasks;
 
 namespace MapEditorCore.TileEditor.Painting
 {
+    /// <summary>
+    /// Type of the paint action.
+    /// </summary>
+    public enum PaintType
+    {
+        /// <summary>
+        /// Texture is being painted.
+        /// </summary>
+        Texture,
+
+        /// <summary>
+        /// Animation is being painted.
+        /// </summary>
+        Animation
+    }
+
     public sealed class TexturePaintArgs
     {
         #region Fields
@@ -18,7 +34,7 @@ namespace MapEditorCore.TileEditor.Painting
         /// <summary>
         /// Tileset that contains texture data.
         /// </summary>
-        public Tileset Tileset;
+        public TexturedTileset Tileset;
 
         /// <summary>
         /// Color to paint with.
@@ -30,7 +46,8 @@ namespace MapEditorCore.TileEditor.Painting
     /// <summary>
     /// Class that contains information regarding painting of the tiles. 
     /// This class will be pooled and there will be few instances in use
-    /// everytime.
+    /// every time. Only one property of this class can be in valid state
+    /// at all times.
     /// </summary>
     public sealed class PaintArgs
     {
@@ -39,6 +56,21 @@ namespace MapEditorCore.TileEditor.Painting
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Current type of the paint. Marks 
+        /// the valid property.
+        /// </summary>
+        public PaintType PaintType
+        {
+            get
+            {
+                return paintType;
+            }
+            set
+            {
+                paintType = value;
+            }
+        }
         public TexturePaintArgs TexturePaintArgs
         {
             get

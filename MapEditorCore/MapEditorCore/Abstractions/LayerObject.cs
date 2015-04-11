@@ -12,34 +12,9 @@ namespace MapEditorCore.Abstractions
     {
         #region Fields
         private Point position;
-
-        private bool visible;
-        private bool enalbed;
         #endregion
 
         #region Properties
-        public bool Visible
-        {
-            get
-            {
-                return visible;
-            }
-            set
-            {
-                visible = true;
-            }
-        }
-        public bool Enabled
-        {
-            get
-            {
-                return enalbed;
-            }
-            set
-            {
-                enalbed = true;
-            }
-        }
         public int X
         {
             get
@@ -52,7 +27,7 @@ namespace MapEditorCore.Abstractions
                 position.X = value;
 
                 if (position != oldPosition)
-                    OnMoved(oldPosition, position);
+                    if (Moved != null) Moved(oldPosition, position);
             }
         }
         public int Y
@@ -67,44 +42,29 @@ namespace MapEditorCore.Abstractions
                 position.Y = value;
 
                 if (position != oldPosition)
-                    OnMoved(oldPosition, position);
+                    if (Moved != null) Moved(oldPosition, position);
             }
         }
         #endregion
 
+        #region Events
+        /// <summary>
+        /// Called when this object is moved.
+        /// </summary>
+        public event LayerObjectMovedEventHandler Moved;
+        #endregion
+
         public LayerObject()
         {
-            visible = true;
-            enalbed = true;
         }
 
-        /// <summary>
-        /// Called when this object gets moved.
-        /// </summary>
-        /// <param name="oldPosition">old position of this object</param>
-        /// <param name="newPosition">new position of this object</param>
-        protected virtual void OnMoved(Point oldPosition, Point newPosition)
+        public virtual void Update(GameTime gameTime)
+        {
+        }
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
         }
 
-        protected virtual void OnUpdate(GameTime gameTime)
-        {
-        }
-        protected virtual void OnDraw(SpriteBatch spriteBatch)
-        {
-        }
-
-        public void Update(GameTime gameTime)
-        {
-            if (!enalbed) return;
-
-            OnUpdate(gameTime);
-        }
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            if (!visible) return;
-
-            OnDraw(spriteBatch);
-        }
+        public delegate void LayerObjectMovedEventHandler(Point oldPosition, Point newPosition);
     }
 }
