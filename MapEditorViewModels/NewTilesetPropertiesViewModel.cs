@@ -11,6 +11,10 @@ namespace MapEditorViewModels
     {
         #region Fields
         private readonly NewTilesetProperties properties;
+
+        // Just used for validating the offset.
+        private int imageWidth;
+        private int imageHeight;
         #endregion
 
         #region Properties
@@ -39,6 +43,10 @@ namespace MapEditorViewModels
             {
                 properties.Path = value;
 
+                // Reset offset for new image.
+                OffsetX = "0";
+                OffsetY = "0";
+
                 OnPropertyChanged("Path");
                 OnPropertyChanged("HasValidProperties");
             }
@@ -52,6 +60,9 @@ namespace MapEditorViewModels
             set
             {
                 int.TryParse(value, out properties.OffsetX);
+                
+                // Keep offset in bounds.
+                if (properties.OffsetX >= imageWidth && properties.OffsetX > 0) properties.OffsetX = imageWidth - 1;
 
                 OnPropertyChanged("OffsetX");
                 OnPropertyChanged("HasValidProperties");
@@ -66,6 +77,9 @@ namespace MapEditorViewModels
             set
             {
                 int.TryParse(value, out properties.OffsetY);
+
+                // Keep offset in bounds.
+                if (properties.OffsetY >= imageHeight && properties.OffsetY > 0) properties.OffsetY = imageHeight - 1;
 
                 OnPropertyChanged("OffsetY");
                 OnPropertyChanged("HasValidProperties");
@@ -127,6 +141,20 @@ namespace MapEditorViewModels
             get
             {
                 return !(properties.TileHeight > 0);
+            }
+        }
+        public int ImageWidth
+        {
+            set
+            {
+                imageWidth = value;
+            }
+        }
+        public int ImageHeight
+        {
+            set
+            {
+                imageHeight = value;
             }
         }
         #endregion

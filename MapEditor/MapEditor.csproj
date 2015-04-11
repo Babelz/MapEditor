@@ -114,6 +114,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Components\BoolToThicknessConverter.cs" />
     <Compile Include="Components\BoolToVisibilityConverter.cs" />
     <Compile Include="Helpers\ChildHelper.cs" />
     <Compile Include="Helpers\StringHelper.cs" />

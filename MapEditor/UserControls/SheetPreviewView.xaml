@@ -13,6 +13,7 @@
                 <ResourceDictionary Source="/Themes/ExpressionDark.xaml"/>
                 <ResourceDictionary>
                     <components:BoolToVisibilityConverter x:Key="converter"/>
+                    <components:BoolToThicknessConverter x:Key="thicknessConverter"/>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -25,10 +26,11 @@
         </Grid.RowDefinitions>
 
         <ScrollViewer BorderBrush="Black" Margin="5" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
-                <Canvas Name="previewRootCanvas">
+                <Canvas Name="previewRootCanvas" MouseLeftButtonDown="previewRootCanvas_MouseLeftButtonDown">
                 <Image Name="tileSheetPreviewImage"/>
 
-                <Border Name="gridBorder" BorderBrush="Black" BorderThickness="2" Visibility="{Binding IsChecked, ElementName=showBordersCheckBox, Converter={StaticResource converter}}">
+                <Border Name="gridBorder" BorderBrush="Black" BorderThickness="{Binding IsChecked, ElementName=showBordersCheckBox, Converter={StaticResource thicknessConverter}}" 
+                                                              Visibility="{Binding IsChecked, ElementName=showBordersCheckBox, Converter={StaticResource converter}}">
                     <Grid Name="tileGrid"  ShowGridLines="True"/>
                 </Border>
                     

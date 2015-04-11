@@ -68,6 +68,10 @@ namespace MapEditor.UserControls
 
         public BitmapImage Image
         {
+            get
+            {
+                return image;
+            }
             set
             {
                 // Capture image.
@@ -99,6 +103,25 @@ namespace MapEditor.UserControls
             SheetPreviewView sheetPreviewView = d as SheetPreviewView;
 
             sheetPreviewView.ReconstructGrid();
+        }
+        #endregion
+
+        #region Event handlers
+        private void previewRootCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            // Update view model.
+            NewTilesetPropertiesViewModel newTilesetPropertiesViewModel = DataContext as NewTilesetPropertiesViewModel;
+
+            // Return of the view model is not found.
+            if (newTilesetPropertiesViewModel == null) return;
+
+            Point mousePosition = e.GetPosition(previewRootCanvas);
+
+            int offsetX = (int)mousePosition.X;
+            int offsetY = (int)mousePosition.Y;
+
+            newTilesetPropertiesViewModel.OffsetX = offsetX.ToString();
+            newTilesetPropertiesViewModel.OffsetY = offsetY.ToString();
         }
         #endregion
 

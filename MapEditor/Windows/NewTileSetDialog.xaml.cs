@@ -81,7 +81,11 @@ namespace MapEditor.Windows
             sheetPreviewView.Image = new BitmapImage(new Uri(openFileDialog.FileName));
 
             // Set path for the model.
-            newTilesetProperties.Path = openFileDialog.FileName;
+            newTilesetPropertiesViewModel.Path = openFileDialog.FileName;
+
+            // Set height for model.
+            newTilesetPropertiesViewModel.ImageWidth = (int)sheetPreviewView.Image.Width;
+            newTilesetPropertiesViewModel.ImageHeight = (int)sheetPreviewView.Image.Height;
         }
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
