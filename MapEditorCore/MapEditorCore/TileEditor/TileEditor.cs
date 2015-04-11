@@ -17,6 +17,7 @@ namespace MapEditorCore.TileEditor
         #region Fields
         private readonly LayerManager<TileLayer> layers;
         private readonly ComponentCollection components;
+        private readonly List<Tileset> tilesets;
 
         private readonly TileEngine tileEngine;
         private readonly BasicView view;
@@ -25,6 +26,13 @@ namespace MapEditorCore.TileEditor
         #endregion
 
         #region Properties
+        public IEnumerable<Tileset> Tilesets
+        {
+            get
+            {
+                return tilesets;
+            }
+        }
         public override IEnumerable<Layer> Layers
         {
             get
@@ -67,10 +75,22 @@ namespace MapEditorCore.TileEditor
 
             layers = new LayerManager<TileLayer>();
             components = new ComponentCollection();
+            tilesets = new List<Tileset>();
+
             view = new BasicView();
 
             backgroundColor = Color.CornflowerBlue;
         }
+
+        #region Event handlers
+        private void tileset_Disposing(object sender, EventArgs e)
+        {
+            Tileset tileset = sender as Tileset;
+            tileset.Disposing -= tileset_Disposing;
+
+            tilesets.Remove(tileset);
+        }
+        #endregion
 
         protected override void OnInitialize()
         {
@@ -95,6 +115,21 @@ namespace MapEditorCore.TileEditor
         {
             layers.RemoveLayer(name);
         }
+
+        public void SelectTileset(string name)
+        {
+            // TODO: make tile set manager and wrap methods here.
+        }
+        public void AddTileset(string name, Texture2D texture, Point sourceSize, Point offset)
+        {
+            // TODO: make tile set manager and wrap methods here.
+        }
+        public void RemoveTileset(string name)
+        {
+            // TODO: make tile set manager and wrap methods here.
+        }
+
+        // TODO: add animation metohds.
 
         public override Rectangle GetMapBounds()
         {
