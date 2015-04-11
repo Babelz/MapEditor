@@ -24,7 +24,7 @@ namespace MapEditorCore.TileEditor.Actors
             sourceIndex = new Point(-1, -1);
 
             // Do same thing at moved event handler. Just copy it to avoid call overhead.
-            destination = new Rectangle(X, Y, TileEngine.TileBounds.Width, TileEngine.TileBounds.Height);
+            destination = new Rectangle(tile.X, tile.Y, TileEngine.TileBounds.Width, TileEngine.TileBounds.Height);
 
             tile.Moved += tile_Moved;
         }

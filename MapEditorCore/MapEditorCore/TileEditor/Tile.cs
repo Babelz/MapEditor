@@ -66,11 +66,11 @@ namespace MapEditorCore.TileEditor
             currentActor.Paint(args);
         }
 
-        public override void OnUpdate(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             currentActor.Update(gameTime);
         }
-        public override void OnDraw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             currentActor.Draw(spriteBatch);
         }

@@ -47,8 +47,8 @@ namespace MapEditorCore.TileEditor
             {
                 for (int j = fromColumn; j < tiles[i].Length; j++)
                 {
-                    tiles[i][j] = new TexturedTile(tileEngine, j * tileEngine.TileBounds.Width + X, 
-                                                               i * tileEngine.TileBounds.Height + Y);
+                    tiles[i][j] = new Tile(tileEngine, j * tileEngine.TileBounds.Width + X, 
+                                                       i * tileEngine.TileBounds.Height + Y);
                 }
             }
         }

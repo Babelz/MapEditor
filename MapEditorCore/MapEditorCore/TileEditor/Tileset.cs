@@ -52,6 +52,7 @@ namespace MapEditorCore.TileEditor
                 return texture;
             }
         }
+
         /// <summary>
         /// Size of one source on the set.
         /// </summary>

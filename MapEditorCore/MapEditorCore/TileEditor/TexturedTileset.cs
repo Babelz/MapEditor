@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,11 @@ namespace MapEditorCore.TileEditor
         #region Fields
         private Rectangle[][] sources;
         #endregion
+
+        public TexturedTileset(string name, Texture2D texture, Point sourceSize, Point offset)
+            : base(name, texture, sourceSize, offset)
+        {
+        }
 
         protected override void GenerateSources()
         {

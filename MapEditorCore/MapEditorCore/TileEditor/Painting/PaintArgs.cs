@@ -53,6 +53,8 @@ namespace MapEditorCore.TileEditor.Painting
     {
         #region Fields
         private readonly TexturePaintArgs texturePaintArgs;
+
+        private PaintType paintType;
         #endregion
 
         #region Properties
