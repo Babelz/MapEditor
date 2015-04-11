@@ -87,6 +87,7 @@
     <Compile Include="Abstractions\Layer.cs" />
     <Compile Include="Abstractions\LayerManager.cs" />
     <Compile Include="Abstractions\LayerObject.cs" />
+    <Compile Include="CommandQueue.cs" />
     <Compile Include="Components\BasicView.cs" />
     <Compile Include="Components\EditorComponents\BorderRenderer.cs" />
     <Compile Include="Components\EditorComponents\ComponentCollection.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Components\EditorComponents\Grid.cs" />
     <Compile Include="EditorGame.cs" />
     <Compile Include="Editor.cs" />
+    <Compile Include="Command.cs" />
     <Compile Include="Input\Buffer\GamepadInputBuffer.cs" />
     <Compile Include="Input\Buffer\InputBuffer.cs" />
     <Compile Include="Input\Buffer\KeyboardInputBuffer.cs" />
