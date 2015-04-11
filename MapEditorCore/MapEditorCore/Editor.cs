@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -75,6 +76,18 @@ namespace MapEditorCore
             this.spriteBatch = spriteBatch;
 
             OnInitialize();
+        }
+
+        protected Texture2D LoadFromFile(string path)
+        {
+            Texture2D texture = null;
+
+            using (FileStream stream = new FileStream(path, FileMode.Open))
+            {
+                texture = Texture2D.FromStream(spriteBatch.GraphicsDevice, stream);    
+            }
+
+            return texture;
         }
 
         protected virtual void OnDispose()

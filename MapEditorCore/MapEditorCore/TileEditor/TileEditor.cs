@@ -120,8 +120,9 @@ namespace MapEditorCore.TileEditor
         {
             // TODO: make tile set manager and wrap methods here.
         }
-        public void AddTileset(string name, Texture2D texture, Point sourceSize, Point offset)
+        public void AddTileset(string name, string texturePath, Point sourceSize, Point offset)
         {
+            Texture2D texture = null;
             // TODO: make tile set manager and wrap methods here.
         }
         public void RemoveTileset(string name)

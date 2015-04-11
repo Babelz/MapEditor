@@ -67,6 +67,10 @@ namespace MapEditor.Configurers
             if (newTilesetDialog.ShowDialog().Value)
             {
                 // Dialog OK, create new tileset.
+                NewTilesetProperties newTilesetProperties = newTilesetDialog.NewTilesetProperties;
+
+                tileEditor.AddTileset(newTilesetProperties.Name, newTilesetProperties.Path, new Point(newTilesetProperties.TileWidth, newTilesetProperties.TileHeight),
+                                                                                            new Point(newTilesetProperties.OffsetX, newTilesetProperties.OffsetY));
             }
         }
         #endregion
