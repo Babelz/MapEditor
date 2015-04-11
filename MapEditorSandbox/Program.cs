@@ -13,7 +13,7 @@ namespace MapEditorSandbox
         }
     }
 
-    public class ReferenceWrapper<T> : IDisposable where T : IDisposable
+    /*public class ReferenceWrapper<T> : IDisposable where T : IDisposable
     {
         private readonly T value;
 
@@ -58,5 +58,5 @@ namespace MapEditorSandbox
         {
             Dispose();
         }
-    }
+    }*/
 }
