@@ -39,6 +39,7 @@ namespace MapEditorCore.TileEditor
                 return components.Components;
             }
         }
+
         public override Color BackgroundColor
         {
             get
@@ -84,7 +85,6 @@ namespace MapEditorCore.TileEditor
         {
             layers.SelectLayer(name);
         }
-
         public override void AddLayer(string name, Point size)
         {
             TileLayer layer = new TileLayer(name, size, tileEngine);
@@ -105,7 +105,6 @@ namespace MapEditorCore.TileEditor
         {
             layers.Update(gameTime);
         }
-
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
