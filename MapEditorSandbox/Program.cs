@@ -10,7 +10,22 @@ namespace MapEditorSandbox
     {
         static void Main(string[] args)
         {
+            List<string> ss = new List<string>()
+            {
+                "asd",
+                "asd",
+                "asd"
+            };
+
+            IEnumerable<string> sse = ss.Select(s => s);
+
+            Console.WriteLine(sse.Count());
+
+            ss.RemoveAt(0);
+
+            Console.WriteLine(sse.Count());
         }
+
     }
 
     /*public class ReferenceWrapper<T> : IDisposable where T : IDisposable

@@ -24,14 +24,40 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="25"/>
                                 <RowDefinition Height="*"/>
-                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="35"/>
                             </Grid.RowDefinitions>
                            
                             
                             <TextBlock Text="Layers" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"
                                        FontSize="18"/>
                         
-                            <ListView Grid.Row="1" Margin="5"/>
+                            <ListView Grid.Row="1" Margin="5" Name="layersListView">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <WrapPanel>
+                                            <CheckBox Name="visibilityCheckBox" IsChecked="{Binding Visible}"/>
+                                            <CheckBox Name="typeCheckBox" IsChecked="{Binding IsDynamic}"/>
+                                            <TextBlock Name="nameTextBlock" Text="{Binding Name}"/>
+                                        </WrapPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                                
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="Visible" Width="50" DisplayMemberBinding="{Binding Visible}"/>
+                                        <GridViewColumn Header="Dynamic" Width="70" DisplayMemberBinding="{Binding Visible}"/>
+                                        <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding Visible}"/>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                            
+                            <!-- TODO: replace text content with icons once they are ready... -->
+                            <StackPanel Grid.Row="2" Margin="5" Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button Content="New" VerticalContentAlignment="Center" Padding="10, 0, 10, 0" Margin="0, 0, 5, 0"/>
+                                <Button Content="Delete" HorizontalContentAlignment="Center" Padding="10, 0, 10, 0" Margin="0, 0, 5, 0"/>
+                                <Button Content="Move up" HorizontalContentAlignment="Center" Padding="10, 0, 10, 0" Margin="0, 0, 5, 0"/>
+                                <Button Content="Move down" HorizontalContentAlignment="Center" Padding="10, 0, 10, 0" Margin="0, 0, 5, 0"/>
+                            </StackPanel>
                         </Grid>
                     </avalon:LayoutAnchorable>
                 </avalon:LayoutAnchorablePane>

@@ -5,8 +5,24 @@ using System.Text;
 
 namespace MapEditorCore
 {
+    /// <summary>
+    /// Singleton class. Handles and contains commands.
+    /// </summary>
     public sealed class CommandQueue
     {
+        #region Singleton
+        private static readonly CommandQueue instance = new CommandQueue(128);
+        private static readonly object padLock = new object();
+
+        public static CommandQueue Instance 
+        {
+            get
+            {
+                return instance;
+            }
+        }
+        #endregion
+
         #region Fields
         private readonly Command[] commands;
 
@@ -44,7 +60,7 @@ namespace MapEditorCore
         }
         #endregion
 
-        public CommandQueue(int maxCommands)
+        private CommandQueue(int maxCommands)
         {
             commands = new Command[maxCommands];
         }

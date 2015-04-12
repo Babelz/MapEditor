@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LayerViewModel.cs" />
     <Compile Include="NewProjectProperties.cs" />
     <Compile Include="NewProjectPropertiesViewModel.cs" />
     <Compile Include="NewTileLayerProperties.cs" />
@@ -62,6 +63,12 @@
     <Compile Include="NewTilesetProperties.cs" />
     <Compile Include="NewTilesetPropertiesViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MapEditorCore\MapEditorCore\MapEditorCore.csproj">
+      <Project>{8a724488-f344-4a79-a7d0-d0d95174752b}</Project>
+      <Name>MapEditorCore</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

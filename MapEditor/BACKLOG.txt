@@ -1,8 +1,4 @@
 ﻿Backlog for 12.4-26.4.2015
-	- Control for painting and layer sizing etc
-		- Redo
-		- Undo
-
 	- Show, edit and select layers
 		- ViewModel
 		- Control
@@ -28,3 +24,8 @@
 		- Cut 
 		- Clear
 		- Color selection
+
+	- Control for painting and layer sizing etc
+		- Redo
+		- Undo
+		- Named return points
