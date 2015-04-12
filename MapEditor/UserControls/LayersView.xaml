@@ -31,13 +31,14 @@
                             <TextBlock Text="Layers" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"
                                        FontSize="18"/>
                         
-                            <ListView Grid.Row="1" Margin="5" Name="layersListView">
+                            <ListView Grid.Row="1" Margin="5" x:Name="layersListView"
+                                      ItemsSource="{Binding LayersViewModel.Layers}">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <WrapPanel>
-                                            <CheckBox Name="visibilityCheckBox" IsChecked="{Binding Visible}"/>
-                                            <CheckBox Name="typeCheckBox" IsChecked="{Binding IsDynamic}"/>
-                                            <TextBlock Name="nameTextBlock" Text="{Binding Name}"/>
+                                            <CheckBox Name="visibilityCheckBox" IsChecked="{Binding ElementName=layersListView, Path=SelectedItem.Visibility}"/>
+                                            <CheckBox Name="typeCheckBox" IsChecked="{Binding ElementName=layersListView, Path=SelectedItem.IsDynamic}"/>
+                                            <TextBlock Name="nameTextBlock" Text="{Binding ElementName=layersListView, Path=SelectedItem.Name}"/>
                                         </WrapPanel>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
