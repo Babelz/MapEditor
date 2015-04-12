@@ -1,0 +1,30 @@
+﻿Backlog for 12.4-26.4.2015
+	- Control for painting and layer sizing etc
+		- Redo
+		- Undo
+
+	- Show, edit and select layers
+		- ViewModel
+		- Control
+
+	- Show, edit and select tilesets
+		- ViewModel
+		- Control
+
+	- Edit map properties
+		- ViewModel
+		- Control
+		- Edit background
+		- Show borders
+		- Show grid
+
+	- Tools
+		- Single tile painting
+		- Multiple tile painting
+		- Stamp (single source, multiple tiles)
+		- Select
+		- Copy
+		- Paste
+		- Cut 
+		- Clear
+		- Color selection

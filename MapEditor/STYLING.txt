@@ -1,6 +1,6 @@
 ﻿- About headers -
 	Headers shoudl always have 50px room in height
-	Headers use font size of 30
+	Headers use font size of 18
 
 - About subheaders -
-	Sub headers use font size of 18
+	Sub headers use font size of 15

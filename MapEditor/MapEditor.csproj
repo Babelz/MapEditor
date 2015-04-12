@@ -122,6 +122,9 @@
     <Compile Include="Configurers\TileEditorGUIConfigurer.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="ProjectBuilder.cs" />
+    <Compile Include="UserControls\LayersView.xaml.cs">
+      <DependentUpon>LayersView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\SheetPreviewView.xaml.cs">
       <DependentUpon>SheetPreviewView.xaml</DependentUpon>
     </Compile>
@@ -173,6 +176,10 @@
     <Page Include="Themes\WhistlerBlue.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\LayersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\SheetPreviewView.xaml">
       <SubType>Designer</SubType>
@@ -230,9 +237,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Style rules.txt" />
+    <Resource Include="STYLING.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="BACKLOG.txt" />
     <Content Include="MapEditorCore.csproj">
       <SubType>Designer</SubType>
     </Content>

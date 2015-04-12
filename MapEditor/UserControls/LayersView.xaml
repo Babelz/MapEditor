@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="MapEditor.UserControls.LayersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d"
+             xmlns:avalon="http://schemas.xceed.com/wpf/xaml/avalondock"
+             d:DesignHeight="300" d:DesignWidth="300">
+    
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\Themes\ExpressionDark.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>    
+    </UserControl.Resources>
+     
+    <avalon:DockingManager>
+        <avalon:LayoutRoot>
+            <avalon:LayoutPanel>
+                <avalon:LayoutAnchorablePane>
+                    <avalon:LayoutAnchorable>
+                        <Grid Background="{StaticResource NormalBrush}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="25"/>
+                            </Grid.RowDefinitions>
+                           
+                            
+                            <TextBlock Text="Layers" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                       FontSize="18"/>
+                        
+                            <ListView Grid.Row="1" Margin="5"/>
+                        </Grid>
+                    </avalon:LayoutAnchorable>
+                </avalon:LayoutAnchorablePane>
+            </avalon:LayoutPanel>
+        </avalon:LayoutRoot>
+    </avalon:DockingManager>
+</UserControl>

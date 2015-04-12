@@ -132,3 +132,5 @@ C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\MapEditor.g.resour
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\MapEditor.Properties.Resources.resources
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\MapEditor.csproj.GenerateResource.Cache
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\MapEditor.exe
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\UserControls\LayersView.baml
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\UserControls\LayersView.g.cs

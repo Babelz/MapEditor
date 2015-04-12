@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:avalon="http://schemas.xceed.com/wpf/xaml/avalondock"
         xmlns:xnaControl="clr-namespace:XNAControl;assembly=XNAControl"
+        xmlns:controls="clr-namespace:MapEditor.UserControls"
         Title="MainWindow" Height="720" Width="1280"
         Closing="Window_Closing">
     
@@ -57,7 +58,8 @@
                 <avalon:LayoutPanel Orientation="Horizontal">
                     <avalon:LayoutAnchorablePane DockWidth="200">
                         <avalon:LayoutAnchorable Title="Project explorer" x:Name="projectExplorerView" Closing="view_Closing">
-                            <Canvas Name="projectExplorerRoot" Background="{StaticResource NormalBorderBrush}"/>
+                            <!-- <Canvas Name="projectExplorerRoot" Background="{StaticResource NormalBorderBrush}"/-->
+                            <controls:LayersView/>
                         </avalon:LayoutAnchorable>
                     </avalon:LayoutAnchorablePane>
                     
