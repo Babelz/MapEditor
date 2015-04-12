@@ -61,5 +61,10 @@ namespace MapEditorCore.TileEditor
         {
             tileset.Dispose();
         }
+
+        ~TilesetManager()
+        {
+            for (int i = 0; i < tilesets.Count; i++) tilesets[i].Dispose();
+        }
     }
 }

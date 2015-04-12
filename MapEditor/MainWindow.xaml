@@ -24,15 +24,30 @@
                 <MenuItem Header="New project" Name="newProjectMenuItem" Click="newProjectMenuItem_Click"/>
                 <MenuItem Header="Load project" Name="loadProjectMenuItem" Click="loadProjectMenuItem_Click"/>
                 <MenuItem Header="Save project" Name="saveProjectMenuItem" Click="saveProjectMenuItem_Click"/>
+                <Separator/>
+                <MenuItem Header="Save as image" Name="saveAsImageMenuItem"/>
             <Separator/>
                 <MenuItem Header="Exit" Name="exitProgramMenuItem"/>
             </MenuItem>
             <MenuItem Header="View" Name="viewMenuItem">
-                <MenuItem Header="Project explorer" Name="viewProjectExplorerMenuItem" Click="viewProjectExplorerMenuItem_Click"/>
-                <MenuItem Header="Map" Name="viewMapMenuItem" Click="viewMapMenuItem_Click"/>
-                <MenuItem Header="Properties" Name="viewPropertiesMenuItem" Click="viewPropertiesMenuItem_Click"/>
+                <MenuItem Header="Windows">
+                    <MenuItem Header="Map" Name="viewMapMenuItem" Click="viewMapMenuItem_Click"/>
+                    <MenuItem Header="Properties" Name="viewPropertiesMenuItem" Click="viewPropertiesMenuItem_Click"/>
+                    <MenuItem Header="Project explorer" Name="viewProjectExplorerMenuItem" Click="viewProjectExplorerMenuItem_Click"/>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="Show grid"/>
+                <MenuItem Header="Show objects"/>
+                <MenuItem Header="Show collision bodies"/>
             </MenuItem>
-            <MenuItem Header="Edit" Name="editMenuItem"/>
+            <MenuItem Header="Edit" Name="editMenuItem">
+                <MenuItem Header="Copy" Name="copyMenuItem"/>
+                <MenuItem Header="Past" Name="pasteMenuItem"/>
+                <MenuItem Header="Cut" Name="cutMenuItem"/>
+                <Separator/>
+                <MenuItem Header="Undo" Name="undoMenuItem"/>
+                <MenuItem Header="Redo" Name="redoMenuItem"/>
+            </MenuItem>
             <MenuItem Header="Add" Name="addMenuItem"/>
             <MenuItem Header="Help" Name="helpMenuItem"/>
         </Menu>

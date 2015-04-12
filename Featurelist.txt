@@ -1,0 +1,13 @@
+Redo
+Undo
+Copy
+Paste
+Clear
+Paint
+Tilesets
+Mini-map
+Objects
+Layers
+Properties
+Show grid
+View
