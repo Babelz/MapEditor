@@ -105,6 +105,7 @@ namespace MapEditorCore.Input.Listener
             if (triggers.Length == 0) throw new ArgumentException("Triggers[] can't be empty", "triggers");
 
             Mapping mapping = GetMapping(mappingName);
+
             if (mapping == null)
             {
                 mapping = new Mapping(mappingName, func);

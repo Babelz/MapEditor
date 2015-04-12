@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapEditorCore", "MapEditorC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapEditorSandbox", "MapEditorSandbox\MapEditorSandbox.csproj", "{4C43CFE3-9904-40D8-AA88-F3536CE73997}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapEditorMetadata", "..\..\..\Documents\Visual Studio 2013\Projects\VoidenMetadata\VoidenMetadata\MapEditorMetadata.csproj", "{0515F73A-BD4F-49BB-8885-5E5E5FCA9067}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		ASD|Any CPU = ASD|Any CPU
@@ -102,6 +104,21 @@ Global
 		{4C43CFE3-9904-40D8-AA88-F3536CE73997}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{4C43CFE3-9904-40D8-AA88-F3536CE73997}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{4C43CFE3-9904-40D8-AA88-F3536CE73997}.Release|x86.ActiveCfg = Release|Any CPU
+		{0515F73A-BD4F-49BB-8885-5E5E5FCA9067}.ASD|Any CPU.ActiveCfg = Release|Any CPU
+		{0515F73A-BD4F-49BB-8885-5E5E5FCA9067}.ASD|Any CPU.Build.0 = Release|Any CPU
+		{0515F73A-BD4F-49BB-8885-5E5E5FCA9067}.ASD|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{0515F73A-BD4F-49BB-8885-5E5E5FCA9067}.ASD|Mixed Platforms.Build.0 = Release|Any CPU
+		{0515F73A-BD4F-49BB-8885-5E5E5FCA9067}.ASD|x86.ActiveCfg = Release|Any CPU
+		{0515F73A-BD4F-49BB-8885-5E5E5FCA9067}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0515F73A-BD4F-49BB-8885-5E5E5FCA9067}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0515F73A-BD4F-49BB-8885-5E5E5FCA9067}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{0515F73A-BD4F-49BB-8885-5E5E5FCA9067}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{0515F73A-BD4F-49BB-8885-5E5E5FCA9067}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0515F73A-BD4F-49BB-8885-5E5E5FCA9067}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0515F73A-BD4F-49BB-8885-5E5E5FCA9067}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0515F73A-BD4F-49BB-8885-5E5E5FCA9067}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{0515F73A-BD4F-49BB-8885-5E5E5FCA9067}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{0515F73A-BD4F-49BB-8885-5E5E5FCA9067}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
