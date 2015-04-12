@@ -59,6 +59,7 @@ namespace MapEditorCore.TileEditor.Painting
         public TileBrush()
         {
             args = new PaintArgs();
+
             color = Color.White;
         }
 

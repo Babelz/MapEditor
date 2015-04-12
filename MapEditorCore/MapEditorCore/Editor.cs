@@ -78,13 +78,20 @@ namespace MapEditorCore
             OnInitialize();
         }
 
-        protected Texture2D LoadFromFile(string path)
+        protected Texture2D LoadTextureFromFile(string path)
         {
             Texture2D texture = null;
 
-            using (FileStream stream = new FileStream(path, FileMode.Open))
+            try
             {
-                texture = Texture2D.FromStream(spriteBatch.GraphicsDevice, stream);    
+                using (FileStream stream = new FileStream(path, FileMode.Open))
+                {
+                    texture = Texture2D.FromStream(spriteBatch.GraphicsDevice, stream);
+                }
+            }
+            catch (Exception)
+            {
+                texture = LoadTextureFromFile(path);
             }
 
             return texture;

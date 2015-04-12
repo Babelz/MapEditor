@@ -1,6 +1,10 @@
 ﻿using MapEditorCore.Abstractions;
 using MapEditorCore.Components;
 using MapEditorCore.Components.EditorComponents;
+using MapEditorCore.Input;
+using MapEditorCore.Input.Listener;
+using MapEditorCore.Input.Trigger;
+using MapEditorCore.TileEditor.Painting;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -15,12 +19,17 @@ namespace MapEditorCore.TileEditor
     public sealed class TileEditor : Editor
     {
         #region Fields
+        private readonly ResourceManager<Texture2D> textures;
         private readonly LayerManager<TileLayer> layers;
         private readonly ComponentCollection components;
-        private readonly List<Tileset> tilesets;
+        private readonly TilesetManager tilesets;
 
         private readonly TileEngine tileEngine;
         private readonly BasicView view;
+
+        private readonly KeyboardInputListener keyboardInputListener;
+        private readonly MouseInputListener mouseInputListener;
+        private readonly InputManager inputManager;
 
         private Color backgroundColor;
         #endregion
@@ -30,7 +39,7 @@ namespace MapEditorCore.TileEditor
         {
             get
             {
-                return tilesets;
+                return tilesets.Tilesets;
             }
         }
         public override IEnumerable<Layer> Layers
@@ -73,24 +82,26 @@ namespace MapEditorCore.TileEditor
         {
             this.tileEngine = tileEngine;
 
+            textures = new ResourceManager<Texture2D>();
             layers = new LayerManager<TileLayer>();
             components = new ComponentCollection();
-            tilesets = new List<Tileset>();
-
+            tilesets = new TilesetManager();
+            
             view = new BasicView();
+
+            keyboardInputListener = new KeyboardInputListener();
+            mouseInputListener = new MouseInputListener();
+            inputManager = new InputManager(keyboardInputListener, mouseInputListener);
 
             backgroundColor = Color.CornflowerBlue;
         }
 
-        #region Event handlers
-        private void tileset_Disposing(object sender, EventArgs e)
+        private void InitializeInput()
         {
-            Tileset tileset = sender as Tileset;
-            tileset.Disposing -= tileset_Disposing;
-
-            tilesets.Remove(tileset);
+            mouseInputListener.Map("interact", (args) => 
+            {
+            }, new MouseTrigger(MouseButtons.LeftButton));
         }
-        #endregion
 
         protected override void OnInitialize()
         {
@@ -99,8 +110,11 @@ namespace MapEditorCore.TileEditor
 
             components.AddComponent(new BorderRenderer(this, temp));
             components.AddComponent(new Grid(this, temp, new Point(tileEngine.TileSizeInPixels.X, tileEngine.TileSizeInPixels.Y)));
+
+            InitializeInput();
         }
 
+        #region Layer metohds
         public override void SelectLayer(string name)
         {
             layers.SelectLayer(name);
@@ -115,21 +129,55 @@ namespace MapEditorCore.TileEditor
         {
             layers.RemoveLayer(name);
         }
+        #endregion
 
+        #region Tileset methods
         public void SelectTileset(string name)
         {
-            // TODO: make tile set manager and wrap methods here.
+            tilesets.SelectTileset(name);
         }
         public void AddTileset(string name, string texturePath, Point sourceSize, Point offset)
         {
-            // TODO: make tile set manager and wrap methods here.
+            // Get the texture resource.
+            int id = texturePath.GetHashCode();
+
+            Texture2D texture = null;
+
+            // Either load it from a file or just get a reference to it.
+            if (textures.ContainsResource(id))
+            {
+                // Get reference.
+                texture = textures.GetReference(id);
+            }
+            else
+            {
+                // Load from file and give it to resource manager.
+                texture = LoadTextureFromFile(texturePath);
+
+                textures.AddResource(texturePath, texture);
+            }
+
+            // TODO: only adds textured tile sets.
+            tilesets.AddTileset(new TexturedTileset(name, texture, sourceSize, offset));
+
+            // TODO: test shiet.
+            SelectLayer(layers.Layers.First().Name);
+            SelectTileset(tilesets.Tilesets.First().Name);
+            // TODO: test shiet.
         }
         public void RemoveTileset(string name)
         {
-            // TODO: make tile set manager and wrap methods here.
-        }
+            Tileset tileset = tilesets.Tilesets.First(s => s.Name == name);
 
-        // TODO: add animation metohds.
+            tilesets.RemoveTileset(tileset);
+
+            // Dereference the texture.
+            textures.Dereference(tileset.Texture);
+        }
+        #endregion
+
+        #region Editor methods
+        // TODO: add animation methods.
 
         public override Rectangle GetMapBounds()
         {
@@ -138,6 +186,8 @@ namespace MapEditorCore.TileEditor
 
         public override void Update(GameTime gameTime)
         {
+            inputManager.Update(gameTime);
+
             layers.Update(gameTime);
         }
         public override void Draw(SpriteBatch spriteBatch)
@@ -150,5 +200,6 @@ namespace MapEditorCore.TileEditor
 
             spriteBatch.End();
         }
+        #endregion
     }
 }

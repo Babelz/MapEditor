@@ -11,10 +11,11 @@ namespace MapEditorCore.TileEditor
     /// Base class for all tile sets. Can be used for texture or 
     /// animation mapping.
     /// </summary>
-    public abstract class Tileset : IDisposable
+    public abstract class Tileset
     {
         #region Fields
         private readonly Texture2D texture;
+
         private readonly Point sourceSize;
         private readonly Point offset;
 
@@ -99,28 +100,5 @@ namespace MapEditorCore.TileEditor
         protected abstract void GenerateSources();
 
         public abstract Rectangle GetSource(Point sourceIndex);
-
-        /// <summary>
-        /// Dispose the set.
-        /// </summary>
-        public void Dispose()
-        {
-            if (disposed) return;
-
-            if (Disposing != null) Disposing(this, new EventArgs());
-
-            texture.Dispose();
-
-            OnDispose();
-
-            GC.SuppressFinalize(this);
-
-            disposed = true;
-        }
-
-        ~Tileset()
-        {
-            Dispose();
-        }
     }
 }

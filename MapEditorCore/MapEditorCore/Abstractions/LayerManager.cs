@@ -28,9 +28,9 @@ namespace MapEditorCore.Abstractions
             }
         }
         /// <summary>
-        /// Gets active layer. Exposed for view models.
+        /// Gets selected layer. Exposed for view models.
         /// </summary>
-        public T ActiveLayer
+        public T SelectedLayer
         {
             get
             {

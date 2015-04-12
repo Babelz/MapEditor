@@ -16,9 +16,9 @@ namespace MapEditorCore.Input.Buffer
 
         private List<MouseButtons> current;
         private List<MouseButtons> old;
-        private MouseListener listener;
+        private MouseInputListener listener;
 
-        public MouseInputBuffer(MouseListener listener)
+        public MouseInputBuffer(MouseInputListener listener)
         {
             this.listener = listener;
             funcs[0] = (state) => state.LeftButton;

@@ -12,7 +12,9 @@ namespace MapEditorCore.TileEditor
     public sealed class TilesetManager
     {
         #region Fields
-        private readonly List<Tileset> tilesets;
+        private readonly Dictionary<string, Tileset> tilesets;
+
+        private Tileset selectedTileset;
         #endregion
 
         #region Properties
@@ -20,38 +22,42 @@ namespace MapEditorCore.TileEditor
         {
             get
             {
-                return tilesets;
+                return tilesets.Values;
+            }
+        }
+        public Tileset SelectedTileset
+        {
+            get
+            {
+                return selectedTileset;
             }
         }
         #endregion
 
         public TilesetManager()
         {
-            tilesets = new List<Tileset>();
+            tilesets = new Dictionary<string, Tileset>();
         }
 
-        #region Event handlers
-        /// <summary>
-        /// Tileset was disposed, remove it from the manager.
-        /// </summary>
-        private void tileset_Disposing(object sender, EventArgs e)
+        public void SelectTileset(string name)
         {
-            Tileset tileset = sender as Tileset;
+            // Clear selection.
+            if (!string.IsNullOrEmpty(name))
+            {
+                selectedTileset = null;
 
-            tilesets.Remove(tileset);
+                return;
+            }
 
-            tileset.Disposing -= tileset_Disposing;
+            selectedTileset = tilesets[name];
         }
-        #endregion
 
         /// <summary>
         /// Adds new tileset.
         /// </summary>
         public void AddTileset(Tileset tileset)
         {
-            tilesets.Add(tileset);
-
-            tileset.Disposing += tileset_Disposing;
+            tilesets.Add(tileset.Name, tileset);
         }
 
         /// <summary>
@@ -59,12 +65,9 @@ namespace MapEditorCore.TileEditor
         /// </summary>
         public void RemoveTileset(Tileset tileset)
         {
-            tileset.Dispose();
-        }
+            tilesets.Remove(tileset.Name);
 
-        ~TilesetManager()
-        {
-            for (int i = 0; i < tilesets.Count; i++) tilesets[i].Dispose();
+            if (ReferenceEquals(tileset, selectedTileset)) selectedTileset = null;
         }
     }
 }

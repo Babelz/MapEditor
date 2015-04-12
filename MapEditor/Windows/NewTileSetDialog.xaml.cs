@@ -4,6 +4,7 @@ using MapEditorViewModels;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -78,7 +79,21 @@ namespace MapEditor.Windows
             if (!openFileDialog.ShowDialog().Value) return;
 
             // Got file, load it.
-            sheetPreviewView.Image = new BitmapImage(new Uri(openFileDialog.FileName));
+            BitmapImage image = new BitmapImage();
+
+            // We need to load (copy) it into memory so it wont block our editor side 
+            // when we try to load it as a texture.
+            using (FileStream stream = new FileStream(openFileDialog.FileName, FileMode.Open))
+            {
+                image.BeginInit();
+                
+                image.StreamSource = stream;
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                
+                image.EndInit();
+            }
+
+            sheetPreviewView.Image = image;
 
             // Set path for the model.
             newTilesetPropertiesViewModel.Path = openFileDialog.FileName;

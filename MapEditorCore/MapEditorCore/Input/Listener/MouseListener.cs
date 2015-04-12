@@ -8,7 +8,7 @@ using MapEditorCore.Input.State;
 
 namespace MapEditorCore.Input.Listener
 {
-    public class MouseListener : InputListener
+    public class MouseInputListener : InputListener
     {
         #region Vars
 
@@ -25,7 +25,7 @@ namespace MapEditorCore.Input.Listener
         }
 
         #endregion
-        public MouseListener()
+        public MouseInputListener()
         {
             State = new MouseStateProvider();
             mouseBuffer = new MouseInputBuffer(this);

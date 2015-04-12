@@ -134,6 +134,9 @@ namespace MapEditor.UserControls
         /// </summary>
         private void ReconstructGrid()
         {
+            // Cant continue if there is no image.
+            if (image == null) return;
+
             // To avoid casts.
             int gridOffsetX = GridOffsetX;
             int gridOffsetY = GridOffsetY;
@@ -156,9 +159,7 @@ namespace MapEditor.UserControls
             if (newWidth > 0.0) gridBorder.Width = newWidth;
             if (newHeight > 0.0) gridBorder.Height = newHeight; 
 
-            // If image is null, we need to wait for it to
-            // get a proper value before we can resize the grid.
-            if (image == null || cellWidth == 0 || cellHeight == 0) return;
+            if (cellWidth == 0 || cellHeight == 0) return;
 
             // Calculate space for the grid.
             int modColumns = (int)image.Width % cellWidth;

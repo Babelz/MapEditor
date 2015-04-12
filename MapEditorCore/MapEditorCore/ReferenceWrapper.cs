@@ -5,7 +5,16 @@ using System.Text;
 
 namespace MapEditorCore
 {
-    public interface IReferenceWrapper : IDisposable
+    public interface IReferenceCountable
+    {
+        void Reference();
+        void DeReference();
+    }
+
+    /// <summary>
+    /// Interface for non-generic reference counting.
+    /// </summary>
+    public interface IReferenceWrapper : IDisposable, IReferenceCountable
     {
         #region Properties
         /// <summary>
@@ -24,19 +33,20 @@ namespace MapEditorCore
         /// </summary>
         event ReferenceDisposingEventHander Disposing;
         #endregion
-
-        void Reference();
-        void DeReference();
     }
 
-    public interface IGenericReferenceWrapper<T> : IReferenceWrapper where T : IDisposable
+    /// <summary>
+    /// Interface for generic reference counting.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public interface IReferenceWrapper<T> : IReferenceWrapper where T : IDisposable
     {
         #region Properties
         /// <summary>
         /// Returns the wrapped reference. Does not increase 
         /// the reference counter.
         /// </summary>
-        T Value
+        new T Value
         {
             get;
         }
@@ -100,7 +110,11 @@ namespace MapEditorCore
         }
     }
 
-    public class ReferenceWrapper<T> : IGenericReferenceWrapper<T> where T : IDisposable
+    /// <summary>
+    /// Simple generic reference wrapper.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class ReferenceWrapper<T> : IReferenceWrapper<T> where T : IDisposable
     {
         #region Fields
         private readonly T value;
@@ -129,7 +143,7 @@ namespace MapEditorCore
 
         #region Events
         public event ReferenceDisposingEventHander Disposing;
-        #endregion
+        #endregion 
 
         public ReferenceWrapper(T value)
         {

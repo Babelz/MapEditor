@@ -7,10 +7,9 @@ using MapEditorCore.Input.Listener;
 
 namespace MapEditorCore.Input
 {
-    public sealed class InputManager : GameComponent
+    public sealed class InputManager
     {
         #region Vars
-
         public List<InputListener> Listeners
         {
             get;
@@ -19,27 +18,21 @@ namespace MapEditorCore.Input
         #endregion
 
         #region Ctor
-        public InputManager(Game game, 
-            KeyboardInputListener keylistener, GamepadInputListener[] padListeners, MouseListener mil) : base(game)
+        public InputManager(KeyboardInputListener keylistener, MouseInputListener mil)
         {
             Listeners = new List<InputListener>();
+
             if (keylistener != null)
                 Listeners.Add(keylistener);
-            foreach (var listener in padListeners)
-            {
-                if (listener == null || Listeners.Contains(listener)) continue;
-                Listeners.Add(listener);
-            }
+            
             if (mil != null)
                 Listeners.Add(mil);
         }
         #endregion
 
-        public override void Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             Listeners.ForEach(l => l.Update(gameTime));
-
-            base.Update(gameTime);
         }
     }
 }
