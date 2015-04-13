@@ -56,5 +56,16 @@ namespace MapEditor.Helpers
 
             return null;
         }
+
+        public static MenuItem FindMenuItem(ItemCollection items, string name)
+        {
+            foreach (MenuItem item in items)
+            {
+                if (item == null) continue;
+                if (item.Name == name) return item;
+            }
+
+            return null;
+        }
     }
 }

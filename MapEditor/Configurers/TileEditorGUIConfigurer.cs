@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using Xceed.Wpf.AvalonDock;
+using Xceed.Wpf.AvalonDock.Layout;
 using Point = Microsoft.Xna.Framework.Point;
 
 namespace MapEditor.Configurers
@@ -26,6 +28,8 @@ namespace MapEditor.Configurers
         // Root menu item.
         private MenuItem editMenuItem;
         private MenuItem addMenuItem;
+        private MenuItem viewMenuItem;
+        private MenuItem windowsMenuItem;
 
         private MenuItem editMapMenuItem;
         private MenuItem editMetaObjectsMenuItem;
@@ -83,6 +87,15 @@ namespace MapEditor.Configurers
         private void InsertUserControls(Window window)
         {
             layersView = new LayersView(tileEditor);
+            
+            // TODO: anchor to properties view.
+            Grid root = LogicalTreeHelper.FindLogicalNode(window, "root") as Grid;
+
+            DockingManager dockingManager = LogicalTreeHelper.FindLogicalNode(root, "dockingManager") as DockingManager;
+
+            LayoutAnchorablePane layoutAnchorablePane = LogicalTreeHelper.FindLogicalNode(dockingManager, "propertiesView") as LayoutAnchorablePane;
+
+            //view.Children.Add(layersView);
         }
         private void InsertMenuItems(Window window)
         {
@@ -129,7 +142,6 @@ namespace MapEditor.Configurers
 
             viewLayersMenuItem.Click += viewLayersMenuItem_Click;
             
-
             // Get root.
             Grid root = LogicalTreeHelper.FindLogicalNode(window, "root") as Grid;
 
@@ -149,10 +161,17 @@ namespace MapEditor.Configurers
             addMenuItem.Items.Add(addTilesetMenuItem);
             addMenuItem.Items.Add(addTileAnimationMenuItem);
             addMenuItem.Items.Add(addMetadataObjectSetMenuItem);
+
+            // Insert new menu items.
+            viewMenuItem = ChildHelper.FindMenuItem(menu, "viewMenuItem");
+            windowsMenuItem = ChildHelper.FindMenuItem(viewMenuItem.Items, "windowsMenuItem");
+
+            windowsMenuItem.Items.Add(viewLayersMenuItem);
         }
 
         private void viewLayersMenuItem_Click(object sender, RoutedEventArgs e)
         {
+            layersView.Visibility = layersView.Visibility == Visibility.Hidden ? Visibility.Visible : Visibility.Hidden;
         }
         private void InitializeToolBar(Window window)
         {

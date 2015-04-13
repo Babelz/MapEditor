@@ -31,7 +31,7 @@
                 <MenuItem Header="Exit" Name="exitProgramMenuItem"/>
             </MenuItem>
             <MenuItem Header="View" Name="viewMenuItem">
-                <MenuItem Header="Windows">
+                <MenuItem Header="Windows" Name="windowsMenuItem">
                     <MenuItem Header="Map" Name="viewMapMenuItem" Click="viewMapMenuItem_Click"/>
                     <MenuItem Header="Properties" Name="viewPropertiesMenuItem" Click="viewPropertiesMenuItem_Click"/>
                     <MenuItem Header="Project explorer" Name="viewProjectExplorerMenuItem" Click="viewProjectExplorerMenuItem_Click"/>
