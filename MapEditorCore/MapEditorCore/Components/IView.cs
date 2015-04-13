@@ -21,5 +21,7 @@ namespace MapEditorCore.Components
             get;
         }
         #endregion
+
+        void SetArea(int width, int height);
     }
 }

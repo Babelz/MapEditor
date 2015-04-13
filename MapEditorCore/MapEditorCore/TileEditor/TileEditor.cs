@@ -56,7 +56,13 @@ namespace MapEditorCore.TileEditor
                 return components.Components;
             }
         }
-
+        public override IView View
+        {
+            get
+            {
+                return view;
+            }
+        }
         public override Color BackgroundColor
         {
             get
@@ -196,7 +202,7 @@ namespace MapEditorCore.TileEditor
 
             layers.Draw(spriteBatch, view.Bounds);
 
-            components.Draw(spriteBatch, view.Bounds);
+            //components.Draw(spriteBatch, view.Bounds);
 
             spriteBatch.End();
         }

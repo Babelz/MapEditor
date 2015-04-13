@@ -30,6 +30,24 @@ namespace MapEditorCore.TileEditor
             InitializeTileArray(ref tiles, 0, 0);
         }
 
+        private void FindRenderBounds(Rectangle viewBounds, ref int fromRow, ref int fromColumn, ref int toRow, ref int toColumn) 
+        {
+            // Padding of 5 tiles.
+            // TODO: const padding, wont work with zoom.
+            const int padding = 5;
+
+            // Calculate index values.
+            int leftIndex = viewBounds.Left / tileEngine.TileSizeInPixels.X;
+            int rightIndex = viewBounds.Right / tileEngine.TileSizeInPixels.X;
+            int topIndex = viewBounds.Top / tileEngine.TileSizeInPixels.Y;
+            int bototmIndex = viewBounds.Bottom / tileEngine.TileSizeInPixels.Y;
+
+            fromRow = leftIndex - padding; fromRow = fromRow < 0 ? 0 : fromRow;
+            fromColumn = topIndex - padding; fromColumn = fromColumn < 0 ? 0 : fromColumn;
+
+            toRow = rightIndex + padding; toRow = toRow > tileEngine.MaxLayerSizeInTiles.Y ? tileEngine.MaxLayerSizeInTiles.X : toRow;
+            toColumn = leftIndex + padding; toColumn = toColumn > tileEngine.MaxLayerSizeInTiles.X ? tileEngine.MaxLayerSizeInTiles.X : toColumn;
+        }
         private void RepositionTiles()
         {
             for (int i = 0; i < Height; i++)
@@ -65,23 +83,28 @@ namespace MapEditorCore.TileEditor
 
         protected override void OnUpdate(GameTime gameTime)
         {
-            for (int i = 0; i < Height; i++)
+            int fromRow = 0;
+            int fromColumn = 0;
+            int toRow = 0;
+            int toColumn = 0;
+
+            for (int i = fromRow; i < toRow; i++)
             {
-                for (int j = 0; j < Width; j++)
+                for (int j = fromColumn; j < toColumn; j++)
                 {
-                    tiles[i][j].Update(gameTime);
+                    //tiles[i][j].Update(gameTime);
                 }
             }
         }
 
         protected override void OnDraw(SpriteBatch spriteBatch, Rectangle viewBounds)
         {
-            // TODO: calc render area.
             int fromRow = 0;
             int fromColumn = 0;
+            int toRow = 0;
+            int toColumn = 0;
 
-            int toRow = Height;
-            int toColumn = Width;
+            FindRenderBounds(viewBounds, ref fromRow, ref fromColumn, ref toRow, ref toColumn);
 
             for (int i = fromRow; i < toRow; i++)
             {

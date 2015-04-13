@@ -25,6 +25,10 @@ namespace MapEditorCore
         #endregion
 
         #region Properties
+        public abstract IView View
+        {
+            get;
+        }
         public abstract IEnumerable<Layer> Layers
         {
             get;

@@ -27,7 +27,6 @@
                                 <RowDefinition Height="35"/>
                             </Grid.RowDefinitions>
                            
-                            
                             <TextBlock Text="Layers" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"
                                        FontSize="18"/>
                         

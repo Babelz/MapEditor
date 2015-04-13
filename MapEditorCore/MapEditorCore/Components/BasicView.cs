@@ -64,6 +64,12 @@ namespace MapEditorCore.Components
         {
         }
 
+        public void SetArea(int width, int height)
+        {
+            size.X = width;
+            size.Y = height;
+        }
+
         public void MoveTo(int x, int y)
         {
             position.X = x;

@@ -37,6 +37,9 @@ namespace MapEditorCore
         protected override void Update(GameTime gameTime)
         {
             editor.Update(gameTime);
+
+            // Set view size.
+            editor.View.SetArea(ResolutionWidth, ResolutionHeight);
             
             base.Update(gameTime);
         }
