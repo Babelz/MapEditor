@@ -15,6 +15,14 @@ namespace MapEditorCore.TileEditor
         private readonly TileEngine tileEngine;
 
         private Tile[][] tiles;
+
+
+        // Values used to find tiles that are inside the view.
+        int fromRow;
+        int fromColumn;
+
+        int toRow;
+        int toColumn;
         #endregion
 
         public TileLayer(string name, Point size, TileEngine tileEngine)
@@ -30,7 +38,7 @@ namespace MapEditorCore.TileEditor
             InitializeTileArray(ref tiles, 0, 0);
         }
 
-        private void CalculateArrayRange(Rectangle viewBounds, ref int fromRow, ref int fromColumn, ref int toRow, ref int toColumn) 
+        private void CalculateTileRange(Rectangle viewBounds) 
         {
             // Padding of 5 tiles.
             // TODO: const padding, wont work with zoom.
@@ -49,7 +57,7 @@ namespace MapEditorCore.TileEditor
             fromColumn = topIndex - padding; 
             fromColumn = fromColumn < 0 ? 0 : fromColumn;
 
-            // Validate thath "to" values are in bounds.
+            // Validate that "to" values are in bounds.
             toRow = rightIndex + padding; 
             toRow = toRow > tileEngine.MaxLayerSizeInTiles.Y ? tileEngine.MaxLayerSizeInTiles.X : toRow;
             
@@ -78,28 +86,6 @@ namespace MapEditorCore.TileEditor
                 }
             }
         }
-        /// <summary>
-        /// Executes action for each tile in given bounds.
-        /// </summary>
-        /// <param name="viewBounds">bounds</param>
-        /// <param name="action">action to execute</param>
-        private void ForTilesInrange(Rectangle viewBounds, Action<Tile> action)
-        {
-            int fromRow = 0;
-            int fromColumn = 0;
-            int toRow = 0;
-            int toColumn = 0;
-
-            CalculateArrayRange(viewBounds, ref fromRow, ref fromColumn, ref toRow, ref toColumn);
-
-            for (int i = fromRow; i < toRow; i++)
-            {
-                for (int j = fromColumn; j < toColumn; j++)
-                {
-                    action(tiles[i][j]);
-                }
-            }
-        }
 
         protected override void MakeStatic()
         {
@@ -113,12 +99,28 @@ namespace MapEditorCore.TileEditor
 
         protected override void OnUpdate(GameTime gameTime, Rectangle viewBounds)
         {
-            ForTilesInrange(viewBounds, t => t.Update(gameTime));
+            CalculateTileRange(viewBounds);
+
+            for (int i = fromRow; i < toRow; i++)
+            {
+                for (int j = fromColumn; j < toColumn; j++)
+                {
+                    tiles[i][j].Update(gameTime);
+                }
+            }
         }
 
         protected override void OnDraw(SpriteBatch spriteBatch, Rectangle viewBounds)
         {
-            ForTilesInrange(viewBounds, t => t.Draw(spriteBatch));
+            // No need to recalculate range because it was done inside update.
+            // Just draw the layer. 
+            for (int i = fromRow; i < toRow; i++)
+            {
+                for (int j = fromColumn; j < toColumn; j++)
+                {
+                    tiles[i][j].Draw(spriteBatch);
+                }
+            }
         }
 
         protected override void Resize(Point newSize)

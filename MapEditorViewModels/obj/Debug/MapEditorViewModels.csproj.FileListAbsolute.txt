@@ -27,3 +27,9 @@ C:\Users\ttv14snikos\Desktop\Gits\MapEditor\MapEditorViewModels\bin\Debug\MapEdi
 C:\Users\ttv14snikos\Desktop\Gits\MapEditor\MapEditorViewModels\obj\Debug\MapEditorViewModels.csprojResolveAssemblyReference.cache
 C:\Users\ttv14snikos\Desktop\Gits\MapEditor\MapEditorViewModels\obj\Debug\MapEditorViewModels.dll
 C:\Users\ttv14snikos\Desktop\Gits\MapEditor\MapEditorViewModels\obj\Debug\MapEditorViewModels.pdb
+C:\Users\ttv14snikos\Desktop\MapEditor\MapEditorViewModels\bin\Debug\Content\temp.xnb
+C:\Users\ttv14snikos\Desktop\MapEditor\MapEditorViewModels\bin\Debug\Content\temp.png
+C:\Users\ttv14snikos\Desktop\MapEditor\MapEditorViewModels\bin\Debug\MapEditorCore.dll
+C:\Users\ttv14snikos\Desktop\MapEditor\MapEditorViewModels\bin\Debug\XNAControl.dll
+C:\Users\ttv14snikos\Desktop\MapEditor\MapEditorViewModels\bin\Debug\MapEditorCore.pdb
+C:\Users\ttv14snikos\Desktop\MapEditor\MapEditorViewModels\obj\Debug\MapEditorViewModels.csprojResolveAssemblyReference.cache

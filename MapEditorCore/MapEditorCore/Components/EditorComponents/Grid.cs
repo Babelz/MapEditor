@@ -38,7 +38,6 @@ namespace MapEditorCore.Components.EditorComponents
             // Get map bounds.
             Rectangle bounds = Editor.GetMapBounds();
 
-            // TODO: const margin values, wont work while zooming.
             int topPadding = viewBounds.Height / 2;
             int leftPadding = viewBounds.Width / 2;
             

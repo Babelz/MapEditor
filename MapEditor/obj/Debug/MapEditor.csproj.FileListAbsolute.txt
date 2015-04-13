@@ -203,3 +203,5 @@ C:\Users\ttv14snikos\Desktop\Gits\MapEditor\MapEditor\obj\Debug\MapEditor.g.reso
 C:\Users\ttv14snikos\Desktop\Gits\MapEditor\MapEditor\obj\Debug\MapEditor.Properties.Resources.resources
 C:\Users\ttv14snikos\Desktop\Gits\MapEditor\MapEditor\obj\Debug\MapEditor.csproj.GenerateResource.Cache
 C:\Users\ttv14snikos\Desktop\Gits\MapEditor\MapEditor\obj\Debug\MapEditor.exe
+C:\Users\ttv14snikos\Desktop\MapEditor\MapEditor\obj\Debug\UserControls\LayersView.baml
+C:\Users\ttv14snikos\Desktop\MapEditor\MapEditor\obj\Debug\UserControls\LayersView.g.cs
