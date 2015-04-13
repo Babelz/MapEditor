@@ -83,7 +83,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstractions\Args.cs" />
+    <Compile Include="Abstractions\Delegates.cs" />
     <Compile Include="Abstractions\DrawOrder.cs" />
+    <Compile Include="Abstractions\ILayerManager.cs" />
     <Compile Include="Abstractions\Layer.cs" />
     <Compile Include="Abstractions\LayerManager.cs" />
     <Compile Include="Abstractions\LayerObject.cs" />

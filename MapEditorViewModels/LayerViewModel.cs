@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace MapEditorViewModels
 {
-    public sealed class LayerViewModel<T> : INotifyPropertyChanged where T : Layer
+    public sealed class LayerViewModel : INotifyPropertyChanged
     {
         #region Fields
         private readonly IEnumerable<string> takenNames;
 
-        private readonly T layer;
+        private readonly Layer layer;
         #endregion
 
         #region Properties
@@ -46,7 +46,7 @@ namespace MapEditorViewModels
                 OnPropertyChanged("Visible");
             }
         }
-        public bool Dynamic
+        public bool IsDynamic
         {
             get
             {
@@ -79,7 +79,7 @@ namespace MapEditorViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
-        public LayerViewModel(T layer, IEnumerable<string> takenNames)
+        public LayerViewModel(Layer layer, IEnumerable<string> takenNames)
         {
             this.layer = layer;
 
@@ -91,7 +91,7 @@ namespace MapEditorViewModels
             if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(name));
         }
 
-        public bool WrapsLayer(T layer)
+        public bool WrapsLayer(Layer layer)
         {
             return ReferenceEquals(layer, this.layer);
         }

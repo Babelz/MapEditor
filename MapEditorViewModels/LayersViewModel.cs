@@ -12,16 +12,16 @@ namespace MapEditorViewModels
     /// <summary>
     /// View model for wrapping layers.
     /// </summary>
-    public sealed class LayersViewModel<T> : INotifyPropertyChanged where T : Layer
+    public sealed class LayersViewModel : INotifyPropertyChanged
     {
         #region Fields
-        private readonly ObservableCollection<LayerViewModel<T>> layerViewModels;
+        private readonly ObservableCollection<LayerViewModel> layerViewModels;
 
-        private readonly LayerManager<T> layers;
+        private readonly ILayerManager layers;
         #endregion
 
         #region Properties
-        public ObservableCollection<LayerViewModel<T>> Layers
+        public ObservableCollection<LayerViewModel> Layers
         {
             get
             {
@@ -34,37 +34,37 @@ namespace MapEditorViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
-        public LayersViewModel(LayerManager<T> layers)
+        public LayersViewModel(ILayerManager layers)
         {
             this.layers = layers;
-            
+          
             layers.LayerAdded += layers_LayerAdded;
             layers.LayerRemoved += layers_LayerRemoved;
 
             // Generate view models.
-            layerViewModels = new ObservableCollection<LayerViewModel<T>>();
+            layerViewModels = new ObservableCollection<LayerViewModel>();
 
-            foreach (T layer in layers.Layers)
+            foreach (Layer layer in layers.Layers)
             {
                 layerViewModels.Add(CreateViewModelFrom(layer));
             }
         }
 
-        private LayerViewModel<T> CreateViewModelFrom(T layer)
+        private LayerViewModel CreateViewModelFrom(Layer layer)
         {
-            return new LayerViewModel<T>(layer, layers.Layers.Select(l => l.Name));
+            return new LayerViewModel(layer, layers.Layers.Select(l => l.Name));
         }
 
         #region Event handlers
-        private void layers_LayerAdded(T layer)
+        private void layers_LayerAdded(object sender, LayerManagerEventArgs e)
         {
-            layerViewModels.Add(CreateViewModelFrom(layer));
+            layerViewModels.Add(CreateViewModelFrom(e.Layer));
 
             OnPropertyChanged("Layers");
         }
-        private void layers_LayerRemoved(T layer)
+        private void layers_LayerRemoved(object sender, LayerManagerEventArgs e)
         {
-            LayerViewModel<T> layerViewModel = layerViewModels.FirstOrDefault(l => l.WrapsLayer(layer));
+            LayerViewModel layerViewModel = layerViewModels.FirstOrDefault(l => l.WrapsLayer(e.Layer));
 
             layerViewModels.Remove(layerViewModel);
 

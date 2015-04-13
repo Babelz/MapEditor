@@ -25,13 +25,13 @@ namespace MapEditor.UserControls
     public partial class LayersView : UserControl
     {
         #region Fields
-        private readonly LayersViewModel<TileLayer> layerViewModel;
+        private readonly LayersViewModel layerViewModel;
 
         private readonly LayerManager<TileLayer> layers;
         #endregion
 
         #region Properties
-        private LayersViewModel<TileLayer> LayersViewModel
+        private LayersViewModel LayersViewModel
         {
             get
             {
@@ -51,7 +51,7 @@ namespace MapEditor.UserControls
                 new TileEngine(new Microsoft.Xna.Framework.Point(32, 32),
                 new Microsoft.Xna.Framework.Point(32, 32))));
 
-            layerViewModel = new LayersViewModel<TileLayer>(layers);
+            layerViewModel = new LayersViewModel(layers);
 
             DataContext = layerViewModel;
 

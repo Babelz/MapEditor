@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MapEditorCore.Abstractions
 {
-    public sealed class LayerManager<T> where T : Layer
+    public sealed class LayerManager<T> : ILayerManager where T : Layer
     {
         #region Fields
         private readonly List<T> layers;
@@ -28,6 +28,17 @@ namespace MapEditorCore.Abstractions
             }
         }
         /// <summary>
+        /// Layers implementation from ILayerManager interface.
+        /// </summary>
+        IEnumerable<Layer> ILayerManager.Layers
+        {
+            get
+            {
+                return layers;
+            }
+        }
+
+        /// <summary>
         /// Gets selected layer. Exposed for view models.
         /// </summary>
         public T SelectedLayer
@@ -43,12 +54,12 @@ namespace MapEditorCore.Abstractions
         /// <summary>
         /// Called when layer is added to the manager.
         /// </summary>
-        public event LayerEventHandler<T> LayerAdded;
+        public event LayerEventHandler LayerAdded;
 
         /// <summary>
         /// Called when layer is removed from the manager.
         /// </summary>
-        public event LayerEventHandler<T> LayerRemoved;
+        public event LayerEventHandler LayerRemoved;
         #endregion
 
         public LayerManager()
@@ -86,7 +97,7 @@ namespace MapEditorCore.Abstractions
 
             layer.DrawOrder.Changed += DrawOrder_Changed;
 
-            if (LayerAdded != null) LayerAdded(layer);
+            if (LayerAdded != null) LayerAdded(this, new LayerManagerEventArgs(layer));
         }
         /// <summary>
         /// Removes the given layer.
@@ -100,7 +111,7 @@ namespace MapEditorCore.Abstractions
 
             if (ReferenceEquals(layer, selectedLayer)) selectedLayer = null;
 
-            if (LayerRemoved != null) LayerRemoved(layer);
+            if (LayerRemoved != null) LayerRemoved(this, new LayerManagerEventArgs(layer));
         }
         /// <summary>
         /// Removes layer with given name.
@@ -143,7 +154,5 @@ namespace MapEditorCore.Abstractions
         {
             for (int i = 0; i < layers.Count; i++) layers[i].Draw(spriteBatch, viewBounds);
         }
-
-        public delegate void LayerEventHandler<T>(T layer);
     }
 }
