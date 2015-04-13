@@ -62,7 +62,7 @@
                             <controls:LayersView/>
                         </avalon:LayoutAnchorable>
                     </avalon:LayoutAnchorablePane>
-                    
+
                     <avalon:LayoutAnchorablePane DockWidth="880">
                         <avalon:LayoutAnchorable Title="Map" x:Name="mapView" Closing="view_Closing">
                             <xnaControl:UserControl1 x:Name="xnaControl" SizeChanged="xnaControl_SizeChanged"/>

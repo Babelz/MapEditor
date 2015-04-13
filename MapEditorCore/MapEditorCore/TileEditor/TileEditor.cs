@@ -194,7 +194,9 @@ namespace MapEditorCore.TileEditor
         {
             inputManager.Update(gameTime);
 
-            layers.Update(gameTime);
+            layers.Update(gameTime, view.Bounds);
+
+            components.Update(gameTime, view.Bounds);
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -202,7 +204,7 @@ namespace MapEditorCore.TileEditor
 
             layers.Draw(spriteBatch, view.Bounds);
 
-            //components.Draw(spriteBatch, view.Bounds);
+            components.Draw(spriteBatch, view.Bounds);
 
             spriteBatch.End();
         }

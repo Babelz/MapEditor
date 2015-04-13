@@ -80,7 +80,8 @@ namespace MapEditor
                 InitializeNewProject();
 
                 // Set resolution.
-                project.Game.ChangeGraphics((int)xnaControl.Width, (int)xnaControl.Height);
+                // TODO: set resolution once its XNA controls size valid.
+                project.Game.ChangeGraphics(1280, 720);
             }
 
             // Invalid results, continue.

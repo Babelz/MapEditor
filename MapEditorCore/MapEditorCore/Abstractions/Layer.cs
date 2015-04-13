@@ -253,7 +253,7 @@ namespace MapEditorCore.Abstractions
         /// Called once every update.
         /// </summary>
         /// <param name="gameTime">current game time</param>
-        protected abstract void OnUpdate(GameTime gameTime);
+        protected abstract void OnUpdate(GameTime gameTime, Rectangle viewBounds);
         /// <summary>
         /// Called once every draw.
         /// </summary>
@@ -287,11 +287,11 @@ namespace MapEditorCore.Abstractions
             position.Y += amount.Y;
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, Rectangle viewBounds)
         {
             if (!enabled) return;
 
-            OnUpdate(gameTime);
+            OnUpdate(gameTime, viewBounds);
         }
         public void Draw(SpriteBatch spriteBatch, Rectangle viewBounds)
         {

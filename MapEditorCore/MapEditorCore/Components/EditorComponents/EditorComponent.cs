@@ -80,7 +80,7 @@ namespace MapEditorCore.Components.EditorComponents
         /// <summary>
         /// Called once every update if component is enabled.
         /// </summary>
-        protected virtual void OnUpdate(GameTime gameTime)
+        protected virtual void OnUpdate(GameTime gameTime, Rectangle viewBounds)
         {
         }
         /// <summary>
@@ -90,11 +90,11 @@ namespace MapEditorCore.Components.EditorComponents
         {
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, Rectangle viewBounds)
         {
             if (!enabled) return;
 
-            OnUpdate(gameTime);
+            OnUpdate(gameTime, viewBounds);
         }
         public void Draw(SpriteBatch spriteBatch, Rectangle viewBounds)
         {

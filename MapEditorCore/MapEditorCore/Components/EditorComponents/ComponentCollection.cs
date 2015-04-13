@@ -62,9 +62,9 @@ namespace MapEditorCore.Components.EditorComponents
             component.DrawOrder.Changed -= DrawOrder_Changed;
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, Rectangle viewBounds)
         {
-            for (int i = 0; i < components.Count; i++) components[i].Update(gameTime);
+            for (int i = 0; i < components.Count; i++) components[i].Update(gameTime, viewBounds);
         }
         public void Draw(SpriteBatch spriteBatch, Rectangle viewBounds)
         {

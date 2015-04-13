@@ -132,9 +132,9 @@ namespace MapEditorCore.Abstractions
         /// <summary>
         /// Update all layers.
         /// </summary>
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, Rectangle viewBounds)
         {
-            for (int i = 0; i < layers.Count; i++) layers[i].Update(gameTime);
+            for (int i = 0; i < layers.Count; i++) layers[i].Update(gameTime, viewBounds);
         }
         /// <summary>
         /// Draw all layers.
