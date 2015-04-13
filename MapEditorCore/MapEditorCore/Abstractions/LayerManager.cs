@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MapEditorCore.Abstractions
 {
-    public sealed class LayerManager<T> : ILayerManager where T : Layer
+    public sealed class LayerManager<T> where T : Layer
     {
         #region Fields
         private readonly List<T> layers;
@@ -28,17 +28,6 @@ namespace MapEditorCore.Abstractions
             }
         }
         /// <summary>
-        /// Layers implementation from ILayerManager interface.
-        /// </summary>
-        IEnumerable<Layer> ILayerManager.Layers
-        {
-            get
-            {
-                return layers;
-            }
-        }
-
-        /// <summary>
         /// Gets selected layer. Exposed for view models.
         /// </summary>
         public T SelectedLayer
@@ -54,12 +43,12 @@ namespace MapEditorCore.Abstractions
         /// <summary>
         /// Called when layer is added to the manager.
         /// </summary>
-        public event LayerEventHandler LayerAdded;
+        public event LayerManagerEventHandler LayerAdded;
 
         /// <summary>
         /// Called when layer is removed from the manager.
         /// </summary>
-        public event LayerEventHandler LayerRemoved;
+        public event LayerManagerEventHandler LayerRemoved;
         #endregion
 
         public LayerManager()

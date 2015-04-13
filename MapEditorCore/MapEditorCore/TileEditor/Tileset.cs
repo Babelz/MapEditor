@@ -21,7 +21,7 @@ namespace MapEditorCore.TileEditor
 
         private string name;
 
-        private bool disposed;
+        private bool deleted;
         #endregion
 
         #region Properties
@@ -34,13 +34,6 @@ namespace MapEditorCore.TileEditor
             set
             {
                 name = value;
-            }
-        }
-        public bool Disposed
-        {
-            get
-            {
-                return disposed;
             }
         }
         /// <summary>
@@ -74,10 +67,17 @@ namespace MapEditorCore.TileEditor
                 return offset;
             }
         }
+        public bool Deleted
+        {
+            get
+            {
+                return deleted;
+            }
+        }
         #endregion
 
         #region Events
-        public event EventHandler Disposing;
+        public event TilesetEventHandler Deleting;
         #endregion
 
         public Tileset(string name, Texture2D texture, Point sourceSize, Point offset)
@@ -100,5 +100,19 @@ namespace MapEditorCore.TileEditor
         protected abstract void GenerateSources();
 
         public abstract Rectangle GetSource(Point sourceIndex);
+
+        /// <summary>
+        /// Notifies all set users that this set is being deleted.
+        /// </summary>
+        public void Delete()
+        {
+            if (deleted) return;
+
+            if (Deleting != null) Deleting();
+
+            deleted = true;
+        }
+
+        public delegate void TilesetEventHandler();
     }
 }

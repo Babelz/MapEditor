@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using MapEditorCore.Input.Buffer;
-using MapEditorCore.Input.State;
-using MapEditorCore.Input.Trigger;
+using MapEditorInput.Buffer;
+using MapEditorInput.State;
+using MapEditorInput.Trigger;
 
-namespace MapEditorCore.Input.Listener
+namespace MapEditorInput.Listener
 {
     public sealed class KeyboardInputListener : InputListener
     {

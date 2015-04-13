@@ -4,11 +4,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Input;
-using MapEditorCore.Input.Listener;
-using MapEditorCore.Input.State;
-using MapEditorCore.Input.Trigger;
+using MapEditorInput.Listener;
+using MapEditorInput.State;
+using MapEditorInput.Trigger;
 
-namespace MapEditorCore.Input.Buffer
+namespace MapEditorInput.Buffer
 {
     public class MouseInputBuffer : InputBuffer
     {

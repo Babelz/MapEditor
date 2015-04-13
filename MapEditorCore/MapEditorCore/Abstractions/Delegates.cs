@@ -5,5 +5,5 @@ using System.Text;
 
 namespace MapEditorCore.Abstractions
 {
-    public delegate void LayerEventHandler(object sender, LayerManagerEventArgs e);
+    public delegate void LayerManagerEventHandler(object sender, LayerManagerEventArgs e);
 }

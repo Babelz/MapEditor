@@ -38,12 +38,10 @@ namespace MapEditorCore.TileEditor.Actors
             destination = new Rectangle(newPosition.X, newPosition.Y, TileEngine.TileBounds.Width, TileEngine.TileBounds.Height);
         }
         /// <summary>
-        /// Tileset was disposed. Reset the actor.
+        /// Tileset is getting deleted soon, reset the actor.
         /// </summary>
-        private void tileset_Disposing(object sender, EventArgs e)
+        private void tileset_Deleting()
         {
-            // Remove event.
-            tileset.Disposing -= tileset_Disposing;
             tileset = null;
             
             Clear();
@@ -60,11 +58,12 @@ namespace MapEditorCore.TileEditor.Actors
             // Swap set if needed.
             if (!ReferenceEquals(tileset, args.TexturePaintArgs.Tileset))
             {
-                if(tileset != null) tileset.Disposing -= tileset_Disposing;
+                // Remove event so the set will not "hang" on this object.
+                if (tileset != null) tileset.Deleting -= tileset_Deleting;
 
                 // Swap set.
                 tileset = args.TexturePaintArgs.Tileset;
-                
+
                 // Null swap. Clear and return.
                 if (tileset == null) 
                 {
@@ -72,6 +71,9 @@ namespace MapEditorCore.TileEditor.Actors
 
                     return;
                 }
+
+                // Got new set, add event listener.
+                tileset.Deleting += tileset_Deleting;
             }
 
             // Got sheet.

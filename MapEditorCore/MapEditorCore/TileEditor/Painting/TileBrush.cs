@@ -104,10 +104,6 @@ namespace MapEditorCore.TileEditor.Painting
         public virtual void SelectTileset(Tileset tileset)
         {
             this.tileset = tileset;
-
-            // Just to make sure we use valid tilesets for painting at 
-            // all times.
-            tileset.Disposing += tileset_Disposing;
         }
 
 

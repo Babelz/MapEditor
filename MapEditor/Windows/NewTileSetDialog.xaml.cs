@@ -55,7 +55,7 @@ namespace MapEditor.Windows
             this.tileEditor = tileEditor;
 
             // Get taken names.
-            string[] takenNames = tileEditor.LayerManager.Layers
+            string[] takenNames = tileEditor.Layers
                 .Select(s => s.Name)
                 .ToArray();
 

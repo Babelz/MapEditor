@@ -1,4 +1,5 @@
-﻿using MapEditorCore.Abstractions;
+﻿using MapEditorCore;
+using MapEditorCore.Abstractions;
 using MapEditorCore.TileEditor;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace MapEditorViewModels
         #region Fields
         private readonly ObservableCollection<LayerViewModel> layerViewModels;
 
-        private readonly ILayerManager layers;
+        private readonly Editor editor;
         #endregion
 
         #region Properties
@@ -34,25 +35,30 @@ namespace MapEditorViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
-        public LayersViewModel(ILayerManager layers)
+        public LayersViewModel(Editor editor)
         {
-            this.layers = layers;
+            this.editor = editor;
           
-            layers.LayerAdded += layers_LayerAdded;
-            layers.LayerRemoved += layers_LayerRemoved;
+            editor.LayerAdded += layers_LayerAdded;
+            editor.LayerRemoved += layers_LayerRemoved;
 
             // Generate view models.
             layerViewModels = new ObservableCollection<LayerViewModel>();
 
-            foreach (Layer layer in layers.Layers)
+            foreach (Layer layer in editor.Layers)
             {
                 layerViewModels.Add(CreateViewModelFrom(layer));
             }
         }
 
+        public LayersViewModel()
+        {
+            // TODO: Complete member initialization
+        }
+
         private LayerViewModel CreateViewModelFrom(Layer layer)
         {
-            return new LayerViewModel(layer, layers.Layers.Select(l => l.Name));
+            return new LayerViewModel(layer, editor.Layers.Select(l => l.Name));
         }
 
         #region Event handlers

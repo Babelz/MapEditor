@@ -54,7 +54,7 @@ namespace MapEditor.Windows
             this.tileEditor = tileEditor;
 
             // Initialize model and view.
-            string[] takenNames = tileEditor.LayerManager.Layers
+            string[] takenNames = tileEditor.Layers
                 .Select(s => s.Name)
                 .ToArray();
 

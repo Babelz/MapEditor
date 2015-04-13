@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Input;
 
-namespace MapEditorCore.Input.State
+namespace MapEditorInput.State
 {
     public class MouseStateProvider : IStateProvider
     {

@@ -37,6 +37,10 @@ namespace MapEditorCore
             get;
             set;
         }
+        public abstract IEnumerable<Layer> Layers
+        {
+            get;
+        }
 
         public ComponentCollection Components
         {
@@ -67,6 +71,18 @@ namespace MapEditorCore
                 return spriteBatch;
             }
         }
+        #endregion
+
+        #region Events
+        /// <summary>
+        /// Called when new layer is added to the editor.
+        /// </summary>
+        public abstract event LayerManagerEventHandler LayerAdded;
+
+        /// <summary>
+        /// Called when layer is removed from the editor.
+        /// </summary>
+        public abstract event LayerManagerEventHandler LayerRemoved;
         #endregion
 
         public Editor()

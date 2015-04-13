@@ -35,6 +35,8 @@ namespace MapEditor.Configurers
         private MenuItem addTileAnimationMenuItem;
         private MenuItem addMetadataObjectSetMenuItem;
 
+        private MenuItem viewLayersMenuItem;
+
         // Tool windows.
         private LayersView layersView;
         #endregion
@@ -80,7 +82,7 @@ namespace MapEditor.Configurers
 
         private void InsertUserControls(Window window)
         {
-            layersView = new LayersView(tileEditor.LayerManager);
+            layersView = new LayersView(tileEditor);
         }
         private void InsertMenuItems(Window window)
         {
@@ -120,6 +122,14 @@ namespace MapEditor.Configurers
                 Header = "Metadata object set"
             };
 
+            viewLayersMenuItem = new MenuItem()
+            {
+                Header = "Layers"
+            };
+
+            viewLayersMenuItem.Click += viewLayersMenuItem_Click;
+            
+
             // Get root.
             Grid root = LogicalTreeHelper.FindLogicalNode(window, "root") as Grid;
 
@@ -141,6 +151,9 @@ namespace MapEditor.Configurers
             addMenuItem.Items.Add(addMetadataObjectSetMenuItem);
         }
 
+        private void viewLayersMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+        }
         private void InitializeToolBar(Window window)
         {
 

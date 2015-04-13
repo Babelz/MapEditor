@@ -1,4 +1,5 @@
-﻿using MapEditorCore.Abstractions;
+﻿using MapEditor.Windows;
+using MapEditorCore.Abstractions;
 using MapEditorCore.TileEditor;
 using MapEditorViewModels;
 using System;
@@ -17,6 +18,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Point = Microsoft.Xna.Framework.Point;
+
 namespace MapEditor.UserControls
 {
     /// <summary>
@@ -25,9 +28,9 @@ namespace MapEditor.UserControls
     public partial class LayersView : UserControl
     {
         #region Fields
-        private readonly LayersViewModel layerViewModel;
+        private readonly LayersViewModel layersViewModel;
 
-        private readonly ILayerManager layers;
+        private readonly TileEditor tileEditor;
         #endregion
 
         #region Properties
@@ -40,21 +43,36 @@ namespace MapEditor.UserControls
         }
         #endregion
 
-        public LayersView(ILayerManager layers)
+        public LayersView(TileEditor tileEditor)
         {
-            this.layers = layers;
+            this.tileEditor = tileEditor;
+
+            // Initialize view model.
+            layersViewModel = new LayersViewModel(tileEditor);
 
             // Set data context.
-            DataContext = layerViewModel;
+            DataContext = layersViewModel;
 
             InitializeComponent();
 
             // Set source for view.
-            layersListView.ItemsSource = layerViewModel.Layers;
+            layersListView.ItemsSource = layersViewModel.Layers;
         }
 
         private void newLayerButton_Click(object sender, RoutedEventArgs e)
         {
+            // WARNING: duplication with tile editor GUI configurers addLayerMenuItem_ClickEventHandler!
+
+            NewTileLayerDialog newTileLayerDialog = new NewTileLayerDialog(tileEditor);
+
+            // Show the dialog, ask for layer properties.
+            if (newTileLayerDialog.ShowDialog().Value)
+            {
+                // Dialog OK, create new layer.
+                NewTileLayerProperties newTileLayerProperties = newTileLayerDialog.NewTileLayerProperties;
+
+                tileEditor.AddLayer(newTileLayerDialog.Name, new Point(newTileLayerProperties.Width, newTileLayerProperties.Height));
+            }
         }
         private void deleteLayerButton_Click(object sender, RoutedEventArgs e)
         {

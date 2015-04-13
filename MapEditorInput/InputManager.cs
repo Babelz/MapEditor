@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
-using MapEditorCore.Input.Listener;
+using MapEditorInput.Listener;
 
-namespace MapEditorCore.Input
+namespace MapEditorInput
 {
     public sealed class InputManager
     {

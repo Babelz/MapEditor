@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Input;
-using MapEditorCore.Input.Listener;
-using MapEditorCore.Input.Trigger;
+using MapEditorInput.Listener;
+using MapEditorInput.Trigger;
 
-namespace MapEditorCore.Input.Buffer
+namespace MapEditorInput.Buffer
 {
     public sealed class KeyboardInputBuffer : InputBuffer
     {

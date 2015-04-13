@@ -1,10 +1,10 @@
 ﻿using MapEditorCore.Abstractions;
 using MapEditorCore.Components;
 using MapEditorCore.Components.EditorComponents;
-using MapEditorCore.Input;
-using MapEditorCore.Input.Listener;
-using MapEditorCore.Input.Trigger;
 using MapEditorCore.TileEditor.Painting;
+using MapEditorInput;
+using MapEditorInput.Listener;
+using MapEditorInput.Trigger;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -51,14 +51,14 @@ namespace MapEditorCore.TileEditor
                 backgroundColor = value;
             }
         }
-
-        public LayerManager<TileLayer> LayerManager
+        public override IEnumerable<Layer> Layers
         {
             get
             {
-                return layers;
+                return layers.Layers;
             }
         }
+
         public TilesetManager TilesetManager
         {
             get
@@ -72,6 +72,35 @@ namespace MapEditorCore.TileEditor
             get
             {
                 return tileEngine;
+            }
+        }
+        #endregion
+
+        #region Events
+        /*
+         * Delegates add and remove calls to layer manager.
+         */
+
+        public override event LayerManagerEventHandler LayerAdded
+        {
+            add
+            {
+                layers.LayerAdded += value;
+            }
+            remove
+            {
+                layers.LayerAdded -= value;
+            }
+        }
+        public override event LayerManagerEventHandler LayerRemoved
+        {
+            add
+            {
+                layers.LayerRemoved += value;
+            }
+            remove
+            {
+                layers.LayerRemoved -= value;
             }
         }
         #endregion

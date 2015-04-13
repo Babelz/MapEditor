@@ -28,8 +28,6 @@ namespace MapEditorCore
 
         private int commandPointer;
         private int commandsCount;
-
-        private Action directionAction;
         #endregion
 
         #region Properties
