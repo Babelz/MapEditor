@@ -70,7 +70,7 @@
 
                     <avalon:LayoutAnchorablePane DockMinWidth="200">
                         <avalon:LayoutAnchorable Title="Properties" x:Name="propertiesView" Closing="view_Closing">
-                            <Canvas Name="propertiesRoot" Background="{StaticResource NormalBorderBrush}"/>
+                            <StackPanel Name="propertiesRoot" Background="{StaticResource NormalBorderBrush}"/>
                         </avalon:LayoutAnchorable>
                     </avalon:LayoutAnchorablePane>
                 </avalon:LayoutPanel>

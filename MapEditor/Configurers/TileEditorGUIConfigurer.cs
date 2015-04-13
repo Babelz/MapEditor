@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using Xceed.Wpf.AvalonDock;
+using Xceed.Wpf.AvalonDock.Controls;
 using Xceed.Wpf.AvalonDock.Layout;
 using Point = Microsoft.Xna.Framework.Point;
 
@@ -93,9 +94,11 @@ namespace MapEditor.Configurers
 
             DockingManager dockingManager = LogicalTreeHelper.FindLogicalNode(root, "dockingManager") as DockingManager;
 
-            LayoutAnchorablePane layoutAnchorablePane = LogicalTreeHelper.FindLogicalNode(dockingManager, "propertiesView") as LayoutAnchorablePane;
+            LayoutAnchorable layoutAnchorable = dockingManager.FindName("propertiesView") as LayoutAnchorable;
 
-            //view.Children.Add(layersView);
+            StackPanel stackPanel = layoutAnchorable.Content as StackPanel;
+
+            stackPanel.Children.Add(layersView);
         }
         private void InsertMenuItems(Window window)
         {
