@@ -19,9 +19,7 @@ namespace MapEditorCore.TileEditor
     public sealed class TileEditor : Editor
     {
         #region Fields
-        private readonly ResourceManager<Texture2D> textures;
         private readonly LayerManager<TileLayer> layers;
-        private readonly ComponentCollection components;
         private readonly TilesetManager tilesets;
 
         private readonly TileEngine tileEngine;
@@ -35,27 +33,6 @@ namespace MapEditorCore.TileEditor
         #endregion
 
         #region Properties
-        public IEnumerable<Tileset> Tilesets
-        {
-            get
-            {
-                return tilesets.Tilesets;
-            }
-        }
-        public override IEnumerable<Layer> Layers
-        {
-            get
-            {
-                return layers.Layers;
-            }
-        }
-        public override IEnumerable<EditorComponent> Components
-        {
-            get
-            {
-                return components.Components;
-            }
-        }
         public override IView View
         {
             get
@@ -74,6 +51,22 @@ namespace MapEditorCore.TileEditor
                 backgroundColor = value;
             }
         }
+
+        public LayerManager<TileLayer> LayerManager
+        {
+            get
+            {
+                return layers;
+            }
+        }
+        public TilesetManager TilesetManager
+        {
+            get
+            {
+                return tilesets;
+            }
+        }
+
         public TileEngine TileEngine
         {
             get
@@ -88,9 +81,7 @@ namespace MapEditorCore.TileEditor
         {
             this.tileEngine = tileEngine;
 
-            textures = new ResourceManager<Texture2D>();
             layers = new LayerManager<TileLayer>();
-            components = new ComponentCollection();
             tilesets = new TilesetManager();
             
             view = new BasicView();
@@ -114,8 +105,8 @@ namespace MapEditorCore.TileEditor
             // 1x1 white texture.
             Texture2D temp = Content.Load<Texture2D>("temp");
 
-            components.AddComponent(new BorderRenderer(this, temp));
-            components.AddComponent(new Grid(this, temp, new Point(tileEngine.TileSizeInPixels.X, tileEngine.TileSizeInPixels.Y)));
+            Components.AddComponent(new BorderRenderer(this, temp));
+            Components.AddComponent(new Grid(this, temp, new Point(tileEngine.TileSizeInPixels.X, tileEngine.TileSizeInPixels.Y)));
 
             InitializeInput();
         }
@@ -150,26 +141,21 @@ namespace MapEditorCore.TileEditor
             Texture2D texture = null;
 
             // Either load it from a file or just get a reference to it.
-            if (textures.ContainsResource(id))
+            if (TextureManager.ContainsResource(id))
             {
                 // Get reference.
-                texture = textures.GetReference(id);
+                texture = TextureManager.GetReference(id);
             }
             else
             {
                 // Load from file and give it to resource manager.
                 texture = LoadTextureFromFile(texturePath);
 
-                textures.AddResource(texturePath, texture);
+                TextureManager.AddResource(texturePath, texture);
             }
 
             // TODO: only adds textured tile sets.
             tilesets.AddTileset(new TexturedTileset(name, texture, sourceSize, offset));
-
-            // TODO: test shiet.
-            SelectLayer(layers.Layers.First().Name);
-            SelectTileset(tilesets.Tilesets.First().Name);
-            // TODO: test shiet.
         }
         public void RemoveTileset(string name)
         {
@@ -178,7 +164,7 @@ namespace MapEditorCore.TileEditor
             tilesets.RemoveTileset(tileset);
 
             // Dereference the texture.
-            textures.Dereference(tileset.Texture);
+            TextureManager.Dereference(tileset.Texture);
         }
         #endregion
 
@@ -196,7 +182,7 @@ namespace MapEditorCore.TileEditor
 
             layers.Update(gameTime, view.Bounds);
 
-            components.Update(gameTime, view.Bounds);
+            Components.Update(gameTime, view.Bounds);
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -204,7 +190,7 @@ namespace MapEditorCore.TileEditor
 
             layers.Draw(spriteBatch, view.Bounds);
 
-            components.Draw(spriteBatch, view.Bounds);
+            Components.Draw(spriteBatch, view.Bounds);
 
             spriteBatch.End();
         }

@@ -58,8 +58,7 @@
                 <avalon:LayoutPanel Orientation="Horizontal">
                     <avalon:LayoutAnchorablePane DockWidth="200">
                         <avalon:LayoutAnchorable Title="Project explorer" x:Name="projectExplorerView" Closing="view_Closing">
-                            <!-- <Canvas Name="projectExplorerRoot" Background="{StaticResource NormalBorderBrush}"/-->
-                            <controls:LayersView/>
+                            <Canvas Name="projectExplorerRoot" Background="{StaticResource NormalBorderBrush}"/>
                         </avalon:LayoutAnchorable>
                     </avalon:LayoutAnchorablePane>
 

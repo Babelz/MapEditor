@@ -27,7 +27,7 @@ namespace MapEditor.UserControls
         #region Fields
         private readonly LayersViewModel layerViewModel;
 
-        private readonly LayerManager<TileLayer> layers;
+        private readonly ILayerManager layers;
         #endregion
 
         #region Properties
@@ -40,35 +40,21 @@ namespace MapEditor.UserControls
         }
         #endregion
 
-        public LayersView()
+        public LayersView(ILayerManager layers)
         {
-            // TODO: test data.
-            
-            layers = new LayerManager<TileLayer>();
+            this.layers = layers;
 
-            for (int i = 0; i < 10; i++) layers.AddLayer(new TileLayer("layer " + i.ToString(),
-                new Microsoft.Xna.Framework.Point(32, 32),
-                new TileEngine(new Microsoft.Xna.Framework.Point(32, 32),
-                new Microsoft.Xna.Framework.Point(32, 32))));
-
-            layerViewModel = new LayersViewModel(layers);
-
+            // Set data context.
             DataContext = layerViewModel;
 
             InitializeComponent();
 
+            // Set source for view.
             layersListView.ItemsSource = layerViewModel.Layers;
-
-            Debug.Assert(layersListView.DataContext != null);
-            Debug.Assert(layersListView.ItemsSource != null);
         }
 
         private void newLayerButton_Click(object sender, RoutedEventArgs e)
         {
-            layers.AddLayer(new TileLayer("layeASasdasd",
-                new Microsoft.Xna.Framework.Point(32, 32),
-                new TileEngine(new Microsoft.Xna.Framework.Point(32, 32),
-                new Microsoft.Xna.Framework.Point(32, 32))));
         }
         private void deleteLayerButton_Click(object sender, RoutedEventArgs e)
         {

@@ -1,4 +1,5 @@
 ﻿using MapEditor.Helpers;
+using MapEditor.UserControls;
 using MapEditor.Windows;
 using MapEditorCore.TileEditor;
 using MapEditorViewModels;
@@ -9,7 +10,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-
 using Point = Microsoft.Xna.Framework.Point;
 
 namespace MapEditor.Configurers
@@ -34,6 +34,9 @@ namespace MapEditor.Configurers
         private MenuItem addTilesetMenuItem;
         private MenuItem addTileAnimationMenuItem;
         private MenuItem addMetadataObjectSetMenuItem;
+
+        // Tool windows.
+        private LayersView layersView;
         #endregion
 
         /// <summary>
@@ -77,6 +80,7 @@ namespace MapEditor.Configurers
 
         private void InsertUserControls(Window window)
         {
+            layersView = new LayersView(tileEditor.LayerManager);
         }
         private void InsertMenuItems(Window window)
         {

@@ -18,6 +18,9 @@ namespace MapEditorCore
     public abstract class Editor : IDisposable
     {
         #region Fields
+        private readonly ResourceManager<Texture2D> textureManager;
+        private readonly ComponentCollection components;
+
         private ContentManager content;
         private SpriteBatch spriteBatch;
         
@@ -29,20 +32,27 @@ namespace MapEditorCore
         {
             get;
         }
-        public abstract IEnumerable<Layer> Layers
-        {
-            get;
-        }
-        public abstract IEnumerable<EditorComponent> Components
-        {
-            get;
-        }
         public abstract Color BackgroundColor
         {
             get;
             set;
         }
 
+        public ComponentCollection Components
+        {
+            get
+            {
+                return components;
+            }
+        }
+
+        protected ResourceManager<Texture2D> TextureManager
+        {
+            get
+            {
+                return textureManager;
+            }
+        }
         protected ContentManager Content
         {
             get
@@ -61,6 +71,8 @@ namespace MapEditorCore
 
         public Editor()
         {
+            textureManager = new ResourceManager<Texture2D>();
+            components = new ComponentCollection();
         }
 
         /// <summary>

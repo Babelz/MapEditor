@@ -35,7 +35,7 @@
                                 <ListView.View>
                                     <GridView>
                                         <GridView.Columns>
-                                            <GridViewColumn Header="Visible">
+                                            <GridViewColumn Header="Visible" Width="50">
                                                 <GridViewColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <CheckBox IsChecked="{Binding Visible}"/>
@@ -43,7 +43,7 @@
                                                 </GridViewColumn.CellTemplate>
                                             </GridViewColumn>
 
-                                            <GridViewColumn Header="Dynamic">
+                                            <GridViewColumn Header="Dynamic" Width="75">
                                                 <GridViewColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <CheckBox IsChecked="{Binding IsDynamic}"/>
@@ -51,7 +51,7 @@
                                                 </GridViewColumn.CellTemplate>
                                             </GridViewColumn>
 
-                                            <GridViewColumn Header="Name">
+                                            <GridViewColumn Header="Name" Width="120">
                                                 <GridViewColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Text="{Binding Name}"/>
@@ -59,9 +59,6 @@
                                                 </GridViewColumn.CellTemplate>
                                             </GridViewColumn>
                                         </GridView.Columns>
-                                        <!--<GridViewColumn Header="Visible" Width="50"/>
-                                        <GridViewColumn Header="Dynamic" Width="70"/>
-                                        <GridViewColumn Header="Name" Width="120"/>-->
                                     </GridView>
                                 </ListView.View>
                             </ListView>
