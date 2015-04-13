@@ -10,7 +10,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Themes/ExpressionDark.xaml"/>
+                <ResourceDictionary Source="..\Themes\ExpressionDark.xaml"/>
                 <ResourceDictionary>
                     <components:BoolToVisibilityConverter x:Key="converter"/>
                     <components:BoolToThicknessConverter x:Key="thicknessConverter"/>

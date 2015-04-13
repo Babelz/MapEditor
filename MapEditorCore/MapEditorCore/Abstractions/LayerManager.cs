@@ -39,6 +39,18 @@ namespace MapEditorCore.Abstractions
         }
         #endregion
 
+        #region Events
+        /// <summary>
+        /// Called when layer is added to the manager.
+        /// </summary>
+        public event LayerEventHandler<T> LayerAdded;
+
+        /// <summary>
+        /// Called when layer is removed from the manager.
+        /// </summary>
+        public event LayerEventHandler<T> LayerRemoved;
+        #endregion
+
         public LayerManager()
         {
             layers = new List<T>();
@@ -73,6 +85,8 @@ namespace MapEditorCore.Abstractions
             SortLayers();
 
             layer.DrawOrder.Changed += DrawOrder_Changed;
+
+            if (LayerAdded != null) LayerAdded(layer);
         }
         /// <summary>
         /// Removes the given layer.
@@ -85,6 +99,8 @@ namespace MapEditorCore.Abstractions
             layer.DrawOrder.Changed -= DrawOrder_Changed;
 
             if (ReferenceEquals(layer, selectedLayer)) selectedLayer = null;
+
+            if (LayerRemoved != null) LayerRemoved(layer);
         }
         /// <summary>
         /// Removes layer with given name.
@@ -127,5 +143,7 @@ namespace MapEditorCore.Abstractions
         {
             for (int i = 0; i < layers.Count; i++) layers[i].Draw(spriteBatch, viewBounds);
         }
+
+        public delegate void LayerEventHandler<T>(T layer);
     }
 }

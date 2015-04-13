@@ -5,7 +5,7 @@
         Title="Create New Project" Width="400" Height="320" ResizeMode="NoResize">
 
     <Window.Resources>
-        <ResourceDictionary Source="/Themes/ExpressionDark.xaml"/>
+        <ResourceDictionary Source="../Themes/ExpressionDark.xaml"/>
     </Window.Resources>
 
     <Grid Background="{StaticResource NormalBrush}">

@@ -8,29 +8,15 @@ using System.Threading.Tasks;
 
 namespace MapEditorViewModels
 {
-    public sealed class LayerViewModel : INotifyPropertyChanged
+    public sealed class LayerViewModel<T> : INotifyPropertyChanged where T : Layer
     {
         #region Fields
         private readonly IEnumerable<string> takenNames;
 
-        private Layer layer;
+        private readonly T layer;
         #endregion
 
         #region Properties
-        /// <summary>
-        /// Layer this view model wraps.
-        /// </summary>
-        public Layer Layer
-        {
-            get
-            {
-                return layer;
-            }
-            set
-            {
-                layer = value;
-            }
-        }
         public string Name
         {
             get
@@ -93,14 +79,21 @@ namespace MapEditorViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
-        public LayerViewModel(IEnumerable<string> takenNames)
+        public LayerViewModel(T layer, IEnumerable<string> takenNames)
         {
+            this.layer = layer;
+
             this.takenNames = takenNames;
         }
 
         private void OnPropertyChanged(string name)
         {
             if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(name));
+        }
+
+        public bool WrapsLayer(T layer)
+        {
+            return ReferenceEquals(layer, this.layer);
         }
     }
 }

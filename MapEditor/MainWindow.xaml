@@ -8,7 +8,7 @@
         Closing="Window_Closing">
     
     <Window.Resources>
-        <ResourceDictionary Source="Themes\ExpressionDark.xaml"/>
+        <ResourceDictionary Source="/Themes/ExpressionDark.xaml"/>
     </Window.Resources>
  
     <Grid Name="root" Background="{StaticResource NormalBrush}">

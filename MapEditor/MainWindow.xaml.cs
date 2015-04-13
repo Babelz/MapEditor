@@ -1,6 +1,8 @@
 ﻿using MapEditor.Helpers;
 using MapEditor.Windows;
 using MapEditorCore;
+using MapEditorCore.Abstractions;
+using MapEditorCore.TileEditor;
 using MapEditorViewModels;
 using System;
 using System.Collections.Generic;

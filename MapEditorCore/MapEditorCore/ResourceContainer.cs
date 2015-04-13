@@ -32,6 +32,11 @@ namespace MapEditorCore
         }
         #endregion
 
+        /// <summary>
+        /// Adds resource to this manager.
+        /// </summary>
+        /// <param name="path">path to the resource, resources id will be this string values hash code</param>
+        /// <param name="value">resource value</param>
         public void AddResource(string path, T value)
         {
             int hash = path.GetHashCode();
@@ -43,7 +48,11 @@ namespace MapEditorCore
 
             resources.Add(resource);
         }
-        
+        /// <summary>
+        /// Returns a reference to wanted resource.
+        /// </summary>
+        /// <param name="id">id of the resource</param>
+        /// <returns>resource reference</returns>
         public T GetReference(int id)
         {
             Resource<T> resource = resources.FirstOrDefault(r => r.ID == id);
@@ -52,20 +61,40 @@ namespace MapEditorCore
             return resource.Value;
         }
 
+        /// <summary>
+        /// Dereferences a resource.
+        /// </summary>
+        /// <param name="id">id of the resource</param>
         public void Dereference(int id)
         {
             Resource<T> resource = resources.FirstOrDefault(r => r.ID == id);
             resource.DeReference();
         }
+        /// <summary>
+        /// Dereferences a resource.
+        /// </summary>
+        /// <param name="value">resource to dereference</param>
         public void Dereference(T value)
         {
             Resource<T> resource = resources.FirstOrDefault(v => ReferenceEquals(value, v.Value));
             resource.DeReference();
         }
 
+        /// <summary>
+        /// Returns true if container contains given resource.
+        /// </summary>
+        /// <param name="id">id of the resource</param>
         public bool ContainsResource(int id)
         {
             return resources.Find(r => r.ID == id) != null;
+        }
+        /// <summary>
+        /// Returns true if container contains given resource.
+        /// </summary>
+        /// <param name="resource">resource to validate</param>
+        public bool ContainsResource(T resource)
+        {
+            return resources.Find(r => ReferenceEquals(r, resource)) != null;
         }
     }
 }
