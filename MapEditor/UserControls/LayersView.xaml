@@ -32,21 +32,36 @@
                         
                             <ListView Grid.Row="1" Margin="5" x:Name="layersListView"
                                       ItemsSource="{Binding LayersViewModel.Layers}">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <WrapPanel>
-                                            <CheckBox Name="visibilityCheckBox" IsChecked="{Binding ElementName=layersListView, Path=Visibility}"/>
-                                            <CheckBox Name="typeCheckBox" IsChecked="{Binding ElementName=layersListView, Path=IsDynamic}"/>
-                                            <TextBlock Name="nameTextBlock" Text="{Binding ElementName=layersListView, Path=Name}"/>
-                                        </WrapPanel>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                                
                                 <ListView.View>
                                     <GridView>
-                                        <GridViewColumn Header="Visible" Width="50" DisplayMemberBinding="{Binding Visible}"/>
-                                        <GridViewColumn Header="Dynamic" Width="70" DisplayMemberBinding="{Binding IsDynamic}"/>
-                                        <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding Name}"/>
+                                        <GridView.Columns>
+                                            <GridViewColumn Header="Visible">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <CheckBox IsChecked="{Binding Visible}"/>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+
+                                            <GridViewColumn Header="Dynamic">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <CheckBox IsChecked="{Binding IsDynamic}"/>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+
+                                            <GridViewColumn Header="Name">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding Name}"/>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                        </GridView.Columns>
+                                        <!--<GridViewColumn Header="Visible" Width="50"/>
+                                        <GridViewColumn Header="Dynamic" Width="70"/>
+                                        <GridViewColumn Header="Name" Width="120"/>-->
                                     </GridView>
                                 </ListView.View>
                             </ListView>

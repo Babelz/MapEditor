@@ -57,7 +57,7 @@ namespace MapEditorViewModels
                 if (value) layer.Type = LayerType.Dynamic;
                 else       layer.Type = LayerType.Static;
 
-                OnPropertyChanged("Dynamic");
+                OnPropertyChanged("IsDynamic");
             }
         }
         public int DrawOrder

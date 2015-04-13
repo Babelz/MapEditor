@@ -167,9 +167,11 @@ namespace MapEditorCore.Abstractions
             }
             set
             {
-                LayerType oldType = type;
+                // Same value, skip processing.
+                if (type == value) return;
 
-                if (oldType == type) return;
+                // New value, change layer type.
+                type = value;
 
                 switch (type)
                 {
