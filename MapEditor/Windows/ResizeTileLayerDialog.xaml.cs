@@ -23,6 +23,7 @@ namespace MapEditor.Windows
     {
         #region Fields
         private readonly ResizeModel resizeModel;
+
         private readonly ResizeViewModel resizeViewModel;
         #endregion
 
@@ -44,11 +45,11 @@ namespace MapEditor.Windows
         }
         #endregion
 
-        public ResizeTileLayerDialog(int maxLayerWidth, int maxLayerHeight)
+        public ResizeTileLayerDialog(int maxLayerWidth, int maxLayerHeight, IEnumerable<string> layers)
         {
             // Initialize model and view model.
             resizeModel = new ResizeModel(maxLayerWidth, maxLayerHeight);
-            resizeViewModel = new ResizeViewModel(resizeModel);
+            resizeViewModel = new ResizeViewModel(resizeModel, layers);
 
             // Set data context.
             DataContext = resizeViewModel;

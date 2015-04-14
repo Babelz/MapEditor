@@ -35,7 +35,7 @@ namespace MapEditorCore.TileEditor
 
             for (int i = 0; i < tiles.Length; i++) tiles[i] = new Tile[Width];
 
-            InitializeTileArray(ref tiles, 0, 0);
+            InitializeTileArray(ref tiles);
         }
 
         private void CalculateTileRange(Rectangle viewBounds) 
@@ -75,12 +75,18 @@ namespace MapEditorCore.TileEditor
                 }
             }
         }
-        private void InitializeTileArray(ref Tile[][] tiles, int fromRow, int fromColumn) 
+        private void InitializeTileArray(ref Tile[][] tiles) 
         {
+            // TODO: initialize from range?
+            //       could get slow with bigger resize
+            //       operations.
+
             for (int i = fromRow; i < tiles.Length; i++)
             {
                 for (int j = fromColumn; j < tiles[i].Length; j++)
                 {
+                    if (tiles[i][j] != null) continue;
+ 
                     tiles[i][j] = new Tile(tileEngine, j * tileEngine.TileBounds.Width + X, 
                                                        i * tileEngine.TileBounds.Height + Y);
                 }
@@ -123,29 +129,29 @@ namespace MapEditorCore.TileEditor
             }
         }
 
-        protected override void Resize(Point newSize)
+        public override void Resize(Point newSize)
         {
             // No need to validate size. Should always be correct.
             Array.Resize(ref tiles, newSize.Y);
 
             for (int i = 0; i < tiles.Length; i++) Array.Resize(ref tiles[i], newSize.X);
 
-            int fromColumn = Width < newSize.X ? Width : newSize.X;
-            int fromRow = Height < newSize.Y ? Height : newSize.Y;
+            // Initialize empty columns.
+            InitializeTileArray(ref tiles);
 
-            InitializeTileArray(ref tiles, fromRow, fromColumn);
+            // TODO: if layer is static, it should redraw itself.
             
             base.Resize(newSize);
         }
 
-        protected override void MoveTo(Point newPosition)
+        public override void MoveTo(Point newPosition)
         {
             base.MoveTo(newPosition);
 
             RepositionTiles();
         }
 
-        protected override void MoveBy(Point amount)
+        public override void MoveBy(Point amount)
         {
             base.MoveBy(amount);
 

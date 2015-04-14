@@ -1,6 +1,7 @@
 ﻿using MapEditor.Helpers;
 using MapEditor.UserControls;
 using MapEditor.Windows;
+using MapEditorCore.Abstractions;
 using MapEditorCore.TileEditor;
 using MapEditorViewModels;
 using System;
@@ -13,7 +14,6 @@ using System.Windows.Controls;
 using Xceed.Wpf.AvalonDock;
 using Xceed.Wpf.AvalonDock.Controls;
 using Xceed.Wpf.AvalonDock.Layout;
-
 using Point = Microsoft.Xna.Framework.Point;
 
 namespace MapEditor.Configurers
@@ -88,11 +88,18 @@ namespace MapEditor.Configurers
         }
         private void resizeLayerMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            ResizeTileLayerDialog resizeTileLayerDialog = new ResizeTileLayerDialog(tileEditor.TileEngine.MaxLayerSizeInTiles.X, tileEditor.TileEngine.MaxLayerSizeInTiles.Y);
+            ResizeTileLayerDialog resizeTileLayerDialog = new ResizeTileLayerDialog(tileEditor.TileEngine.MaxLayerSizeInTiles.X, 
+                                                                                    tileEditor.TileEngine.MaxLayerSizeInTiles.Y,
+                                                                                    tileEditor.Layers.Select(s => s.Name));
 
             if (resizeTileLayerDialog.ShowDialog().Value)
             {
                 // Dialog OK, resize the layer.
+                ResizeModel resizeModel = resizeTileLayerDialog.ResizeModel;
+
+                Layer layer = tileEditor.Layers.FirstOrDefault(l => l.Name == resizeModel.SelectedLayer);
+
+                layer.Resize(new Point(resizeModel.NewWidth, resizeModel.NewHeight));
             }
         }
         #endregion

@@ -10,10 +10,33 @@ namespace MapEditorViewModels
     public sealed class ResizeViewModel : INotifyPropertyChanged
     {
         #region Fields
+        private readonly IEnumerable<string> layers;
+
         private readonly ResizeModel model;
         #endregion
 
         #region Properties
+        public IEnumerable<string> Layers
+        {
+            get
+            {
+                return layers;
+            }
+        }
+        public string SelectedLayer
+        {
+            get
+            {
+                return model.SelectedLayer;
+            }
+            set
+            {
+                model.SelectedLayer = value;
+
+                OnPropertyChanged("SelectedLayer");
+                OnPropertyChanged("HasValidProperties");
+            }
+        }
         public int Width
         {
             get
@@ -25,6 +48,7 @@ namespace MapEditorViewModels
                 model.NewWidth = value;
 
                 OnPropertyChanged("WidthInBounds");
+                OnPropertyChanged("HasValidProperties");
                 OnPropertyChanged("InBounds");
                 OnPropertyChanged("Width");
             }
@@ -39,7 +63,9 @@ namespace MapEditorViewModels
             {
                 model.NewHeight = value;
 
+
                 OnPropertyChanged("HeightInBounds");
+                OnPropertyChanged("HasValidProperties");
                 OnPropertyChanged("InBounds");
                 OnPropertyChanged("Height");
             }
@@ -71,9 +97,10 @@ namespace MapEditorViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
-        public ResizeViewModel(ResizeModel model)
+        public ResizeViewModel(ResizeModel model, IEnumerable<string> layers)
         {
             this.model = model;
+            this.layers = layers;
         }
 
         private void OnPropertyChanged(string name)

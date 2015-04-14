@@ -267,7 +267,7 @@ namespace MapEditorCore.Abstractions
         /// Resize this layer.
         /// </summary>
         /// <param name="newSize">wanted size</param>
-        protected virtual void Resize(Point newSize)
+        public virtual void Resize(Point newSize)
         {
             size = newSize;
         }
@@ -275,7 +275,7 @@ namespace MapEditorCore.Abstractions
         /// Move the layer to wanted position.
         /// </summary>
         /// <param name="newPosition">new position of the layer</param>
-        protected virtual void MoveTo(Point newPosition)
+        public virtual void MoveTo(Point newPosition)
         {
             position = newPosition;
         }
@@ -283,7 +283,7 @@ namespace MapEditorCore.Abstractions
         /// Move the layer by given amount.
         /// </summary>
         /// <param name="amount">amount to move this layer</param>
-        protected virtual void MoveBy(Point amount)
+        public virtual void MoveBy(Point amount)
         {
             position.X += amount.X;
             position.Y += amount.Y;
