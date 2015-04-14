@@ -12,6 +12,7 @@ namespace MapEditorViewModels
         private readonly int maxWidth;
         private readonly int maxHeight;
 
+        public string SelectedLayer;
         public int NewWidth;
         public int NewHeight;
         #endregion
@@ -32,9 +33,14 @@ namespace MapEditorViewModels
             return NewHeight > 0 && NewHeight <= maxHeight;
         }
 
-        public bool InBounds()
+        public bool HasLayerSelected()
         {
-            return WidthInBounds() && HeightInBounds();
+            return !string.IsNullOrEmpty(SelectedLayer);
+        }
+
+        public bool HasValidProperties()
+        {
+            return WidthInBounds() && HeightInBounds() && HasLayerSelected();
         }
     }
 }

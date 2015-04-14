@@ -139,6 +139,9 @@
     <Compile Include="Windows\NewTilesetDialog.xaml.cs">
       <DependentUpon>NewTilesetDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\ResizeTileLayerDialog.xaml.cs">
+      <DependentUpon>ResizeTileLayerDialog.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -196,6 +199,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\NewTilesetDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ResizeTileLayerDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -35,6 +35,8 @@ namespace MapEditor.Configurers
 
         private MenuItem editMapMenuItem;
         private MenuItem editMetaObjectsMenuItem;
+        private MenuItem resizeLayerMenuItem;
+        private Separator editMenuSeparator;
 
         private MenuItem addLayerMenuItem;
         private MenuItem addTilesetMenuItem;
@@ -82,6 +84,15 @@ namespace MapEditor.Configurers
 
                 tileEditor.AddTileset(newTilesetProperties.Name, newTilesetProperties.Path, new Point(newTilesetProperties.TileWidth, newTilesetProperties.TileHeight),
                                                                                             new Point(newTilesetProperties.OffsetX, newTilesetProperties.OffsetY));
+            }
+        }
+        private void resizeLayerMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            ResizeTileLayerDialog resizeTileLayerDialog = new ResizeTileLayerDialog(tileEditor.TileEngine.MaxLayerSizeInTiles.X, tileEditor.TileEngine.MaxLayerSizeInTiles.Y);
+
+            if (resizeTileLayerDialog.ShowDialog().Value)
+            {
+                // Dialog OK, resize the layer.
             }
         }
         #endregion
@@ -148,7 +159,16 @@ namespace MapEditor.Configurers
             };
 
             viewLayersMenuItem.Click += viewLayersMenuItem_Click;
+
+            resizeLayerMenuItem = new MenuItem()
+            {
+                Header = "Resize layer"
+            };
+
+            resizeLayerMenuItem.Click += resizeLayerMenuItem_Click;
             
+            editMenuSeparator = new Separator();
+
             // Get root.
             Grid root = LogicalTreeHelper.FindLogicalNode(window, "root") as Grid;
 
@@ -158,8 +178,10 @@ namespace MapEditor.Configurers
             // Insert new menu items.
             editMenuItem = ChildHelper.FindMenuItem(menu, "editMenuItem");
 
+            editMenuItem.Items.Add(editMenuSeparator);
             editMenuItem.Items.Add(editMapMenuItem);
             editMenuItem.Items.Add(editMetaObjectsMenuItem);
+            editMenuItem.Items.Add(resizeLayerMenuItem);
 
             // Insert new menu items.
             addMenuItem = ChildHelper.FindMenuItem(menu, "addMenuItem");

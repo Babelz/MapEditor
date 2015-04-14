@@ -64,6 +64,8 @@
     <Compile Include="NewTilesetProperties.cs" />
     <Compile Include="NewTilesetPropertiesViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResizeModel.cs" />
+    <Compile Include="ResizeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MapEditorCore\MapEditorCore\MapEditorCore.csproj">

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MapEditor.Helpers;
+using MapEditorViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,54 @@ namespace MapEditor.Windows
     /// </summary>
     public partial class ResizeTileLayerDialog : Window
     {
-        public ResizeTileLayerDialog()
+        #region Fields
+        private readonly ResizeModel resizeModel;
+        private readonly ResizeViewModel resizeViewModel;
+        #endregion
+
+        #region Properties
+        private ResizeViewModel ResizeViewModel
         {
+            get
+            {
+                return resizeViewModel;
+            }
+        } 
+
+        public ResizeModel ResizeModel
+        {
+            get
+            {
+                return resizeModel;
+            }
+        }
+        #endregion
+
+        public ResizeTileLayerDialog(int maxLayerWidth, int maxLayerHeight)
+        {
+            // Initialize model and view model.
+            resizeModel = new ResizeModel(maxLayerWidth, maxLayerHeight);
+            resizeViewModel = new ResizeViewModel(resizeModel);
+
+            // Set data context.
+            DataContext = resizeViewModel;
+
             InitializeComponent();
         }
+
+        #region Event handlers
+        private void resizeLayerButton_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+
+            Close();
+        }
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            if (!StringHelper.OnlyContainsDigits(textBox.Text)) textBox.Text = StringHelper.RemoveAllNonDigitCharacters(textBox.Text);
+        }
+        #endregion
     }
 }

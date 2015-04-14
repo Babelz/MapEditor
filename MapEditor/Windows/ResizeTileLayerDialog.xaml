@@ -1,14 +1,25 @@
 ﻿<Window x:Class="MapEditor.Windows.ResizeTileLayerDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Resize Layer" Height="200" Width="480">
+        xmlns:components="clr-namespace:MapEditor.Components"
+        Title="Resize Layer" Height="300" Width="480" ResizeMode="NoResize">
 
     <Window.Resources>
-        <ResourceDictionary Source="../Themes/ExpressionDark.xaml"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Themes/ExpressionDark.xaml"/>
+                
+                <ResourceDictionary>
+                    <components:BoolToVisibilityConverter x:Key="converter"/>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Window.Resources>
     
     <Grid Background="{StaticResource NormalBrush}" Margin="10">
         <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
             <RowDefinition Height="25"/>
             <RowDefinition Height="25"/>
             <RowDefinition Height="25"/>
@@ -24,17 +35,26 @@
         
         <Rectangle Fill="{StaticResource NormalBrush}" Margin="-10" Grid.ColumnSpan="2" Grid.RowSpan="10"/>
 
-        <TextBlock Text="Width: " Foreground="White" VerticalAlignment="Center" Margin="0, 5, 0, 0"/>
-        <TextBlock Text="Height: " Grid.Row="2" Foreground="White" VerticalAlignment="Center" Margin="0, 5, 0, 0"/>
+        <TextBlock Text="Layers: " VerticalAlignment="Center" Foreground="White" Margin="0, 5, 0, 0"/>
+        
+        <ComboBox Name="layersCombobox" Grid.Column="2" Margin="0, 5, 0, 0" ItemsSource="{Binding Layers}"/>
+        
+        <TextBlock Text="Width: " Grid.Row="2" Foreground="White" VerticalAlignment="Center" Margin="0, 5, 0, 0"/>
+        <TextBlock Text="Height: " Grid.Row="4" Foreground="White" VerticalAlignment="Center" Margin="0, 5, 0, 0"/>
         
         <!-- TODO: visibility bindings -->
-        <TextBlock Text="new width cant be zero or greater than the width of the map" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Top" Foreground="White"/>
-        <TextBlock Text="new height cant be zero or greater than the height of the map" Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Top" Foreground="White"/>
+        <TextBlock Text="new width cant be zero or greater than the width of the map" Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Top" Foreground="White"
+                   Visibility="{Binding HeightInBounds, Converter={StaticResource ResourceKey=converter}}"/>
+        <TextBlock Text="new height cant be zero or greater than the height of the map" Grid.Row="5" Grid.ColumnSpan="2" VerticalAlignment="Top" Foreground="White"
+                   Visibility="{Binding WidthInBounds, Converter={StaticResource ResourceKey=converter}}"/>
 
-        <TextBox Grid.Row="0" Grid.Column="1" Margin="0, 5, 0, 0" TextChanged="TextBox_TextChangd"/>
-        <TextBox Grid.Row="2" Grid.Column="1" Margin="0, 5, 0, 0" TextChanged="TextBox_TextChangd"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Margin="0, 5, 0, 0" TextChanged="TextBox_TextChanged"
+                 Text="{Binding Width}"/>
+        <TextBox Grid.Row="4" Grid.Column="1" Margin="0, 5, 0, 0" TextChanged="TextBox_TextChanged"
+                 Text="{Binding Height}"/>
 
-        <Button Grid.Row="5" Grid.ColumnSpan="2" Margin="5" Content="Resize" Name="resizeLayerButton"
-                Click="resizeLayerButton_Click"/>
+        <Button Grid.Row="7" Grid.ColumnSpan="2" Margin="5" Content="Resize" Name="resizeLayerButton"
+                Click="resizeLayerButton_Click"
+                IsEnabled="{Binding HasValidProperties}"/>
     </Grid>
 </Window>

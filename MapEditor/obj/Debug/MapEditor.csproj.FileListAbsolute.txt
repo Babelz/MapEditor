@@ -69,3 +69,5 @@ C:\Users\ttv14snikos\Desktop\Gits\mp\MapEditor\MapEditor\obj\Debug\MapEditor.Pro
 C:\Users\ttv14snikos\Desktop\Gits\mp\MapEditor\MapEditor\obj\Debug\MapEditor.csproj.GenerateResource.Cache
 C:\Users\ttv14snikos\Desktop\Gits\mp\MapEditor\MapEditor\obj\Debug\MapEditor.exe
 C:\Users\ttv14snikos\Desktop\Gits\mp\MapEditor\MapEditor\obj\Debug\MapEditor.pdb
+C:\Users\ttv14snikos\Desktop\Gits\mp\MapEditor\MapEditor\obj\Debug\Windows\ResizeTileLayerDialog.g.cs
+C:\Users\ttv14snikos\Desktop\Gits\mp\MapEditor\MapEditor\obj\Debug\Windows\ResizeTileLayerDialog.baml
