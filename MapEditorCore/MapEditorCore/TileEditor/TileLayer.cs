@@ -59,10 +59,10 @@ namespace MapEditorCore.TileEditor
 
             // Validate that "to" values are in bounds.
             toRow = rightIndex + padding; 
-            toRow = toRow > tileEngine.MaxLayerSizeInTiles.Y ? tileEngine.MaxLayerSizeInTiles.X : toRow;
+            toRow = toRow > Height ? Height : toRow;
             
             toColumn = leftIndex + padding; 
-            toColumn = toColumn > tileEngine.MaxLayerSizeInTiles.X ? tileEngine.MaxLayerSizeInTiles.X : toColumn;
+            toColumn = toColumn > Width ? Width : toColumn;
         }
         private void RepositionTiles()
         {

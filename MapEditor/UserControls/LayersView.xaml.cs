@@ -5,6 +5,8 @@ using MapEditorCore.TileEditor;
 using MapEditorViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -70,6 +72,9 @@ namespace MapEditor.UserControls
 
             // Hook create new layer action.
             createNewLayerAction = new Action(CreateTileLayer);
+
+            CollectionView collectioView = (CollectionView)CollectionViewSource.GetDefaultView(layersListView.ItemsSource);
+            collectioView.SortDescriptions.Add(new SortDescription("DrawOrder", ListSortDirection.Descending));
         }
 
         #region Create new layer actions 
@@ -116,7 +121,7 @@ namespace MapEditor.UserControls
         }
         private LayerViewModel GetSelectedLayer()
         {
-            return layersViewModel.Layers.ElementAt(layersListView.SelectedIndex);
+            return layersListView.SelectedItem as LayerViewModel;
         }
         private void SwapDrawOrders(LayerViewModel a, LayerViewModel b)
         {
@@ -144,6 +149,8 @@ namespace MapEditor.UserControls
             // TODO: action binding.
 
             editor.RemoveLayer(layerViewModel.Name);
+
+            layersListView.SelectedItem = null;
         }
         private void moveLayerUpButton_Click(object sender, RoutedEventArgs e)
         {
@@ -154,19 +161,20 @@ namespace MapEditor.UserControls
 
             if (layerViewModel == null) return;
 
-            // Draw order was changed by basic method, return.
-            if (ReorderLayers()) return;
-
             // Get current max draw order.
-            int max = editor.Layers.Max(l => l.DrawOrder.Value);
+            int max = editor.Layers.Count();
 
             // Trying to rise topmost layer, just return.
-            if (layerViewModel.DrawOrder > max + 1) return;
+            if (layerViewModel.DrawOrder >= max) return;
+
+            // Draw order was changed by basic method, return.
+            if (ReorderLayers()) return;
              
             // Rise the layer.
             layerViewModel.DrawOrder += 1;
 
-            layersViewModel.NotifyDrawOrderChanged();
+            CollectionView collectioView = (CollectionView)CollectionViewSource.GetDefaultView(layersListView.ItemsSource);
+            collectioView.Refresh();
         }
         private void moveLayerDown_Click(object sender, RoutedEventArgs e)
         {
@@ -177,30 +185,35 @@ namespace MapEditor.UserControls
 
             if (layerViewModel == null) return;
 
-            // Draw order was changed by basic method, return.
-            if (ReorderLayers()) return;
-
             // Get current min draw order.
             int min = editor.Layers.Min(l => l.DrawOrder.Value);
 
+            // Trying to go below zero, just return.
             if (layerViewModel.DrawOrder - 1 < 0) return;
+
+            // Draw order was changed by basic method, return.
+            if (ReorderLayers()) return;
 
             layerViewModel.DrawOrder -= 1;
 
-            layersViewModel.NotifyDrawOrderChanged();
+            CollectionView collectioView = (CollectionView)CollectionViewSource.GetDefaultView(layersListView.ItemsSource);
+            collectioView.Refresh();
         }
         private void layersListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // Get the selected layer view model.
-            LayerViewModel LayerViewModel = null;
+            LayerViewModel layerViewModel = null;
 
             foreach (object o in e.AddedItems)
             {
-                LayerViewModel = o as LayerViewModel;
+                layerViewModel = o as LayerViewModel;
             }
 
+            // No layer, return.
+            if (layerViewModel == null) return;
+
             // Notify tile editor that new layer has been selected.
-            editor.SelectLayer(LayerViewModel.Name);
+            editor.SelectLayer(layerViewModel.Name);
         }
         #endregion
     }

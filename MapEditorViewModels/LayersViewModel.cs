@@ -26,11 +26,6 @@ namespace MapEditorViewModels
         {
             get
             {
-                // Sort the collection and return it.
-                IEnumerable<LayerViewModel> sortedLayers = layerViewModels.OrderBy(o => o.DrawOrder);
-
-                layerViewModels = new ObservableCollection<LayerViewModel>(sortedLayers);
-
                 return layerViewModels;
             }
         }
@@ -81,14 +76,6 @@ namespace MapEditorViewModels
         private void OnPropertyChanged(string name)
         {
             if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(name));
-        }
-
-        /// <summary>
-        /// Notify the model that some layers draw order was changed.
-        /// </summary>
-        public void NotifyDrawOrderChanged()
-        {
-            OnPropertyChanged("Layers");
         }
     }
 }
