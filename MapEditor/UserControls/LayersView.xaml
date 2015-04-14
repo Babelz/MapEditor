@@ -5,13 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d"
              xmlns:avalon="http://schemas.xceed.com/wpf/xaml/avalondock"
-             d:DesignHeight="300" d:DesignWidth="300" MaxWidth="300" MinWidth="300"
-                                                      MaxHeight="300" MinHeight="300">
+             xmlns:components="clr-namespace:MapEditor.Components"
+             d:DesignHeight="300" d:DesignWidth="300">
     
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="..\Themes\ExpressionDark.xaml"/>
+                <ResourceDictionary>
+                    <components:ValueToBoolConverter x:Key="converter"/>
+                </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>    
     </UserControl.Resources>
@@ -32,7 +35,9 @@
                                        FontSize="18"/>
                         
                             <ListView Grid.Row="1" Margin="5" x:Name="layersListView"
-                                      ItemsSource="{Binding LayersViewModel.Layers}">
+                                      ItemsSource="{Binding LayersViewModel.Layers}"
+                                      SelectionChanged="layersListView_SelectionChanged"
+                                      SelectionMode="Single">
                                 <ListView.View>
                                     <GridView>
                                         <GridView.Columns>
@@ -44,10 +49,18 @@
                                                 </GridViewColumn.CellTemplate>
                                             </GridViewColumn>
 
-                                            <GridViewColumn Header="Dynamic" Width="75">
+                                            <GridViewColumn Header="Dynamic" Width="55">
                                                 <GridViewColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <CheckBox IsChecked="{Binding IsDynamic}"/>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            
+                                            <GridViewColumn Header="Order" Width="45">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding DrawOrder}"/>
                                                     </DataTemplate>
                                                 </GridViewColumn.CellTemplate>
                                             </GridViewColumn>
@@ -69,13 +82,15 @@
                                 <Button Content="New" VerticalContentAlignment="Center" Padding="10, 0, 10, 0" Margin="0, 0, 5, 0"
                                         Name="newLayerButton" Click="newLayerButton_Click"/>
                                 
-                                <!-- TODO: bind enabled, needs to have layers selected for these operations to work -->
                                 <Button Content="Delete" HorizontalContentAlignment="Center" Padding="10, 0, 10, 0" Margin="0, 0, 5, 0"
-                                        Name="deleteLayerButton" Click="deleteLayerButton_Click"/>
+                                        Name="deleteLayerButton" Click="deleteLayerButton_Click"
+                                        IsEnabled="{Binding SelectedItem, ElementName=layersListView, Converter={StaticResource converter}}"/>
                                 <Button Content="Move up" HorizontalContentAlignment="Center" Padding="10, 0, 10, 0" Margin="0, 0, 5, 0"
-                                        Name="moveLayerUpButton" Click="moveLayerUpButton_Click"/>
+                                        Name="moveLayerUpButton" Click="moveLayerUpButton_Click"
+                                        IsEnabled="{Binding SelectedItem, ElementName=layersListView, Converter={StaticResource converter}}"/>
                                 <Button Content="Move down" HorizontalContentAlignment="Center" Padding="10, 0, 10, 0" Margin="0, 0, 5, 0"
-                                        Name="moveLayerDown" Click="moveLayerDown_Click"/>
+                                        Name="moveLayerDown" Click="moveLayerDown_Click"
+                                        IsEnabled="{Binding SelectedItem, ElementName=layersListView, Converter={StaticResource converter}}"/>
                             </StackPanel>
                         </Grid>
                     </avalon:LayoutAnchorable>

@@ -35,3 +35,15 @@ C:\Users\ttv14snikos\Desktop\MapEditor\MapEditorViewModels\bin\Debug\MapEditorIn
 C:\Users\ttv14snikos\Desktop\MapEditor\MapEditorViewModels\obj\Debug\MapEditorViewModels.csprojResolveAssemblyReference.cache
 C:\Users\ttv14snikos\Desktop\MapEditor\MapEditorViewModels\obj\Debug\MapEditorViewModels.dll
 C:\Users\ttv14snikos\Desktop\MapEditor\MapEditorViewModels\obj\Debug\MapEditorViewModels.pdb
+C:\Users\ttv14snikos\Desktop\Gits\mp\MapEditor\MapEditorViewModels\bin\Debug\Content\temp.xnb
+C:\Users\ttv14snikos\Desktop\Gits\mp\MapEditor\MapEditorViewModels\bin\Debug\Content\temp.png
+C:\Users\ttv14snikos\Desktop\Gits\mp\MapEditor\MapEditorViewModels\bin\Debug\MapEditorViewModels.dll
+C:\Users\ttv14snikos\Desktop\Gits\mp\MapEditor\MapEditorViewModels\bin\Debug\MapEditorViewModels.pdb
+C:\Users\ttv14snikos\Desktop\Gits\mp\MapEditor\MapEditorViewModels\bin\Debug\MapEditorCore.dll
+C:\Users\ttv14snikos\Desktop\Gits\mp\MapEditor\MapEditorViewModels\bin\Debug\XNAControl.dll
+C:\Users\ttv14snikos\Desktop\Gits\mp\MapEditor\MapEditorViewModels\bin\Debug\MapEditorInput.dll
+C:\Users\ttv14snikos\Desktop\Gits\mp\MapEditor\MapEditorViewModels\bin\Debug\MapEditorCore.pdb
+C:\Users\ttv14snikos\Desktop\Gits\mp\MapEditor\MapEditorViewModels\bin\Debug\MapEditorInput.pdb
+C:\Users\ttv14snikos\Desktop\Gits\mp\MapEditor\MapEditorViewModels\obj\Debug\MapEditorViewModels.csprojResolveAssemblyReference.cache
+C:\Users\ttv14snikos\Desktop\Gits\mp\MapEditor\MapEditorViewModels\obj\Debug\MapEditorViewModels.dll
+C:\Users\ttv14snikos\Desktop\Gits\mp\MapEditor\MapEditorViewModels\obj\Debug\MapEditorViewModels.pdb

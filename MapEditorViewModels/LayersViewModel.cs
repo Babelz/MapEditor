@@ -16,9 +16,9 @@ namespace MapEditorViewModels
     public sealed class LayersViewModel : INotifyPropertyChanged
     {
         #region Fields
-        private readonly ObservableCollection<LayerViewModel> layerViewModels;
-
         private readonly Editor editor;
+
+        private ObservableCollection<LayerViewModel> layerViewModels;
         #endregion
 
         #region Properties
@@ -26,6 +26,11 @@ namespace MapEditorViewModels
         {
             get
             {
+                // Sort the collection and return it.
+                IEnumerable<LayerViewModel> sortedLayers = layerViewModels.OrderBy(o => o.DrawOrder);
+
+                layerViewModels = new ObservableCollection<LayerViewModel>(sortedLayers);
+
                 return layerViewModels;
             }
         }
@@ -51,11 +56,6 @@ namespace MapEditorViewModels
             }
         }
 
-        public LayersViewModel()
-        {
-            // TODO: Complete member initialization
-        }
-
         private LayerViewModel CreateViewModelFrom(Layer layer)
         {
             return new LayerViewModel(layer, editor.Layers.Select(l => l.Name));
@@ -78,9 +78,17 @@ namespace MapEditorViewModels
         }
         #endregion
 
-        public void OnPropertyChanged(string name)
+        private void OnPropertyChanged(string name)
         {
             if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(name));
+        }
+
+        /// <summary>
+        /// Notify the model that some layers draw order was changed.
+        /// </summary>
+        public void NotifyDrawOrderChanged()
+        {
+            OnPropertyChanged("Layers");
         }
     }
 }

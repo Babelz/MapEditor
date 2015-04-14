@@ -70,7 +70,13 @@
 
                     <avalon:LayoutAnchorablePane DockMinWidth="200">
                         <avalon:LayoutAnchorable Title="Properties" x:Name="propertiesView" Closing="view_Closing">
-                            <StackPanel Name="propertiesRoot" Background="{StaticResource NormalBorderBrush}"/>
+                            <avalon:DockingManager>
+                                <avalon:LayoutRoot>
+                                    <avalon:LayoutPanel x:Name="propertiesRootPanel">
+                                        
+                                    </avalon:LayoutPanel>
+                                </avalon:LayoutRoot>
+                            </avalon:DockingManager>
                         </avalon:LayoutAnchorable>
                     </avalon:LayoutAnchorablePane>
                 </avalon:LayoutPanel>

@@ -13,6 +13,7 @@ using System.Windows.Controls;
 using Xceed.Wpf.AvalonDock;
 using Xceed.Wpf.AvalonDock.Controls;
 using Xceed.Wpf.AvalonDock.Layout;
+
 using Point = Microsoft.Xna.Framework.Point;
 
 namespace MapEditor.Configurers
@@ -89,16 +90,19 @@ namespace MapEditor.Configurers
         {
             layersView = new LayersView(tileEditor);
             
-            // TODO: anchor to properties view.
+            // Root of the window.
             Grid root = LogicalTreeHelper.FindLogicalNode(window, "root") as Grid;
 
-            DockingManager dockingManager = LogicalTreeHelper.FindLogicalNode(root, "dockingManager") as DockingManager;
+            // Get root docking manager and view panel.
+            DockingManager rootDockingManager = LogicalTreeHelper.FindLogicalNode(root, "dockingManager") as DockingManager;
+            LayoutAnchorable propertiesLayoutAnchorable = rootDockingManager.FindName("propertiesView") as LayoutAnchorable;
 
-            LayoutAnchorable layoutAnchorable = dockingManager.FindName("propertiesView") as LayoutAnchorable;
+            // Get vies docking manager.
+            DockingManager propertiesDockingManager = propertiesLayoutAnchorable.Content as DockingManager;
+            LayoutPanelControl propertiesLayoutPanel = propertiesDockingManager.LayoutRootPanel;
 
-            StackPanel stackPanel = layoutAnchorable.Content as StackPanel;
-
-            stackPanel.Children.Add(layersView);
+            // Insert window.
+            propertiesLayoutPanel.Children.Add(layersView);
         }
         private void InsertMenuItems(Window window)
         {

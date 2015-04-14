@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\ttv14snikos\Desktop\MapEditor\MapEditor\obj\Debug\
+C:\Users\ttv14snikos\Desktop\Gits\mp\MapEditor\MapEditor\obj\Debug\
 MapEditor
 none
 false
 DEBUG;TRACE
-C:\Users\ttv14snikos\Desktop\MapEditor\MapEditor\App.xaml
+C:\Users\ttv14snikos\Desktop\Gits\mp\MapEditor\MapEditor\App.xaml
 131206179155
 1959906167
-231379166442
-30-1525301221
+24665086386
+301367535781
 MainWindow.xaml;Themes\BureauBlack.xaml;Themes\BureauBlue.xaml;Themes\ExpressionDark.xaml;Themes\ExpressionLight.xaml;Themes\ShinyBlue.xaml;Themes\ShinyRed.xaml;Themes\WhistlerBlue.xaml;UserControls\LayersView.xaml;UserControls\SheetPreviewView.xaml;Windows\NewTileLayerDialog.xaml;Windows\NewProjectDialog.xaml;Windows\NewTilesetDialog.xaml;
 
 True
