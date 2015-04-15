@@ -71,3 +71,6 @@ C:\Users\ttv14snikos\Desktop\Gits\mp\MapEditor\MapEditor\obj\Debug\MapEditor.exe
 C:\Users\ttv14snikos\Desktop\Gits\mp\MapEditor\MapEditor\obj\Debug\MapEditor.pdb
 C:\Users\ttv14snikos\Desktop\Gits\mp\MapEditor\MapEditor\obj\Debug\Windows\ResizeTileLayerDialog.g.cs
 C:\Users\ttv14snikos\Desktop\Gits\mp\MapEditor\MapEditor\obj\Debug\Windows\ResizeTileLayerDialog.baml
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\bin\Debug\MapEditor.exe.config
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\MapEditor.exe
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\MapEditor.pdb
