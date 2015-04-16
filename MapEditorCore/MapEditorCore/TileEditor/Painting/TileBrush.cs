@@ -6,10 +6,26 @@ using System.Text;
 
 namespace MapEditorCore.TileEditor.Painting
 {
+    /*
+     * TODO:
+     *      Brushed have 1 class
+     *      Can resize
+     *      Cant resize
+     *      Stamp
+     *      Single
+     *      Multi
+     *      Range
+     */
+    public enum BrushResizeMode
+    {
+        NoResize,
+        CanResize
+    }
+
     /// <summary>
     /// Tool for used to paint tiles.
     /// </summary>
-    public abstract class TileBrush
+    public sealed class TileBrush
     {
         #region Fields
         private readonly PaintArgs args;
@@ -21,28 +37,6 @@ namespace MapEditorCore.TileEditor.Painting
         #endregion
 
         #region Properties
-        protected Tileset Tileset
-        {
-            get
-            {
-                return tileset;
-            }
-        }
-        protected Point Index
-        {
-            get
-            {
-                return index;
-            }
-        }
-        protected PaintArgs Args
-        {
-            get
-            {
-                return args;
-            }
-        }
-
         public Color Color
         {
             get
@@ -78,6 +72,7 @@ namespace MapEditorCore.TileEditor.Painting
         {
             color = Color.White;
             index = new Point(-1, -1);
+
             tileset = null;
         }
 
@@ -105,7 +100,6 @@ namespace MapEditorCore.TileEditor.Painting
         {
             this.tileset = tileset;
         }
-
 
         /// <summary>
         /// Returns boolean whether brush has finished 

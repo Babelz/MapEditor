@@ -107,7 +107,6 @@
     <Compile Include="TileEditor\Actors\TileActor.cs" />
     <Compile Include="TileEditor\Painting\TileBrush.cs" />
     <Compile Include="TileEditor\Painting\PaintArgs.cs" />
-    <Compile Include="TileEditor\Painting\SingleTileBrush.cs" />
     <Compile Include="ResourceContainer.cs" />
     <Compile Include="TileEditor\TexturedTileset.cs" />
     <Compile Include="TileEditor\Tile.cs" />
