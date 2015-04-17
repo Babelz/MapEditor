@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MapEditorCore.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,10 +35,29 @@ namespace MapEditorCore.TileEditor
         }
         #endregion
 
+        #region Events
+        /// <summary>
+        /// Called when tileset is added.
+        /// </summary>
+        public event TilesetEventHandler TilesetAdded;
+
+        /// <summary>
+        /// Called when tileset is removed.
+        /// </summary>
+        public event TilesetEventHandler TilesetRemoved;
+        #endregion
+
         public TilesetManager()
         {
             tilesets = new Dictionary<string, Tileset>();
         }
+
+        #region Event handlers
+        private void tileset_Deleting(object sender, TilesetEventArgs e)
+        {
+            RemoveTileset(e.Tileset);
+        }
+        #endregion
 
         public void SelectTileset(string name)
         {
@@ -57,7 +77,11 @@ namespace MapEditorCore.TileEditor
         /// </summary>
         public void AddTileset(Tileset tileset)
         {
+            tileset.Deleting += tileset_Deleting;
+            
             tilesets.Add(tileset.Name, tileset);
+
+            if (TilesetAdded != null) TilesetAdded(this, new TilesetEventArgs(tileset));
         }
 
         /// <summary>
@@ -65,9 +89,13 @@ namespace MapEditorCore.TileEditor
         /// </summary>
         public void RemoveTileset(Tileset tileset)
         {
+            tileset.Deleting -= tileset_Deleting;
+
             tilesets.Remove(tileset.Name);
 
             if (ReferenceEquals(tileset, selectedTileset)) selectedTileset = null;
+
+            if (TilesetRemoved != null) TilesetRemoved(this, new TilesetEventArgs(tileset));
         }
     }
 }

@@ -59,11 +59,11 @@ namespace MapEditorCore.TileEditor
             }
         }
 
-        public TilesetManager TilesetManager
+        public IEnumerable<Tileset> Tilesets
         {
             get
             {
-                return tilesets;
+                return tilesets.Tilesets;
             }
         }
 
@@ -101,6 +101,32 @@ namespace MapEditorCore.TileEditor
             remove
             {
                 layers.LayerRemoved -= value;
+            }
+        }
+        
+        /*
+         * Delegates add and remove calls to tileset manager.
+         */
+        public event TilesetEventHandler TilesetAdded
+        {
+            add
+            {
+                tilesets.TilesetAdded += value;
+            }
+            remove
+            {
+                tilesets.TilesetAdded -= value;
+            }
+        }
+        public event TilesetEventHandler TilesetRemoved
+        {
+            add
+            {
+                tilesets.TilesetRemoved += value;
+            }
+            remove
+            {
+                tilesets.TilesetRemoved -= value;
             }
         }
         #endregion

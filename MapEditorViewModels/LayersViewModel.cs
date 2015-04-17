@@ -51,10 +51,6 @@ namespace MapEditorViewModels
             }
         }
 
-        private LayerViewModel CreateViewModelFrom(Layer layer)
-        {
-            return new LayerViewModel(layer, editor.Layers.Select(l => l.Name));
-        }
 
         #region Event handlers
         private void layers_LayerAdded(object sender, LayerManagerEventArgs e)
@@ -72,6 +68,11 @@ namespace MapEditorViewModels
             OnPropertyChanged("Layers");
         }
         #endregion
+
+        private LayerViewModel CreateViewModelFrom(Layer layer)
+        {
+            return new LayerViewModel(layer, editor.Layers.Select(l => l.Name));
+        }
 
         private void OnPropertyChanged(string name)
         {

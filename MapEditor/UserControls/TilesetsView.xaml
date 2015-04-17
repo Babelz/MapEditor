@@ -35,7 +35,7 @@
                                        FontSize="18"/>
                             
                             <ListView Grid.Row="1" Margin="5" x:Name="setsListView"
-                                      ItemsSource="{Binding SheetsViewModel.Sheets}"
+                                      ItemsSource="{Binding TilesetsViewModel.Tilesets}"
                                       SelectionChanged="setsListView_SelectionChanged"
                                       SelectionMode="Single">
                                 <ListView.View>
@@ -69,7 +69,7 @@
                                 </ListView.View>
                             </ListView>
                             
-                            <StackPanel Grid.Row="2" Margin="5" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <StackPanel Grid.Row="2" Margin="5" Orientation="Horizontal" HorizontalAlignment="Left">
                                 <Button Name="newSetButton" Content="New" Padding="10, 0, 10, 0" Margin="0, 0, 5, 0"/>
                                 <Button Name="deleteSetButton" Content="Delete" Padding="10, 0, 10, 0" Margin="0, 0, 5, 0"/>
                             </StackPanel>

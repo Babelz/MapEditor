@@ -98,6 +98,7 @@ namespace MapEditorCore.TileEditor
             this.sourceSize = sourceSize;
             this.offset = offset;
 
+            // Calculate indices count (rows & columns count).
             indicesCount = new Point((texture.Width - offset.X) / sourceSize.X, 
                                      (texture.Height - offset.Y) / sourceSize.Y);
 
@@ -122,11 +123,9 @@ namespace MapEditorCore.TileEditor
         {
             if (deleted) return;
 
-            if (Deleting != null) Deleting();
+            if (Deleting != null) Deleting(this, new TilesetEventArgs(this));
 
             deleted = true;
         }
-
-        public delegate void TilesetEventHandler();
     }
 }
