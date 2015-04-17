@@ -51,7 +51,6 @@ namespace MapEditorViewModels
             }
         }
 
-
         #region Event handlers
         private void layers_LayerAdded(object sender, LayerManagerEventArgs e)
         {

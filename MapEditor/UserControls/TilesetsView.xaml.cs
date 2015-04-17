@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MapEditorCore.TileEditor;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +21,11 @@ namespace MapEditor.UserControls
     /// </summary>
     public partial class TilesetsView : UserControl
     {
-        public TilesetsView()
+        #region Fields
+
+        #endregion
+
+        public TilesetsView(TileEditor editor)
         {
             InitializeComponent();
         }

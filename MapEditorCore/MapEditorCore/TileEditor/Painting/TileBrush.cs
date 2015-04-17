@@ -103,7 +103,7 @@ namespace MapEditorCore.TileEditor.Painting
         }
 
         #region Event handlers
-        private void tileset_Deleting()
+        private void tileset_Deleting(object sender, TilesetEventArgs e)
         {
             tileset.Deleting -= tileset_Deleting;
 

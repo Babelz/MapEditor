@@ -40,7 +40,7 @@ namespace MapEditorCore.TileEditor.Actors
         /// <summary>
         /// Tileset is getting deleted soon, reset the actor.
         /// </summary>
-        private void tileset_Deleting()
+        private void tileset_Deleting(object sender, TilesetEventArgs e)
         {
             tileset = null;
             

@@ -26,8 +26,7 @@ namespace MapEditorViewModels
         {
             get
             {
-                return string.Format("{0}x{1}pxl", tileset.SourceSize.X * tileset.IndicesCount.X,
-                                                   tileset.SourceSize.Y * tileset.IndicesCount.Y);
+                return string.Format("{0}x{1}pxl", tileset.Texture.Width, tileset.Texture.Height);
             }
         }
         public string TileSize

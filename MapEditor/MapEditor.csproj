@@ -116,6 +116,7 @@
     </ApplicationDefinition>
     <Compile Include="Components\BoolToThicknessConverter.cs" />
     <Compile Include="Components\BoolToVisibilityConverter.cs" />
+    <Compile Include="Components\TileGridManager.cs" />
     <Compile Include="Components\ValueToBoolConverter.cs" />
     <Compile Include="DelegateCommand.cs" />
     <Compile Include="Helpers\ChildHelper.cs" />

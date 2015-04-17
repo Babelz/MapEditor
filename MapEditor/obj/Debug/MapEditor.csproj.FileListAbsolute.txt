@@ -144,3 +144,5 @@ C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\Windows\ResizeTile
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\MapEditor.g.resources
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\MapEditor.Properties.Resources.resources
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\MapEditor.csproj.GenerateResource.Cache
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\UserControls\TilesetsView.g.cs
+C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditor\obj\Debug\UserControls\TilesetsView.baml
