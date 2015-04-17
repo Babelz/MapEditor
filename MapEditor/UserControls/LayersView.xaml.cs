@@ -75,12 +75,14 @@ namespace MapEditor.UserControls
 
             CollectionView collectioView = (CollectionView)CollectionViewSource.GetDefaultView(layersListView.ItemsSource);
             collectioView.SortDescriptions.Add(new SortDescription("DrawOrder", ListSortDirection.Descending));
+
+            dockingManager.ToolTipClosing += dockingManager_ToolTipClosing;
         }
 
         #region Create new layer actions 
         private void CreateTileLayer()
         {
-            // WARNING: duplication with tile editor GUI configurers addLayerMenuItem_ClickEventHandler!
+            // WARNING: duplication with tile editor GUI configurer addLayerMenuItem_ClickEventHandler!
 
             NewTileLayerDialog newTileLayerDialog = new NewTileLayerDialog(tileEditor);
 
@@ -210,7 +212,12 @@ namespace MapEditor.UserControls
             }
 
             // No layer, return.
-            if (layerViewModel == null) return;
+            if (layerViewModel == null)
+            {
+                editor.SelectLayer(string.Empty);
+
+                return;
+            }
 
             // Notify tile editor that new layer has been selected.
             editor.SelectLayer(layerViewModel.Name);

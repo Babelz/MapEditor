@@ -18,8 +18,8 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>    
     </UserControl.Resources>
-     
-    <avalon:DockingManager>
+
+    <avalon:DockingManager x:Name="dockingManager">
         <avalon:LayoutRoot>
             <avalon:LayoutPanel>
                 <avalon:LayoutAnchorablePane>
