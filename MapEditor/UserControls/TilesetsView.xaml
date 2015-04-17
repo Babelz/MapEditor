@@ -1,0 +1,91 @@
+﻿<UserControl x:Class="MapEditor.UserControls.TilesetsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             xmlns:avalon="http://schemas.xceed.com/wpf/xaml/avalondock"
+             xmlns:components="clr-namespace:MapEditor.Components"
+             d:DesignHeight="500" d:DesignWidth="300">
+    
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="..\Themes\ExpressionDark.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <avalon:DockingManager>
+        <avalon:LayoutRoot>
+            <avalon:LayoutPanel>
+                <avalon:LayoutAnchorablePane>
+                    <avalon:LayoutAnchorable>
+                        <Grid Background="{StaticResource NormalBrush}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="35"/>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="35"/>
+                            </Grid.RowDefinitions>
+                            
+                            <TextBlock Text="Tilesets" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                       FontSize="18"/>
+                            
+                            <ListView Grid.Row="1" Margin="5" x:Name="setsListView"
+                                      ItemsSource="{Binding SheetsViewModel.Sheets}"
+                                      SelectionChanged="setsListView_SelectionChanged"
+                                      SelectionMode="Single">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridView.Columns>
+                                            <GridViewColumn Header="Name" Width="50">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding Name}"/>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+
+                                            <GridViewColumn Header="Size">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding Size}"/>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+
+                                            <GridViewColumn Header="Tile size">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding TileSize}"/>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                        </GridView.Columns>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                            
+                            <StackPanel Grid.Row="2" Margin="5" Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button Name="newSetButton" Content="New" Padding="10, 0, 10, 0" Margin="0, 0, 5, 0"/>
+                                <Button Name="deleteSetButton" Content="Delete" Padding="10, 0, 10, 0" Margin="0, 0, 5, 0"/>
+                            </StackPanel>
+
+                            <ScrollViewer Grid.Row="4" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" Margin="5">
+                                <Canvas>
+                                    <Image Name="sheetImage"/>
+                                    <Border Name="gridBorder">
+                                        <Grid Name="tileGrid" ShowGridLines="True"/>
+                                    </Border>
+                                </Canvas>
+                            </ScrollViewer>
+                        </Grid>
+                    </avalon:LayoutAnchorable>
+                </avalon:LayoutAnchorablePane>
+            </avalon:LayoutPanel>
+        </avalon:LayoutRoot>
+    </avalon:DockingManager>
+</UserControl>

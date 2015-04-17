@@ -130,6 +130,9 @@
     <Compile Include="UserControls\SheetPreviewView.xaml.cs">
       <DependentUpon>SheetPreviewView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\TilesetsView.xaml.cs">
+      <DependentUpon>TilesetsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\NewTileLayerDialog.xaml.cs">
       <DependentUpon>NewTileLayerDialog.xaml</DependentUpon>
     </Compile>
@@ -187,6 +190,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\SheetPreviewView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\TilesetsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

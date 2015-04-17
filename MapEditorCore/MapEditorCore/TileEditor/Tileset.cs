@@ -18,6 +18,7 @@ namespace MapEditorCore.TileEditor
 
         private readonly Point sourceSize;
         private readonly Point offset;
+        private readonly Point indicesCount;
 
         private string name;
 
@@ -25,6 +26,16 @@ namespace MapEditorCore.TileEditor
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Offset of indices.
+        /// </summary>
+        protected Point Offset
+        {
+            get
+            {
+                return offset;
+            }
+        }
         public string Name
         {
             get
@@ -50,7 +61,7 @@ namespace MapEditorCore.TileEditor
         /// <summary>
         /// Size of one source on the set.
         /// </summary>
-        protected Point SourceSize
+        public Point SourceSize
         {
             get
             {
@@ -58,13 +69,13 @@ namespace MapEditorCore.TileEditor
             }
         }
         /// <summary>
-        /// Offset of indices.
+        /// Count of rows and columns.
         /// </summary>
-        protected Point Offset
+        public Point IndicesCount
         {
             get
             {
-                return offset;
+                return indicesCount;
             }
         }
         public bool Deleted
@@ -86,6 +97,9 @@ namespace MapEditorCore.TileEditor
             this.texture = texture;
             this.sourceSize = sourceSize;
             this.offset = offset;
+
+            indicesCount = new Point((texture.Width - offset.X) / sourceSize.X, 
+                                     (texture.Height - offset.Y) / sourceSize.Y);
 
             GenerateSources();
         }

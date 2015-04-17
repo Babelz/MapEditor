@@ -33,7 +33,6 @@
                                                               Visibility="{Binding IsChecked, ElementName=showBordersCheckBox, Converter={StaticResource converter}}">
                     <Grid Name="tileGrid"  ShowGridLines="True"/>
                 </Border>
-                    
             </Canvas>
         </ScrollViewer>
 
