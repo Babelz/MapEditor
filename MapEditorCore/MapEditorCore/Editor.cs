@@ -20,10 +20,10 @@ namespace MapEditorCore
         #region Fields
         private readonly ResourceManager<Texture2D> textureManager;
         private readonly ComponentCollection components;
-
+       
         private ContentManager content;
         private SpriteBatch spriteBatch;
-        
+
         private bool disposed;
         #endregion
 

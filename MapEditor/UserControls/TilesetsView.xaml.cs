@@ -69,7 +69,7 @@ namespace MapEditor.UserControls
         #region Event handlers
         private void brushesViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if(brushesViewModel.Selected == null) return;
+            if (brushesViewModel.Selected == null) return;
 
             Tileset selectedTileSet = brushesViewModel.Selected.Tileset;
 
@@ -100,7 +100,7 @@ namespace MapEditor.UserControls
         }
         private void sheetCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            // Check if there is brush selected.
+            // Check if there is brush selected and tile set selected.
             if (tilesetsViewModel.Selected == null) return;
             if (brushesViewModel.Selected == null) return;
 
@@ -120,6 +120,7 @@ namespace MapEditor.UserControls
 
             sheetImage.Source = null;
 
+            // If we have tileset selected, we can reconstruct the grid. Else, just reset it.
             if (tileset != null)
             {
                 // Calculate area size.

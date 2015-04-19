@@ -163,26 +163,30 @@ namespace MapEditorCore.TileEditor
         {
             mouseInputListener.Map("paint", (args) => 
             {
-                if (brushes.SelectedBrush == null) brushes.SelectBrush(brushes.Brushes.First().Name);
+                if (brushes.SelectedBrush == null) return;
+                if (layers.SelectedLayer == null) return;
 
-                int mouseX = Mouse.GetState().X / tileEngine.TileSizeInPixels.X;
-                int mouseY = Mouse.GetState().Y / tileEngine.TileSizeInPixels.Y;
+                int mouseX = Mouse.GetState().X;
+                int mouseY = Mouse.GetState().Y;
+                
+                // Check that mouse is inside editors view port.
+                if (!SpriteBatch.GraphicsDevice.Viewport.Bounds.Contains(mouseX, mouseY)) return;
 
-                if (mouseX < 0 || mouseX >= 32) return;
-                if (mouseY < 0 || mouseY >= 32) return;
+                // TODO: does not work if the layers origin is not at (0, 0).
 
-                TileLayer l = layers.Layers.FirstOrDefault();
-
-                if (l == null) return;
+                // Calculate index.
+                mouseX = mouseX / tileEngine.TileSizeInPixels.X;
+                mouseY = mouseY / tileEngine.TileSizeInPixels.Y;
+                
+                // Check that the index is in bounds.
+                if (mouseX < 0 || mouseX > layers.SelectedLayer.Width) return;
+                if (mouseY < 0 || mouseY > layers.SelectedLayer.Height) return;
 
                 while (brushes.SelectedBrush.CanPaint())
                 {
-                    var paintArgs = brushes.SelectedBrush.Paint();
+                    PaintArgs paintArgs = brushes.SelectedBrush.Paint();
 
-                    if (paintArgs.TexturePaintArgs.Tileset == null) break;
-                    paintArgs.TexturePaintArgs.Color = Color.White;
-
-                    l.TileAtIndex(mouseX, mouseY).Paint(paintArgs);    
+                    layers.SelectedLayer.TileAtIndex(mouseX, mouseY).Paint(paintArgs);    
                 }
 
             }, new MouseTrigger(MouseButtons.LeftButton));
