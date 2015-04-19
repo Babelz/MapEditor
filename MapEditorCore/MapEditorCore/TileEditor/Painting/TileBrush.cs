@@ -41,11 +41,21 @@ namespace MapEditorCore.TileEditor.Painting
         
         private Tileset tileset;
 
-        private Point index;
         private Color color;
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Tileset that this brush is using.
+        /// </summary>
+        public Tileset Tileset
+        {
+            get
+            {
+                return tileset;
+            }
+        }
+
         public int Width
         {
             get
@@ -100,6 +110,8 @@ namespace MapEditorCore.TileEditor.Painting
             this.name = name;
 
             this.resizeMode = resizeMode;
+
+            color = Color.White;
         }
 
         #region Event handlers
@@ -136,7 +148,7 @@ namespace MapEditorCore.TileEditor.Painting
             // Not all brushes can be resized.
         }
 
-        public abstract PaintArgs Paint(int x, int y);
+        public abstract PaintArgs Paint();
         public abstract bool CanPaint();
 
         public void SelectTileSheet(Tileset tileset)
@@ -150,13 +162,13 @@ namespace MapEditorCore.TileEditor.Painting
         /// <summary>
         /// Selects given index at given location.
         /// </summary>
-        /// <param name="x">mouse position x</param>
-        /// <param name="y">mouse position y</param>
-        public void SelectIndex(int x, int y)
+        /// <param name="mousePositionX">mouse position x</param>
+        /// <param name="mousePositionY">mouse position y</param>
+        public void SelectIndex(int mousePositionX, int mousePositionY)
         {
             // Translate to index.
-            x = x / tileset.SourceSize.X;
-            y = y / tileset.SourceSize.Y;
+            mousePositionX = mousePositionX / tileset.SourceSize.X;
+            mousePositionY = mousePositionY / tileset.SourceSize.Y;
 
             // Validate that the index is in bounds.
             int rows = tileset.IndicesCount.Y;
@@ -165,10 +177,10 @@ namespace MapEditorCore.TileEditor.Painting
             int width = GetWidth() - 1;
             int height = GetHeight() - 1;
 
-            x = x + width > columns ? columns - x - width : x;
-            y = y + height > rows ? rows - y - height : y;
+            mousePositionX = mousePositionX + width > columns ? columns - mousePositionX - width : mousePositionX;
+            mousePositionY = mousePositionY + height > rows ? rows - mousePositionY - height : mousePositionY;
 
-            OnSelect(x, y);
+            OnSelect(mousePositionX, mousePositionY);
         }
     }
 }

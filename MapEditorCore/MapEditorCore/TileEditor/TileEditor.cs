@@ -8,6 +8,7 @@ using MapEditorInput.Trigger;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace MapEditorCore.TileEditor
     public sealed class TileEditor : Editor
     {
         #region Fields
+        private readonly BrushManager brushes;
         private readonly LayerManager<TileLayer> layers;
         private readonly TilesetManager tilesets;
 
@@ -56,6 +58,14 @@ namespace MapEditorCore.TileEditor
             get
             {
                 return layers.Layers;
+            }
+        }
+
+        public IEnumerable<TileBrush> Brushes
+        {
+            get
+            {
+                return brushes.Brushes;
             }
         }
 
@@ -136,6 +146,7 @@ namespace MapEditorCore.TileEditor
         {
             this.tileEngine = tileEngine;
 
+            brushes = new BrushManager();
             layers = new LayerManager<TileLayer>();
             tilesets = new TilesetManager();
             
@@ -150,8 +161,30 @@ namespace MapEditorCore.TileEditor
 
         private void InitializeInput()
         {
-            mouseInputListener.Map("interact", (args) => 
+            mouseInputListener.Map("paint", (args) => 
             {
+                if (brushes.SelectedBrush == null) brushes.SelectBrush(brushes.Brushes.First().Name);
+
+                int mouseX = Mouse.GetState().X / tileEngine.TileSizeInPixels.X;
+                int mouseY = Mouse.GetState().Y / tileEngine.TileSizeInPixels.Y;
+
+                if (mouseX < 0 || mouseX >= 32) return;
+                if (mouseY < 0 || mouseY >= 32) return;
+
+                TileLayer l = layers.Layers.FirstOrDefault();
+
+                if (l == null) return;
+
+                while (brushes.SelectedBrush.CanPaint())
+                {
+                    var paintArgs = brushes.SelectedBrush.Paint();
+
+                    if (paintArgs.TexturePaintArgs.Tileset == null) break;
+                    paintArgs.TexturePaintArgs.Color = Color.White;
+
+                    l.TileAtIndex(mouseX, mouseY).Paint(paintArgs);    
+                }
+
             }, new MouseTrigger(MouseButtons.LeftButton));
         }
 
@@ -187,6 +220,9 @@ namespace MapEditorCore.TileEditor
         public void SelectTileset(string name)
         {
             tilesets.SelectTileset(name);
+
+            if (tilesets.SelectedTileset != null)
+                if (brushes.SelectedBrush != null) brushes.SelectedBrush.SelectTileSheet(tilesets.SelectedTileset);
         }
         public void AddTileset(string name, string texturePath, Point sourceSize, Point offset)
         {
@@ -221,9 +257,20 @@ namespace MapEditorCore.TileEditor
             // Dereference the texture.
             TextureManager.Dereference(tileset.Texture);
         }
+
         public string GetTexturePath(Texture2D texture)
         {
             return TextureManager.PathToResource(texture);
+        }
+        #endregion
+
+        #region Brush methods
+        public void SelectBrush(string name)
+        {
+            brushes.SelectBrush(name);
+
+            if (brushes.SelectedBrush != null)
+                if (tilesets.SelectedTileset != null) brushes.SelectedBrush.SelectTileSheet(tilesets.SelectedTileset);
         }
         #endregion
 

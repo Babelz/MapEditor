@@ -34,7 +34,7 @@ namespace MapEditorCore.TileEditor.Painting
         /// <summary>
         /// Tileset that contains texture data.
         /// </summary>
-        public TexturedTileset Tileset;
+        public Tileset Tileset;
 
         /// <summary>
         /// Color to paint with.

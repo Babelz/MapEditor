@@ -157,5 +157,10 @@ namespace MapEditorCore.TileEditor
 
             RepositionTiles();
         }
+
+        public Tile TileAtIndex(int x, int y)
+        {
+            return tiles[y][x];
+        }
     }
 }

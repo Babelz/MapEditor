@@ -14,7 +14,9 @@ namespace MapEditorViewModels
         #region Fields
         private readonly TileEditor editor;
 
-        private readonly ObservableCollection<TilesetViewModel> tilesetViewModels;  
+        private readonly ObservableCollection<TilesetViewModel> tilesetViewModels;
+        
+        private TilesetViewModel selected;
         #endregion
 
         #region Properties
@@ -23,6 +25,19 @@ namespace MapEditorViewModels
             get
             {
                 return tilesetViewModels;
+            }
+        }
+        public TilesetViewModel Selected
+        {
+            get
+            {
+                return selected;
+            }
+            set
+            {
+                selected = value;
+
+                OnPropertyChanged("Selected");
             }
         }
         #endregion

@@ -28,7 +28,11 @@ namespace MapEditor.Configurers
          */
 
         #region Fields
+        // Shared view models.
+        private readonly BrushesViewModel brushesViewModel;
+
         private readonly TileEditor editor;
+
         // Root menu item.
         private MenuItem editMenuItem;
         private MenuItem addMenuItem;
@@ -60,6 +64,9 @@ namespace MapEditor.Configurers
         public TileEditorGUIConfigurer(TileEditor editor)
         {
             this.editor = editor;
+
+            brushesViewModel = new BrushesViewModel(editor.Brushes);
+            brushesViewModel.Selected = brushesViewModel.Brushes.First();
         }
 
         #region Event handlers
@@ -119,7 +126,7 @@ namespace MapEditor.Configurers
         private void InsertControlToPropertiesView(Window window)
         {
             layersView = new LayersView(editor);
-            tilesetsView = new TilesetsView(editor);
+            tilesetsView = new TilesetsView(editor, brushesViewModel);
             
             // Root of the window.
             Grid root = LogicalTreeHelper.FindLogicalNode(window, "root") as Grid;

@@ -36,13 +36,6 @@ namespace MapEditorViewModels
                 return string.Format("{0}x{1}pxl", tileset.SourceSize.X, tileset.SourceSize.Y);
             }
         }
-        public Tileset Tileset
-        {
-            get
-            {
-                return tileset;
-            }
-        }
         #endregion
 
         public TilesetViewModel(Tileset tileset)

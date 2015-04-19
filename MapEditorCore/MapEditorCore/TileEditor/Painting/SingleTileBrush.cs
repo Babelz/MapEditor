@@ -15,6 +15,8 @@ namespace MapEditorCore.TileEditor.Painting
         private readonly PaintArgs args;
 
         private Point selectedIndex;
+
+        private bool painted;
         #endregion
 
         public SingleTileBrush()
@@ -38,9 +40,13 @@ namespace MapEditorCore.TileEditor.Painting
             selectedIndex.Y = y;
         }
 
-        public override PaintArgs Paint(int x, int y)
+        public override PaintArgs Paint()
         {
+            // Set state to true.
+            painted = true;
+
             args.PaintType = PaintType.Texture;
+            args.TexturePaintArgs.Tileset = Tileset;
 
             args.TexturePaintArgs.Color = Color;
             args.TexturePaintArgs.SourceIndex = selectedIndex;
@@ -50,7 +56,17 @@ namespace MapEditorCore.TileEditor.Painting
 
         public override bool CanPaint()
         {
-            return selectedIndex.X != -1;
+            // Single paint, swap state.
+            if (!painted && selectedIndex.X != -1)
+            {
+                painted = true;
+
+                return painted;
+            }
+
+            painted = false;
+
+            return painted;
         }
     }
 }

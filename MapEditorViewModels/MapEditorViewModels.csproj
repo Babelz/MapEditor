@@ -57,6 +57,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BrushesViewModel.cs" />
+    <Compile Include="BrushViewModel.cs" />
     <Compile Include="LayersViewModel.cs" />
     <Compile Include="LayerViewModel.cs" />
     <Compile Include="NewProjectProperties.cs" />

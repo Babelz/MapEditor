@@ -26,6 +26,7 @@ namespace MapEditor.UserControls
     public partial class TilesetsView : UserControl
     {
         #region Fields
+        private readonly BrushesViewModel brushesViewModel;
         private readonly TileGridManager tileGridManager;
         private readonly TileEditor editor;
 
@@ -42,9 +43,12 @@ namespace MapEditor.UserControls
         }
         #endregion
 
-        public TilesetsView(TileEditor editor)
+        public TilesetsView(TileEditor editor, BrushesViewModel brushesViewModel)
         {
             this.editor = editor;
+            this.brushesViewModel = brushesViewModel;
+
+            brushesViewModel.PropertyChanged += brushesViewModel_PropertyChanged;
 
             // Initialize view model.
             tilesetsViewModel = new TilesetsViewModel(editor);
@@ -63,6 +67,14 @@ namespace MapEditor.UserControls
         }
 
         #region Event handlers
+        private void brushesViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if(brushesViewModel.Selected == null) return;
+
+            Tileset selectedTileSet = brushesViewModel.Selected.Tileset;
+
+            ReconstructGrid(selectedTileSet);
+        }
         private void setsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // Get selected set.
@@ -80,31 +92,47 @@ namespace MapEditor.UserControls
 
                 return;
             }
-            
+
             // Notify editor.
             editor.SelectTileset(tilesetViewModel.Name);
 
-            ReconstructGrid(tilesetViewModel.Tileset);
+            ReconstructGrid(editor.Tilesets.FirstOrDefault(t => t.Name == tilesetViewModel.Name));
+        }
+        private void sheetCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            // Check if there is brush selected.
+            if (tilesetsViewModel.Selected == null) return;
+            if (brushesViewModel.Selected == null) return;
+
+            // Get tileset and mouse position.
+            Point position = Mouse.GetPosition(gridBorder);
+
+            Tileset tileset = editor.Tilesets.FirstOrDefault(t => t.Name == tilesetsViewModel.Selected.Name);
+
+            brushesViewModel.Selected.SelectIndex((int)position.X, (int)position.Y);
         }
         #endregion
 
-        private Tileset GetSelectedSet()
-        {
-            return setsListView.SelectedValue as Tileset;
-        }
-
         private void ReconstructGrid(Tileset tileset)
         {
-            // Reconstruct grid.
-            string pathToImage = editor.GetTexturePath(tileset.Texture);
+            int width = 0;
+            int height = 0;
 
-            BitmapImage image = ImageHelper.LoadToMemory(pathToImage);
-            
-            sheetImage.Source = image;
+            sheetImage.Source = null;
 
-            // Calculate area size.
-            int width = tileset.SourceSize.X * tileset.IndicesCount.X;
-            int height = tileset.SourceSize.Y * tileset.IndicesCount.Y;
+            if (tileset != null)
+            {
+                // Calculate area size.
+                width = tileset.SourceSize.X * tileset.IndicesCount.X;
+                height = tileset.SourceSize.Y * tileset.IndicesCount.Y;
+
+                // Reconstruct grid.
+                string pathToImage = editor.GetTexturePath(tileset.Texture);
+
+                BitmapImage image = ImageHelper.LoadToMemory(pathToImage);
+
+                sheetImage.Source = image;
+            }
 
             // Keep offset at zero, we don't want to move the grid but the image instead.
             tileGridManager.Reconstruct(width,

@@ -10,7 +10,7 @@ namespace MapEditorCore.TileEditor.Actors
     public sealed class TexturedTileActor : TileActor
     {
         #region Fields
-        private TexturedTileset tileset;
+        private Tileset tileset;
 
         private Point sourceIndex;
 
@@ -85,7 +85,10 @@ namespace MapEditorCore.TileEditor.Actors
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (sourceIndex.X != -1) spriteBatch.Draw(tileset.Texture, destination, source, Color);
+            if (sourceIndex.X != -1)
+            {
+                spriteBatch.Draw(tileset.Texture, destination, source, Color.White);
+            }
         }
     }
 }
