@@ -102,15 +102,23 @@ namespace MapEditor.UserControls
             
             sheetImage.Source = image;
 
-            tileGridManager.Reconstruct(image, tileset.SourceSize.X, tileset.SourceSize.Y, tileset.Offset.X, tileset.Offset.Y);
+            // Keep offset at zero, we dont want to move the grid but the image instead.
+            tileGridManager.Reconstruct(tileset.IndicesCount.X * tileset.SourceSize.X,
+                                        tileset.IndicesCount.Y * tileset.SourceSize.Y, 
+                                        tileset.SourceSize.X, 
+                                        tileset.SourceSize.Y, 
+                                        0, 
+                                        0);
+
+            Canvas.SetLeft(sheetImage, -tileset.Offset.X);
+            Canvas.SetTop(sheetImage, -tileset.Offset.Y);
 
             // Set view size.
             sheetCanvas.Width = tileset.Texture.Width - tileset.Offset.X;
             sheetCanvas.Height = tileset.Texture.Height - tileset.Offset.Y;
 
-            sheetCanvas.UpdateLayout();
-
-            UpdateLayout();
+            gridBorder.Width = tileset.IndicesCount.X * tileset.SourceSize.X;
+            gridBorder.Height = tileset.IndicesCount.Y * tileset.SourceSize.Y;
         }
     }
 }

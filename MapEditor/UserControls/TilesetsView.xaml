@@ -73,7 +73,7 @@
                       MaxHeight="400">
             <Canvas Name="sheetCanvas" VerticalAlignment="Top" HorizontalAlignment="Left">
                 <Image Name="sheetImage" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                <Border Name="gridBorder" VerticalAlignment="Top" HorizontalAlignment="Left">
+                <Border Name="gridBorder" VerticalAlignment="Top" HorizontalAlignment="Left" BorderThickness="1" BorderBrush="Black">
                     <Grid Name="tileGrid" ShowGridLines="True" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                 </Border>
             </Canvas>

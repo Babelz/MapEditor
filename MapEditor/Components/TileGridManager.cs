@@ -34,17 +34,17 @@ namespace MapEditor.Components
         /// WARNING: could use some optimization. Grid is reconstructed every time
         /// something gets changed.
         /// </summary>
-        public void Reconstruct(BitmapImage image, int cellWidth, int cellHeight, int gridOffsetX, int gridOffsetY)
+        public void Reconstruct(int areaWidth, int areaHeight, int cellWidth, int cellHeight, int gridOffsetX, int gridOffsetY)
         {
             // Cant continue if there is no image.
-            if (image == null) return;
+            if (areaWidth == 0 || areaHeight == 0) return;
 
             // Move view of the grid to new location.
             Canvas.SetTop(gridBorder, gridOffsetY);
             Canvas.SetLeft(gridBorder, gridOffsetX);
 
-            gridBorder.Width = image.Width;
-            gridBorder.Height = image.Height;
+            gridBorder.Width = areaWidth;
+            gridBorder.Height = areaHeight;
 
             // Resize the grid canvas.
             double newWidth = gridBorder.Width - Canvas.GetLeft(gridBorder);
@@ -57,11 +57,11 @@ namespace MapEditor.Components
             if (cellWidth == 0 || cellHeight == 0) return;
 
             // Calculate space for the grid.
-            int modColumns = (int)image.Width % cellWidth;
-            int modRows = (int)image.Height % cellHeight;
+            int modColumns = areaWidth % cellWidth;
+            int modRows = areaHeight % cellHeight;
 
-            int columnSpace = (int)image.Width;
-            int rowSpace = (int)image.Height;
+            int columnSpace = areaWidth;
+            int rowSpace = areaHeight;
 
             // If modifier is not zero, we need to overlap the image.
             if (modColumns != 0) columnSpace += cellWidth;

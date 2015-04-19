@@ -126,7 +126,13 @@ namespace MapEditor.UserControls
 
         private void ReconstructGrid()
         {
-            tileGridManager.Reconstruct(image, CellWidth, CellHeight, GridOffsetX, GridOffsetY);
+            // Cant reconstruct if image is null.
+            if (image == null) return;
+
+            tileGridManager.Reconstruct((int)image.Width, (int)image.Height, CellWidth, CellHeight, GridOffsetX, GridOffsetY);
+
+            gridBorder.Width = tileGrid.ColumnDefinitions.Count * CellWidth; 
+            gridBorder.Height = tileGrid.RowDefinitions.Count * CellHeight;
         }
     }
 }
