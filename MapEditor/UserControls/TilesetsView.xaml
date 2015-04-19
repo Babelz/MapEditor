@@ -7,7 +7,7 @@
              xmlns:avalon="http://schemas.xceed.com/wpf/xaml/avalondock"
              xmlns:components="clr-namespace:MapEditor.Components"
              d:DesignHeight="500" d:DesignWidth="300">
-    
+
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -15,6 +15,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
+    
     
     <avalon:DockingManager x:Name="dockingManager">
         <avalon:LayoutRoot>

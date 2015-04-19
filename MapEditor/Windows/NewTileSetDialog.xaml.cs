@@ -78,22 +78,9 @@ namespace MapEditor.Windows
             // Loading the file failed, return.
             if (!openFileDialog.ShowDialog().Value) return;
 
-            // Got file, load it.
-            BitmapImage image = new BitmapImage();
-
             // We need to load (copy) it into memory so it wont block our editor side 
             // when we try to load it as a texture.
-            using (FileStream stream = new FileStream(openFileDialog.FileName, FileMode.Open))
-            {
-                image.BeginInit();
-                
-                image.StreamSource = stream;
-                image.CacheOption = BitmapCacheOption.OnLoad;
-                
-                image.EndInit();
-            }
-
-            sheetPreviewView.Image = image;
+            sheetPreviewView.Image = ImageHelper.LoadToMemory(openFileDialog.FileName);
 
             // Set path for the model.
             newTilesetPropertiesViewModel.Path = openFileDialog.FileName;

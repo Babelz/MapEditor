@@ -108,6 +108,7 @@ namespace MapEditor.Configurers
         }
         private void viewTilesetsMenuItem_Click(object sender, RoutedEventArgs e)
         {
+            tilesetsView.Visibility = tilesetsView.Visibility == Visibility.Hidden ? Visibility.Visible : Visibility.Hidden;
         }
         private void viewLayersMenuItem_Click(object sender, RoutedEventArgs e)
         {
@@ -133,6 +134,7 @@ namespace MapEditor.Configurers
 
             // Insert window.
             propertiesLayoutPanel.Children.Add(layersView);
+            propertiesLayoutPanel.Children.Add(tilesetsView);
         }
         private void InsertMenuItems(Window window)
         {

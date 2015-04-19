@@ -98,7 +98,7 @@ namespace MapEditorCore
         protected abstract void OnInitialize();
 
         /// <summary>
-        /// Initialize the editor, pass content and spritebatch for it.
+        /// Initialize the editor, pass content and sprite batch for it.
         /// </summary>
         /// <param name="content">xna content manager</param>
         /// <param name="spriteBatch">xna sprite batch</param>

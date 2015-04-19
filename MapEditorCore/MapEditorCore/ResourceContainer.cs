@@ -96,5 +96,12 @@ namespace MapEditorCore
         {
             return resources.Find(r => ReferenceEquals(r, resource)) != null;
         }
+
+        public string PathToResource(T resource)
+        {
+            if (ContainsResource(resource)) return resources.FirstOrDefault(r => ReferenceEquals(r, resource)).Path;
+
+            return string.Empty;
+        }
     }
 }

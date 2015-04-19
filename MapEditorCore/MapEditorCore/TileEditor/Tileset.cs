@@ -29,7 +29,7 @@ namespace MapEditorCore.TileEditor
         /// <summary>
         /// Offset of indices.
         /// </summary>
-        protected Point Offset
+        public Point Offset
         {
             get
             {

@@ -120,6 +120,7 @@
     <Compile Include="Components\ValueToBoolConverter.cs" />
     <Compile Include="DelegateCommand.cs" />
     <Compile Include="Helpers\ChildHelper.cs" />
+    <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Configurers\IGUIConfigurer.cs" />
     <Compile Include="Configurers\TileEditorGUIConfigurer.cs" />

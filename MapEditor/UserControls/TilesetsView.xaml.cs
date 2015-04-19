@@ -1,7 +1,10 @@
-﻿using MapEditorCore.TileEditor;
+﻿using MapEditor.Components;
+using MapEditor.Helpers;
+using MapEditorCore.TileEditor;
 using MapEditorViewModels;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +26,7 @@ namespace MapEditor.UserControls
     public partial class TilesetsView : UserControl
     {
         #region Fields
+        private readonly TileGridManager tileGridManager;
         private readonly TileEditor editor;
 
         private readonly TilesetsViewModel tilesetsViewModel;
@@ -49,6 +53,13 @@ namespace MapEditor.UserControls
             DataContext = tilesetsViewModel;
 
             InitializeComponent();
+
+            setsListView.ItemsSource = tilesetsViewModel.Tilesets;
+
+            CollectionView collectionView = (CollectionView)CollectionViewSource.GetDefaultView(setsListView.ItemsSource);
+            collectionView.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Descending));
+
+            tileGridManager = new TileGridManager(tileGrid, gridBorder);
         }
 
         #region Event handlers
@@ -72,12 +83,29 @@ namespace MapEditor.UserControls
             
             // Notify editor.
             editor.SelectTileset(tilesetViewModel.Name);
+
+            ReconstructGrid();
         }
         #endregion
 
-        private void rootLayoutAnchorable_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private Tileset GetSelectedSet()
         {
+            return setsListView.SelectedItem as Tileset;
+        }
 
+        private void ReconstructGrid()
+        {
+            Tileset tileset = GetSelectedSet();
+
+            // Reset view.
+            if (tileset == null) return;
+
+            // Reconstruct it.
+            string pathToImage = editor.GetTexturePath(tileset.Texture);
+            BitmapImage image = ImageHelper.LoadToMemory(pathToImage);
+            sheetImage.Source = image;
+
+            tileGridManager.Reconstruct(image, tileset.SourceSize.X, tileset.SourceSize.Y, tileset.Offset.X, tileset.Offset.Y);
         }
     }
 }

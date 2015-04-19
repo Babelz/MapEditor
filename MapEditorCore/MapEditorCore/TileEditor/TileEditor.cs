@@ -221,6 +221,10 @@ namespace MapEditorCore.TileEditor
             // Dereference the texture.
             TextureManager.Dereference(tileset.Texture);
         }
+        public string GetTexturePath(Texture2D texture)
+        {
+            return TextureManager.PathToResource(texture);
+        }
         #endregion
 
         #region Editor methods

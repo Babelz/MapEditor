@@ -73,10 +73,8 @@ namespace MapEditor.UserControls
             // Hook create new layer action.
             createNewLayerAction = new Action(CreateTileLayer);
 
-            CollectionView collectioView = (CollectionView)CollectionViewSource.GetDefaultView(layersListView.ItemsSource);
-            collectioView.SortDescriptions.Add(new SortDescription("DrawOrder", ListSortDirection.Descending));
-
-            dockingManager.ToolTipClosing += dockingManager_ToolTipClosing;
+            CollectionView collectionView = (CollectionView)CollectionViewSource.GetDefaultView(layersListView.ItemsSource);
+            collectionView.SortDescriptions.Add(new SortDescription("DrawOrder", ListSortDirection.Descending));
         }
 
         #region Create new layer actions 
