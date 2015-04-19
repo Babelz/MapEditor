@@ -15,78 +15,68 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    
-    
-    <avalon:DockingManager x:Name="dockingManager">
-        <avalon:LayoutRoot>
-            <avalon:LayoutPanel>
-                <avalon:LayoutAnchorablePane>
-                    <avalon:LayoutAnchorable>
-                        <Grid Background="{StaticResource NormalBrush}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="25"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="35"/>
-                                <RowDefinition Height="25"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="35"/>
-                            </Grid.RowDefinitions>
-                            
-                            <TextBlock Text="Tilesets" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"
+
+    <Grid Background="{StaticResource NormalBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="190"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="35"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Tilesets" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"
                                        FontSize="18"/>
-                            
-                            <ListView Grid.Row="1" Margin="5" x:Name="setsListView"
+
+        <ListView Grid.Row="1" Margin="5" x:Name="setsListView"
                                       ItemsSource="{Binding TilesetsViewModel.Tilesets}"
                                       SelectionChanged="setsListView_SelectionChanged"
                                       SelectionMode="Single">
-                                <ListView.View>
-                                    <GridView>
-                                        <GridView.Columns>
-                                            <GridViewColumn Header="Name" Width="50">
-                                                <GridViewColumn.CellTemplate>
-                                                    <DataTemplate>
-                                                        <TextBlock Text="{Binding Name}"/>
-                                                    </DataTemplate>
-                                                </GridViewColumn.CellTemplate>
-                                            </GridViewColumn>
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Header="Name" Width="50">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
-                                            <GridViewColumn Header="Size">
-                                                <GridViewColumn.CellTemplate>
-                                                    <DataTemplate>
-                                                        <TextBlock Text="{Binding Size}"/>
-                                                    </DataTemplate>
-                                                </GridViewColumn.CellTemplate>
-                                            </GridViewColumn>
+                        <GridViewColumn Header="Size">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Size}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
-                                            <GridViewColumn Header="Tile size">
-                                                <GridViewColumn.CellTemplate>
-                                                    <DataTemplate>
-                                                        <TextBlock Text="{Binding TileSize}"/>
-                                                    </DataTemplate>
-                                                </GridViewColumn.CellTemplate>
-                                            </GridViewColumn>
-                                        </GridView.Columns>
-                                    </GridView>
-                                </ListView.View>
-                            </ListView>
-                            
-                            <StackPanel Grid.Row="2" Margin="5" Orientation="Horizontal" HorizontalAlignment="Left">
-                                <Button Name="newSetButton" Content="New" Padding="10, 0, 10, 0" Margin="0, 0, 5, 0"/>
-                                <Button Name="deleteSetButton" Content="Delete" Padding="10, 0, 10, 0" Margin="0, 0, 5, 0"/>
-                            </StackPanel>
+                        <GridViewColumn Header="Tile size">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding TileSize}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
 
-                            <ScrollViewer Grid.Row="4" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" Margin="5">
-                                <Canvas>
-                                    <Image Name="sheetImage"/>
-                                    <Border Name="gridBorder">
-                                        <Grid Name="tileGrid" ShowGridLines="True"/>
-                                    </Border>
-                                </Canvas>
-                            </ScrollViewer>
-                        </Grid>
-                    </avalon:LayoutAnchorable>
-                </avalon:LayoutAnchorablePane>
-            </avalon:LayoutPanel>
-        </avalon:LayoutRoot>
-    </avalon:DockingManager>
+        <StackPanel Grid.Row="2" Margin="5" Orientation="Horizontal" HorizontalAlignment="Left">
+            <Button Name="newSetButton" Content="New" Padding="10, 0, 10, 0" Margin="0, 0, 5, 0"/>
+            <Button Name="deleteSetButton" Content="Delete" Padding="10, 0, 10, 0" Margin="0, 0, 5, 0"/>
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="4" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" Margin="5"
+                      MaxHeight="400">
+            <Canvas Name="sheetCanvas" VerticalAlignment="Top" HorizontalAlignment="Left">
+                <Image Name="sheetImage" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                <Border Name="gridBorder" VerticalAlignment="Top" HorizontalAlignment="Left">
+                    <Grid Name="tileGrid" ShowGridLines="True" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                </Border>
+            </Canvas>
+        </ScrollViewer>
+    </Grid>
 </UserControl>

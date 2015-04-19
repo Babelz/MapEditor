@@ -129,12 +129,14 @@ namespace MapEditor.Configurers
             LayoutAnchorable propertiesLayoutAnchorable = rootDockingManager.FindName("propertiesView") as LayoutAnchorable;
 
             // Get vies docking manager.
-            DockingManager propertiesDockingManager = propertiesLayoutAnchorable.Content as DockingManager;
-            LayoutPanelControl propertiesLayoutPanel = propertiesDockingManager.LayoutRootPanel;
+            //DockingManager propertiesDockingManager = propertiesLayoutAnchorable.Content as DockingManager;
+            //LayoutPanelControl propertiesLayoutPanel = propertiesDockingManager.LayoutRootPanel;
 
-            // Insert window.
-            propertiesLayoutPanel.Children.Add(layersView);
-            propertiesLayoutPanel.Children.Add(tilesetsView);
+            StackPanel stackPanel = propertiesLayoutAnchorable.Content as StackPanel;
+
+            // Insert new controls.
+            stackPanel.Children.Add(layersView);
+            stackPanel.Children.Add(tilesetsView);
         }
         private void InsertMenuItems(Window window)
         {

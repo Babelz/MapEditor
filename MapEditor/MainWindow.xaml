@@ -58,7 +58,7 @@
                 <avalon:LayoutPanel Orientation="Horizontal">
                     <avalon:LayoutAnchorablePane DockWidth="200">
                         <avalon:LayoutAnchorable Title="Project explorer" x:Name="projectExplorerView" Closing="view_Closing">
-                            <Canvas Name="projectExplorerRoot" Background="{StaticResource NormalBorderBrush}"/>
+                            <Canvas Name="projectExplorerRoot" Background="{StaticResource NormalBrush}"/>
                         </avalon:LayoutAnchorable>
                     </avalon:LayoutAnchorablePane>
 
@@ -70,13 +70,7 @@
 
                     <avalon:LayoutAnchorablePane DockMinWidth="200">
                         <avalon:LayoutAnchorable Title="Properties" x:Name="propertiesView" Closing="view_Closing">
-                            <avalon:DockingManager>
-                                <avalon:LayoutRoot>
-                                    <avalon:LayoutPanel x:Name="propertiesRootPanel">
-                                        
-                                    </avalon:LayoutPanel>
-                                </avalon:LayoutRoot>
-                            </avalon:DockingManager>
+                            <StackPanel Background="{StaticResource NormalBrush}"/>
                         </avalon:LayoutAnchorable>
                     </avalon:LayoutAnchorablePane>
                 </avalon:LayoutPanel>

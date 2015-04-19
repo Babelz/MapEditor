@@ -62,7 +62,7 @@ namespace MapEditorCore.TileEditor
         public void SelectTileset(string name)
         {
             // Clear selection.
-            if (!string.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(name))
             {
                 selectedTileset = null;
 

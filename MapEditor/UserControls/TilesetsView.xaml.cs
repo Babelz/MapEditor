@@ -84,28 +84,33 @@ namespace MapEditor.UserControls
             // Notify editor.
             editor.SelectTileset(tilesetViewModel.Name);
 
-            ReconstructGrid();
+            ReconstructGrid(tilesetViewModel.Tileset);
         }
         #endregion
 
         private Tileset GetSelectedSet()
         {
-            return setsListView.SelectedItem as Tileset;
+            return setsListView.SelectedValue as Tileset;
         }
 
-        private void ReconstructGrid()
+        private void ReconstructGrid(Tileset tileset)
         {
-            Tileset tileset = GetSelectedSet();
-
-            // Reset view.
-            if (tileset == null) return;
-
-            // Reconstruct it.
+            // Reconstruct grid.
             string pathToImage = editor.GetTexturePath(tileset.Texture);
+
             BitmapImage image = ImageHelper.LoadToMemory(pathToImage);
+            
             sheetImage.Source = image;
 
             tileGridManager.Reconstruct(image, tileset.SourceSize.X, tileset.SourceSize.Y, tileset.Offset.X, tileset.Offset.Y);
+
+            // Set view size.
+            sheetCanvas.Width = tileset.Texture.Width - tileset.Offset.X;
+            sheetCanvas.Height = tileset.Texture.Height - tileset.Offset.Y;
+
+            sheetCanvas.UpdateLayout();
+
+            UpdateLayout();
         }
     }
 }
