@@ -98,16 +98,16 @@ namespace MapEditorCore.TileEditor
             this.sourceSize = sourceSize;
             this.offset = offset;
 
-            // Calculate mod values.
-            int modX = (texture.Width - offset.X) % sourceSize.X;
-            int modY = (texture.Height - offset.Y) % sourceSize.Y;
+            // Calculate offset values.
+            int sourceOffsetX = (texture.Width - offset.X) % sourceSize.X;
+            int sourceOffsetY = (texture.Height - offset.Y) % sourceSize.Y;
 
-            modX += sourceSize.X % modX;
-            modY += sourceSize.Y % modY;
+            sourceOffsetX = sourceOffsetX > 0 ? sourceSize.X : 0;
+            sourceOffsetY = sourceOffsetY > 0 ? sourceSize.Y : 0;
 
             // Calculate indices count (rows & columns count).
-            indicesCount = new Point((texture.Width - offset.X + modX) / sourceSize.X,
-                                     (texture.Height - offset.Y + modY) / sourceSize.Y);
+            indicesCount = new Point((texture.Width - offset.X + sourceOffsetX) / sourceSize.X,
+                                     (texture.Height - offset.Y + sourceOffsetY) / sourceSize.Y);
 
             GenerateSources();
         }

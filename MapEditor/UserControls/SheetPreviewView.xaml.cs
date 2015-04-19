@@ -129,10 +129,35 @@ namespace MapEditor.UserControls
             // Cant reconstruct if image is null.
             if (image == null) return;
 
-            tileGridManager.Reconstruct((int)image.Width, (int)image.Height, CellWidth, CellHeight, GridOffsetX, GridOffsetY);
+            // Calculate columns.
+            int columns = 0;
+            if (CellWidth == 0) return;
+            
+            columns = (int)((image.Width - GridOffsetX) / CellWidth);
 
-            gridBorder.Width = tileGrid.ColumnDefinitions.Count * CellWidth; 
-            gridBorder.Height = tileGrid.RowDefinitions.Count * CellHeight;
+            // Calculate rows.
+            int rows = 0;
+            if (CellHeight == 0) return;
+            
+            rows = (int)((image.Height - GridOffsetY) / CellHeight);
+
+            // Calculate row modulo.
+            int modRows = (int)(image.Height - GridOffsetY) % CellHeight;
+            modRows = modRows > 0 ? 1 : 0;
+
+            // Calculate column modulo.
+            int modColumns = (int)(image.Width - GridOffsetX) % CellWidth;
+            modColumns = modColumns > 0 ? 1 : 0;
+
+            // Calculate width and height.
+            int width = (modColumns + columns) * CellWidth;
+            int height = (modRows + rows) * CellHeight;
+
+            tileGridManager.Reconstruct(width, height, CellWidth, CellHeight, GridOffsetX, GridOffsetY);
+
+            // Set borders size.
+            gridBorder.Width = width;
+            gridBorder.Height = height;
         }
     }
 }

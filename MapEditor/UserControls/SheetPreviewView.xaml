@@ -26,7 +26,7 @@
         </Grid.RowDefinitions>
 
         <ScrollViewer BorderBrush="Black" Margin="5" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
-                <Canvas Name="previewRootCanvas" MouseLeftButtonDown="previewRootCanvas_MouseLeftButtonDown">
+                <Canvas Name="previewRootCanvas" MouseLeftButtonDown="previewRootCanvas_MouseLeftButtonDown" VerticalAlignment="Top" HorizontalAlignment="Left">
                 <Image Name="tileSheetPreviewImage"/>
 
                 <Border Name="gridBorder" BorderBrush="Black" BorderThickness="{Binding IsChecked, ElementName=showBordersCheckBox, Converter={StaticResource thicknessConverter}}" 

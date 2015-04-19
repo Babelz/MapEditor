@@ -102,9 +102,13 @@ namespace MapEditor.UserControls
             
             sheetImage.Source = image;
 
-            // Keep offset at zero, we dont want to move the grid but the image instead.
-            tileGridManager.Reconstruct(tileset.IndicesCount.X * tileset.SourceSize.X,
-                                        tileset.IndicesCount.Y * tileset.SourceSize.Y, 
+            // Calculate area size.
+            int width = tileset.SourceSize.X * tileset.IndicesCount.X;
+            int height = tileset.SourceSize.Y * tileset.IndicesCount.Y;
+
+            // Keep offset at zero, we don't want to move the grid but the image instead.
+            tileGridManager.Reconstruct(width,
+                                        height, 
                                         tileset.SourceSize.X, 
                                         tileset.SourceSize.Y, 
                                         0, 
@@ -114,11 +118,11 @@ namespace MapEditor.UserControls
             Canvas.SetTop(sheetImage, -tileset.Offset.Y);
 
             // Set view size.
-            sheetCanvas.Width = tileset.Texture.Width - tileset.Offset.X;
-            sheetCanvas.Height = tileset.Texture.Height - tileset.Offset.Y;
+            sheetCanvas.Width = width;
+            sheetCanvas.Height = height;
 
-            gridBorder.Width = tileset.IndicesCount.X * tileset.SourceSize.X;
-            gridBorder.Height = tileset.IndicesCount.Y * tileset.SourceSize.Y;
+            gridBorder.Width = width;
+            gridBorder.Height = height;
         }
     }
 }
