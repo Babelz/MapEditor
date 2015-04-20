@@ -30,8 +30,9 @@
                                        FontSize="18"/>
 
         <ListView Grid.Row="1" Margin="5" x:Name="setsListView"
-                                      SelectedValue="{Binding Selected}"
                                       SelectionChanged="setsListView_SelectionChanged"
+                                      SelectedItem="{Binding Selected}"
+                                      ItemsSource="{Binding Tilesets}"
                                       SelectionMode="Single">
             <ListView.View>
                 <GridView>

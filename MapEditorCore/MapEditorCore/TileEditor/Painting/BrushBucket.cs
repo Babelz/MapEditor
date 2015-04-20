@@ -1,5 +1,4 @@
-﻿using MapEditorCore.TileEditor.Painting;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,22 +6,23 @@ using System.Text;
 namespace MapEditorCore.TileEditor.Painting
 {
     /// <summary>
-    /// Class for containing and managing brushes.
+    /// Class that contains all brushes for each tileset.
     /// </summary>
-    public sealed class BrushManager
+    public sealed class BrushBucket
     {
         #region Fields
         private readonly List<TileBrush> brushes;
+        private readonly Tileset owner;
 
         private TileBrush selectedBrush;
         #endregion
 
         #region Properties
-        public TileBrush SelectedBrush
+        public bool HasBrushSelected
         {
             get
             {
-                return selectedBrush;
+                return selectedBrush != null;
             }
         }
         public IEnumerable<TileBrush> Brushes
@@ -32,14 +32,30 @@ namespace MapEditorCore.TileEditor.Painting
                 return brushes;
             }
         }
+        /// <summary>
+        /// Returns selected brush.
+        /// </summary>
+        public TileBrush SelectedBrush
+        {
+            get
+            {
+                return selectedBrush;
+            }
+        }
         #endregion
 
-        public BrushManager()
+        public BrushBucket(Tileset owner)
         {
-            brushes = new List<TileBrush>();
+            this.owner = owner;
+            
+            // TODO: add all brushes by hand.
+            brushes = new List<TileBrush>()
+            {
+                new SingleTileBrush(owner)
+            };
 
-            // TODO: push new brushes.
-            brushes.Add(new SingleTileBrush());
+            // Select first brush in the list.
+            selectedBrush = brushes[0];
         }
 
         public void SelectBrush(string name)

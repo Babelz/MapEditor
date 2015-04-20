@@ -33,14 +33,6 @@ namespace MapEditor.Windows
         #endregion
 
         #region Properties
-        private NewTilesetPropertiesViewModel NewTilesetPropertiesViewModel
-        {
-            get
-            {
-                return newTilesetPropertiesViewModel;
-            }
-        }
-
         public NewTilesetProperties NewTilesetProperties
         {
             get
@@ -64,7 +56,7 @@ namespace MapEditor.Windows
             newTilesetPropertiesViewModel = new NewTilesetPropertiesViewModel(newTilesetProperties);
 
             // Set data context.
-            DataContext = NewTilesetPropertiesViewModel;
+            DataContext = newTilesetPropertiesViewModel;
 
             InitializeComponent();
         }

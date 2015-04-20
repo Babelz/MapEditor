@@ -31,8 +31,8 @@
                                        FontSize="18"/>
 
         <ListView Grid.Row="1" Margin="5" x:Name="layersListView"
-                                      ItemsSource="{Binding LayersViewModel.Layers}"
                                       SelectionChanged="layersListView_SelectionChanged"
+                                      ItemsSource="{Binding Layers}"
                                       SelectionMode="Single">
             <ListView.View>
                 <GridView>

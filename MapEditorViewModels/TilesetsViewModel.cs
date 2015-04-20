@@ -15,7 +15,7 @@ namespace MapEditorViewModels
         private readonly TileEditor editor;
 
         private readonly ObservableCollection<TilesetViewModel> tilesetViewModels;
-        
+
         private TilesetViewModel selected;
         #endregion
 
@@ -35,9 +35,23 @@ namespace MapEditorViewModels
             }
             set
             {
+                /*
+                 * WARNING:
+                 * Brushes view model depends on this order. 
+                 * If the editor is not first notified about the changed,
+                 * it will not get correct brush bucket. 
+                 * Place for a refactoring?
+                 */
+
+                // Catch value.
                 selected = value;
 
-                OnPropertyChanged("Selected");
+                // Notify editor.
+                string tilesetName = selected == null ? string.Empty : selected.Name;
+                editor.SelectTileset(tilesetName);
+                
+                // Notify user.
+                if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("Selected"));
             }
         }
         #endregion
@@ -58,7 +72,7 @@ namespace MapEditorViewModels
 
             foreach (Tileset tileset in editor.Tilesets)
             {
-                tilesetViewModels.Add(CreateTilesetViewModelFrom(tileset));
+                tilesetViewModels.Add(new TilesetViewModel(tileset));
             }
         }
 
@@ -73,16 +87,11 @@ namespace MapEditorViewModels
         }
         private void editor_TilesetAdded(object sender, TilesetEventArgs e)
         {
-            tilesetViewModels.Add(CreateTilesetViewModelFrom(e.Tileset));
+            tilesetViewModels.Add(new TilesetViewModel(e.Tileset));
 
             OnPropertyChanged("Tilesets");
         }
         #endregion
-
-        private TilesetViewModel CreateTilesetViewModelFrom(Tileset tileset)
-        {
-            return new TilesetViewModel(tileset);
-        }
 
         private void OnPropertyChanged(string name)
         {

@@ -1,6 +1,7 @@
 ﻿using MapEditor.Components;
 using MapEditor.Helpers;
 using MapEditorCore.TileEditor;
+using MapEditorCore.TileEditor.Painting;
 using MapEditorViewModels;
 using System;
 using System.Collections.Generic;
@@ -26,39 +27,29 @@ namespace MapEditor.UserControls
     public partial class TilesetsView : UserControl
     {
         #region Fields
-        private readonly BrushesViewModel brushesViewModel;
-        private readonly TileGridManager tileGridManager;
-        private readonly TileEditor editor;
-
         private readonly TilesetsViewModel tilesetsViewModel;
+        private readonly BrushesViewModel brushesViewModel;
+        
+        private readonly TileGridManager tileGridManager;
+
+        private readonly TileEditor editor;
         #endregion
 
-        #region Properties
-        private TilesetsViewModel TilesetsViewModel
-        {
-            get
-            {
-                return tilesetsViewModel;
-            }
-        }
-        #endregion
+        /*
+         * TODO: each 
+         * 
+         */
 
-        public TilesetsView(TileEditor editor, BrushesViewModel brushesViewModel)
+        public TilesetsView(TileEditor editor, BrushesViewModel brushesViewModel, TilesetsViewModel tilesetsViewModel)
         {
             this.editor = editor;
             this.brushesViewModel = brushesViewModel;
-
-            brushesViewModel.PropertyChanged += brushesViewModel_PropertyChanged;
-
-            // Initialize view model.
-            tilesetsViewModel = new TilesetsViewModel(editor);
+            this.tilesetsViewModel = tilesetsViewModel;
 
             // Set data context.
             DataContext = tilesetsViewModel;
 
             InitializeComponent();
-
-            setsListView.ItemsSource = tilesetsViewModel.Tilesets;
 
             CollectionView collectionView = (CollectionView)CollectionViewSource.GetDefaultView(setsListView.ItemsSource);
             collectionView.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Descending));
@@ -67,16 +58,10 @@ namespace MapEditor.UserControls
         }
 
         #region Event handlers
-        private void brushesViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (brushesViewModel.Selected == null) return;
-
-            Tileset selectedTileSet = brushesViewModel.Selected.Tileset;
-
-            ReconstructGrid(selectedTileSet);
-        }
         private void setsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // Editor has been notified (inside the tilesets view model selected get), just do grid processing.
+            
             // Get selected set.
             TilesetViewModel tilesetViewModel = null;
 
@@ -86,16 +71,8 @@ namespace MapEditor.UserControls
             }
 
             // No set, return.
-            if (tilesetViewModel == null)
-            {
-                editor.SelectTileset(string.Empty);
-
-                return;
-            }
-
-            // Notify editor.
-            editor.SelectTileset(tilesetViewModel.Name);
-
+            if (tilesetViewModel == null) return;
+            
             ReconstructGrid(editor.Tilesets.FirstOrDefault(t => t.Name == tilesetViewModel.Name));
         }
         private void sheetCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -107,9 +84,12 @@ namespace MapEditor.UserControls
             // Get tileset and mouse position.
             Point position = Mouse.GetPosition(gridBorder);
 
-            Tileset tileset = editor.Tilesets.FirstOrDefault(t => t.Name == tilesetsViewModel.Selected.Name);
+            // Get bucket.
+            BrushBucket brushBucket = editor.GetBrushBucketForSelectedTileset();
 
-            brushesViewModel.Selected.SelectIndex((int)position.X, (int)position.Y);
+            // Select wanted index.
+            brushBucket.SelectedBrush.SelectIndex((int)position.X / editor.TileEngine.TileSizeInPixels.X,
+                                                  (int)position.Y / editor.TileEngine.TileSizeInPixels.Y);
         }
         #endregion
 

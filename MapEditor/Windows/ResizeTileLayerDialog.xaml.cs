@@ -28,14 +28,6 @@ namespace MapEditor.Windows
         #endregion
 
         #region Properties
-        private ResizeViewModel ResizeViewModel
-        {
-            get
-            {
-                return resizeViewModel;
-            }
-        } 
-
         public ResizeModel ResizeModel
         {
             get

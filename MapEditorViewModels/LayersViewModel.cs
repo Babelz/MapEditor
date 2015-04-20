@@ -29,18 +29,6 @@ namespace MapEditorViewModels
                 return layerViewModels;
             }
         }
-        // TODO: do selected.
-        public LayerViewModel Selected
-        {
-            get
-            {
-
-            }
-            set
-            {
-
-            }
-        }
         #endregion
 
         #region Events

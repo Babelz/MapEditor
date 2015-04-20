@@ -19,8 +19,8 @@ namespace MapEditorCore.TileEditor.Painting
         private bool painted;
         #endregion
 
-        public SingleTileBrush()
-            : base("Single", BrushResizeMode.NoResize)
+        public SingleTileBrush(Tileset owner)
+            : base("Single", BrushResizeMode.NoResize, owner)
         {
             args = new PaintArgs();
         }
@@ -34,7 +34,7 @@ namespace MapEditorCore.TileEditor.Painting
             return HEIGHT;
         }
 
-        protected override void OnSelect(int x, int y)
+        public override void SelectIndex(int x, int y)
         {
             selectedIndex.X = x;
             selectedIndex.Y = y;
@@ -46,7 +46,7 @@ namespace MapEditorCore.TileEditor.Painting
             painted = true;
 
             args.PaintType = PaintType.Texture;
-            args.TexturePaintArgs.Tileset = Tileset;
+            args.TexturePaintArgs.Tileset = Owner;
 
             args.TexturePaintArgs.Color = Color;
             args.TexturePaintArgs.SourceIndex = selectedIndex;

@@ -20,7 +20,8 @@ namespace MapEditorCore.TileEditor
     public sealed class TileEditor : Editor
     {
         #region Fields
-        private readonly BrushManager brushes;
+        private readonly Dictionary<Tileset, BrushBucket> brushBuckets;
+
         private readonly LayerManager<TileLayer> layers;
         private readonly TilesetManager tilesets;
 
@@ -58,14 +59,6 @@ namespace MapEditorCore.TileEditor
             get
             {
                 return layers.Layers;
-            }
-        }
-
-        public IEnumerable<TileBrush> Brushes
-        {
-            get
-            {
-                return brushes.Brushes;
             }
         }
 
@@ -146,7 +139,6 @@ namespace MapEditorCore.TileEditor
         {
             this.tileEngine = tileEngine;
 
-            brushes = new BrushManager();
             layers = new LayerManager<TileLayer>();
             tilesets = new TilesetManager();
             
@@ -156,6 +148,8 @@ namespace MapEditorCore.TileEditor
             mouseInputListener = new MouseInputListener();
             inputManager = new InputManager(keyboardInputListener, mouseInputListener);
 
+            brushBuckets = new Dictionary<Tileset, BrushBucket>();
+
             backgroundColor = Color.CornflowerBlue;
         }
 
@@ -163,7 +157,7 @@ namespace MapEditorCore.TileEditor
         {
             mouseInputListener.Map("paint", (args) => 
             {
-                if (brushes.SelectedBrush == null) return;
+                //if (brushes.SelectedBrush == null) return;
                 if (layers.SelectedLayer == null) return;
 
                 int mouseX = Mouse.GetState().X;
@@ -182,12 +176,12 @@ namespace MapEditorCore.TileEditor
                 if (mouseX < 0 || mouseX > layers.SelectedLayer.Width) return;
                 if (mouseY < 0 || mouseY > layers.SelectedLayer.Height) return;
 
-                while (brushes.SelectedBrush.CanPaint())
+                /*while (brushes.SelectedBrush.CanPaint())
                 {
                     PaintArgs paintArgs = brushes.SelectedBrush.Paint();
 
                     layers.SelectedLayer.TileAtIndex(mouseX, mouseY).Paint(paintArgs);    
-                }
+                }*/
 
             }, new MouseTrigger(MouseButtons.LeftButton));
         }
@@ -224,9 +218,6 @@ namespace MapEditorCore.TileEditor
         public void SelectTileset(string name)
         {
             tilesets.SelectTileset(name);
-
-            if (tilesets.SelectedTileset != null)
-                if (brushes.SelectedBrush != null) brushes.SelectedBrush.SelectTileSheet(tilesets.SelectedTileset);
         }
         public void AddTileset(string name, string texturePath, Point sourceSize, Point offset)
         {
@@ -250,13 +241,20 @@ namespace MapEditorCore.TileEditor
             }
 
             // TODO: only adds textured tile sets.
-            tilesets.AddTileset(new TexturedTileset(name, texture, sourceSize, offset));
+            TexturedTileset tileset = new TexturedTileset(name, texture, sourceSize, offset);
+            tilesets.AddTileset(tileset);
+
+            // Add new brush bucket for this tileset.
+            brushBuckets.Add(tileset, new BrushBucket(tileset));
         }
         public void RemoveTileset(string name)
         {
             Tileset tileset = tilesets.Tilesets.First(s => s.Name == name);
 
             tilesets.RemoveTileset(tileset);
+
+            // Remove brush bucket.
+            brushBuckets.Remove(tileset);
 
             // Dereference the texture.
             TextureManager.Dereference(tileset.Texture);
@@ -271,10 +269,14 @@ namespace MapEditorCore.TileEditor
         #region Brush methods
         public void SelectBrush(string name)
         {
-            brushes.SelectBrush(name);
+            if (tilesets.SelectedTileset != null)
+                brushBuckets[tilesets.SelectedTileset].SelectBrush(name);
+        }
+        public BrushBucket GetBrushBucketForSelectedTileset()
+        {
+            if (tilesets.SelectedTileset == null) return null;
 
-            if (brushes.SelectedBrush != null)
-                if (tilesets.SelectedTileset != null) brushes.SelectedBrush.SelectTileSheet(tilesets.SelectedTileset);
+            return brushBuckets[tilesets.SelectedTileset];
         }
         #endregion
 

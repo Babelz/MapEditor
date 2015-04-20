@@ -31,6 +31,7 @@ namespace MapEditorCore.TileEditor.Painting
 
     /// <summary>
     /// Tool for used to paint tiles.
+    /// TODO: refactor this class?
     /// </summary>
     public abstract class TileBrush
     {
@@ -38,21 +39,18 @@ namespace MapEditorCore.TileEditor.Painting
         private readonly string name;
 
         private readonly BrushResizeMode resizeMode;
-        
-        private Tileset tileset;
+
+        private readonly Tileset owner;
 
         private Color color;
         #endregion
 
         #region Properties
-        /// <summary>
-        /// Tileset that this brush is using.
-        /// </summary>
-        public Tileset Tileset
+        public Tileset Owner
         {
             get
             {
-                return tileset;
+                return owner;
             }
         }
 
@@ -105,25 +103,14 @@ namespace MapEditorCore.TileEditor.Painting
         }
         #endregion
 
-        protected TileBrush(string name, BrushResizeMode resizeMode)
+        public TileBrush(string name, BrushResizeMode resizeMode, Tileset owner)
         {
             this.name = name;
-
             this.resizeMode = resizeMode;
+            this.owner = owner;
 
             color = Color.White;
         }
-
-        #region Event handlers
-        private void tileset_Deleting(object sender, TilesetEventArgs e)
-        {
-            tileset.Deleting -= tileset_Deleting;
-
-            tileset = null;
-
-            SelectIndex(-1, -1);
-        }
-        #endregion
 
         private void Resize(int newWidth, int newHeight)
         {
@@ -142,7 +129,6 @@ namespace MapEditorCore.TileEditor.Painting
         protected abstract int GetWidth();
         protected abstract int GetHeight();
 
-        protected abstract void OnSelect(int x, int y);
         protected virtual void OnResize(int newWidth, int newHeight)
         {
             // Not all brushes can be resized.
@@ -151,36 +137,11 @@ namespace MapEditorCore.TileEditor.Painting
         public abstract PaintArgs Paint();
         public abstract bool CanPaint();
 
-        public void SelectTileSheet(Tileset tileset)
-        {
-            if (this.tileset != null) this.tileset.Deleting -= tileset_Deleting;
-
-            this.tileset = tileset;
-            this.tileset.Deleting += tileset_Deleting;
-        }
-
         /// <summary>
         /// Selects given index at given location.
         /// </summary>
-        /// <param name="mousePositionX">mouse position x</param>
-        /// <param name="mousePositionY">mouse position y</param>
-        public void SelectIndex(int mousePositionX, int mousePositionY)
-        {
-            // Translate to index.
-            mousePositionX = mousePositionX / tileset.SourceSize.X;
-            mousePositionY = mousePositionY / tileset.SourceSize.Y;
-
-            // Validate that the index is in bounds.
-            int rows = tileset.IndicesCount.Y;
-            int columns = tileset.IndicesCount.X;
-
-            int width = GetWidth() - 1;
-            int height = GetHeight() - 1;
-
-            mousePositionX = mousePositionX + width > columns ? columns - mousePositionX - width : mousePositionX;
-            mousePositionY = mousePositionY + height > rows ? rows - mousePositionY - height : mousePositionY;
-
-            OnSelect(mousePositionX, mousePositionY);
-        }
+        /// <param name="x">mouse position x</param>
+        /// <param name="y">mouse position y</param>
+        public abstract void SelectIndex(int x, int y);
     }
 }
