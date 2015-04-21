@@ -26,6 +26,13 @@ namespace MapEditorCore.TileEditor
                 return tilesets.Values;
             }
         }
+        public bool HasTilesetSelected
+        {
+            get
+            {
+                return selectedTileset != null;
+            }
+        }
         public Tileset SelectedTileset
         {
             get

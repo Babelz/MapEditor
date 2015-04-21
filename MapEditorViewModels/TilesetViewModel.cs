@@ -1,4 +1,5 @@
 ﻿using MapEditorCore.TileEditor;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -34,6 +35,20 @@ namespace MapEditorViewModels
             get
             {
                 return string.Format("{0}x{1}pxl", tileset.SourceSize.X, tileset.SourceSize.Y);
+            }
+        }
+        public int TileWidth
+        {
+            get
+            {
+                return tileset.SourceSize.X;
+            }
+        }
+        public int TileHeight
+        {
+            get
+            {
+                return tileset.SourceSize.Y;
             }
         }
         #endregion

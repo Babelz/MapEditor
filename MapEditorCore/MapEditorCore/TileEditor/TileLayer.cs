@@ -61,7 +61,7 @@ namespace MapEditorCore.TileEditor
             toRow = rightIndex + padding; 
             toRow = toRow > Height ? Height : toRow;
             
-            toColumn = leftIndex + padding; 
+            toColumn = bototmIndex + padding; 
             toColumn = toColumn > Width ? Width : toColumn;
         }
         private void RepositionTiles()
@@ -87,8 +87,8 @@ namespace MapEditorCore.TileEditor
                 {
                     if (tiles[i][j] != null) continue;
  
-                    tiles[i][j] = new Tile(tileEngine, j * tileEngine.TileBounds.Width + X, 
-                                                       i * tileEngine.TileBounds.Height + Y);
+                    tiles[i][j] = new Tile(tileEngine, j * tileEngine.TileSizeInPixels.X + X, 
+                                                       i * tileEngine.TileSizeInPixels.Y + Y);
                 }
             }
         }

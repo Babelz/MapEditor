@@ -80,6 +80,11 @@ namespace MapEditorViewModels
             this.brush = brush;
         }
 
+        public bool WrapsBrush(TileBrush brush)
+        {
+            return ReferenceEquals(this.brush, brush);
+        }
+
         private void OnPropertyChanged(string name)
         {
             if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(name));

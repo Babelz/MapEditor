@@ -37,7 +37,8 @@ namespace MapEditorCore
         /// </summary>
         /// <param name="path">path to the resource, resources id will be this string values hash code</param>
         /// <param name="value">resource value</param>
-        public void AddResource(string path, T value)
+        /// <param name="reference">should a reference be added to the new resouce</param>
+        public void AddResource(string path, T value, bool reference = true)
         {
             int hash = path.GetHashCode();
 
@@ -47,6 +48,8 @@ namespace MapEditorCore
             resource.Disposing += resource_Disposing;
 
             resources.Add(resource);
+
+            if (reference) resource.Reference();
         }
         /// <summary>
         /// Returns a reference to wanted resource.

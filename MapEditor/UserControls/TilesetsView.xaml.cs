@@ -35,11 +35,6 @@ namespace MapEditor.UserControls
         private readonly TileEditor editor;
         #endregion
 
-        /*
-         * TODO: each 
-         * 
-         */
-
         public TilesetsView(TileEditor editor, BrushesViewModel brushesViewModel, TilesetsViewModel tilesetsViewModel)
         {
             this.editor = editor;
@@ -88,8 +83,8 @@ namespace MapEditor.UserControls
             BrushBucket brushBucket = editor.GetBrushBucketForSelectedTileset();
 
             // Select wanted index.
-            brushBucket.SelectedBrush.SelectIndex((int)position.X / editor.TileEngine.TileSizeInPixels.X,
-                                                  (int)position.Y / editor.TileEngine.TileSizeInPixels.Y);
+            brushBucket.SelectedBrush.SelectIndex((int)position.X / tilesetsViewModel.Selected.TileWidth,
+                                                  (int)position.Y / tilesetsViewModel.Selected.TileHeight);
         }
         #endregion
 
@@ -103,16 +98,16 @@ namespace MapEditor.UserControls
             // If we have tileset selected, we can reconstruct the grid. Else, just reset it.
             if (tileset != null)
             {
-                // Calculate area size.
-                width = tileset.SourceSize.X * tileset.IndicesCount.X;
-                height = tileset.SourceSize.Y * tileset.IndicesCount.Y;
-
                 // Reconstruct grid.
                 string pathToImage = editor.GetTexturePath(tileset.Texture);
 
                 BitmapImage image = ImageHelper.LoadToMemory(pathToImage);
 
                 sheetImage.Source = image;
+
+                // Calculate area size.
+                width = tileset.SourceSize.X * tileset.IndicesCount.X;
+                height = tileset.SourceSize.Y * tileset.IndicesCount.Y;
             }
 
             // Keep offset at zero, we don't want to move the grid but the image instead.
@@ -132,6 +127,9 @@ namespace MapEditor.UserControls
 
             gridBorder.Width = width;
             gridBorder.Height = height;
+
+            sheetImage.Width = Math.Min(width, sheetImage.Source.Width);
+            sheetImage.Height = Math.Min(height, sheetImage.Source.Height);
         }
     }
 }

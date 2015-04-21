@@ -157,8 +157,14 @@ namespace MapEditorCore.TileEditor
         {
             mouseInputListener.Map("paint", (args) => 
             {
-                //if (brushes.SelectedBrush == null) return;
-                if (layers.SelectedLayer == null) return;
+                if (!layers.HasLayerSelected) return;
+                if (!tilesets.HasTilesetSelected) return;
+
+                // Get brush bucket.
+                BrushBucket brushBucket = brushBuckets[tilesets.SelectedTileset];
+
+                // Return if no brush is selected.
+                if (!brushBucket.HasBrushSelected) return;
 
                 int mouseX = Mouse.GetState().X;
                 int mouseY = Mouse.GetState().Y;
@@ -166,22 +172,23 @@ namespace MapEditorCore.TileEditor
                 // Check that mouse is inside editors view port.
                 if (!SpriteBatch.GraphicsDevice.Viewport.Bounds.Contains(mouseX, mouseY)) return;
 
-                // TODO: does not work if the layers origin is not at (0, 0).
-
                 // Calculate index.
                 mouseX = mouseX / tileEngine.TileSizeInPixels.X;
                 mouseY = mouseY / tileEngine.TileSizeInPixels.Y;
                 
                 // Check that the index is in bounds.
-                if (mouseX < 0 || mouseX > layers.SelectedLayer.Width) return;
-                if (mouseY < 0 || mouseY > layers.SelectedLayer.Height) return;
+                if (mouseX < 0 || mouseX >= layers.SelectedLayer.Width) return;
+                if (mouseY < 0 || mouseY >= layers.SelectedLayer.Height) return;
 
-                /*while (brushes.SelectedBrush.CanPaint())
+                // Get brush and paint with it.
+                TileBrush brush = brushBucket.SelectedBrush;
+
+                while (brush.CanPaint())
                 {
-                    PaintArgs paintArgs = brushes.SelectedBrush.Paint();
+                    PaintArgs paintArgs = brush.Paint();
 
                     layers.SelectedLayer.TileAtIndex(mouseX, mouseY).Paint(paintArgs);    
-                }*/
+                }
 
             }, new MouseTrigger(MouseButtons.LeftButton));
         }
@@ -269,20 +276,19 @@ namespace MapEditorCore.TileEditor
         #region Brush methods
         public void SelectBrush(string name)
         {
-            if (tilesets.SelectedTileset != null)
-                brushBuckets[tilesets.SelectedTileset].SelectBrush(name);
+            if (!tilesets.HasTilesetSelected) return;
+
+            brushBuckets[tilesets.SelectedTileset].SelectBrush(name);
         }
         public BrushBucket GetBrushBucketForSelectedTileset()
         {
-            if (tilesets.SelectedTileset == null) return null;
+            if (!tilesets.HasTilesetSelected) return null;
 
             return brushBuckets[tilesets.SelectedTileset];
         }
         #endregion
 
         #region Editor methods
-        // TODO: add animation methods.
-
         public override Rectangle GetMapBounds()
         {
             return tileEngine.PixelBounds;

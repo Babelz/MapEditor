@@ -105,6 +105,9 @@ namespace MapEditorCore.TileEditor
             sourceOffsetX = sourceOffsetX > 0 ? sourceSize.X : 0;
             sourceOffsetY = sourceOffsetY > 0 ? sourceSize.Y : 0;
 
+            sourceOffsetX += 1;
+            sourceOffsetY += 1;
+
             // Calculate indices count (rows & columns count).
             indicesCount = new Point((texture.Width - offset.X + sourceOffsetX) / sourceSize.X,
                                      (texture.Height - offset.Y + sourceOffsetY) / sourceSize.Y);

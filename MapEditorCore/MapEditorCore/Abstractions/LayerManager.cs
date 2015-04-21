@@ -27,6 +27,13 @@ namespace MapEditorCore.Abstractions
                 return layers;
             }
         }
+        public bool HasLayerSelected
+        {
+            get
+            {
+                return selectedLayer != null;
+            }
+        }
         /// <summary>
         /// Gets selected layer. Exposed for view models.
         /// </summary>
@@ -119,7 +126,7 @@ namespace MapEditorCore.Abstractions
         /// <param name="name">name of the layer to activate, if name is empty or null, clears selection</param>
         public void SelectLayer(string name)
         {
-            if (!string.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(name))
             {
                 selectedLayer = null;
                 

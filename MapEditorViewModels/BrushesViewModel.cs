@@ -68,7 +68,7 @@ namespace MapEditorViewModels
                 {
                     // Generate view models, set selected.
                     brushes = new ObservableCollection<BrushViewModel>(brushBucket.Brushes.Select(b => new BrushViewModel(b)));
-                    selected = brushes.FirstOrDefault(b => ReferenceEquals(b, brushBucket.SelectedBrush));
+                    selected = brushes.FirstOrDefault(b => b.WrapsBrush(brushBucket.SelectedBrush));
                 }
                 else
                 {
