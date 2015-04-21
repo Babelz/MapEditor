@@ -40,7 +40,57 @@ namespace MapEditor
         public MainWindow()
         {
             InitializeComponent();
+
+#if DEBUG
+            TileMapDebug();
+#endif
         }
+
+        #region Debug methods
+        private void TileMapDebug()
+        {
+
+            // TODO: copy paste from event handler, just for debug purposes.
+
+            // Dispose old project and show warning dialog to the user.
+            if (project != null)
+            {
+                if (MessageBox.Show("All unsaved work will be lost, continue?", "Warning", MessageBoxButton.YesNo) == MessageBoxResult.No) return;
+
+                CleanupLastProject();
+            }
+
+            // Create new project.
+            NewProjectProperties properties = new NewProjectProperties()
+            {
+                MapHeight = 32,
+                MapWidth = 32,
+                MapName = "debug",
+                ProjectName = "debug",
+                TileHeight = 64,
+                TileWidth = 64,
+                MapType = MapType.Tile
+            };
+
+            switch (properties.MapType)
+            {
+                case MapType.Tile:
+                    project = ProjectBuilder.BuildTileMapProject(properties, xnaControl.Handle);
+                    break;
+                case MapType.Object:
+                case MapType.Hex:
+                default:
+                    throw new NotImplementedException("Feature is not implemented.");
+            }
+
+            // Initialize the project.
+            InitializeNewProject();
+
+            // Set resolution.
+            // TODO: set resolution once its XNA controls size valid.
+            project.Game.ChangeGraphics(1280, 720);
+        }
+        #endregion
 
         #region Event handlers
 

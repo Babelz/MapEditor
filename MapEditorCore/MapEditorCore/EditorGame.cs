@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,8 @@ namespace MapEditorCore
             // Just initialize the editor, XNA control has already called
             // load content, initialize etc...
             editor.Initialize(Content, spriteBatch);
+
+            Mouse.WindowHandle = windowHandle;
         }
 
         protected override void Update(GameTime gameTime)

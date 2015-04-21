@@ -31,15 +31,6 @@ namespace MapEditor.Windows
         #endregion
 
         #region Properties
-        private NewTileLayerPropertiesViewModel NewTileLayerPropertiesViewModel
-        {
-            get
-            {
-                
-                return newTileLayerPropertiesViewModel;
-            }
-        } 
-
         public NewTileLayerProperties NewTileLayerProperties
         {
             get

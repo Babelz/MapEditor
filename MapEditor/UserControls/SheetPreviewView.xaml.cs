@@ -1,4 +1,5 @@
-﻿using MapEditorViewModels;
+﻿using MapEditor.Components;
+using MapEditorViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,8 +24,7 @@ namespace MapEditor.UserControls
     public partial class SheetPreviewView : UserControl
     {
         #region Fields
-        private readonly List<RowDefinition> currentRows;
-        private readonly List<ColumnDefinition> currentColumns;
+        private readonly TileGridManager tileGridManager;
 
         private BitmapImage image;
         #endregion
@@ -93,8 +93,7 @@ namespace MapEditor.UserControls
         {
             InitializeComponent();
 
-            currentRows = new List<RowDefinition>();
-            currentColumns = new List<ColumnDefinition>();
+            tileGridManager = new TileGridManager(tileGrid, gridBorder);
         }
 
         #region Static methods
@@ -119,109 +118,46 @@ namespace MapEditor.UserControls
 
             int offsetX = (int)mousePosition.X;
             int offsetY = (int)mousePosition.Y;
-
+            
             newTilesetPropertiesViewModel.OffsetX = offsetX.ToString();
             newTilesetPropertiesViewModel.OffsetY = offsetY.ToString();
         }
         #endregion
 
-        // TODO: could use the mouse to set offset values? Bet some people would find it to be a nice feature.
-
-        /// <summary>
-        /// Reconstruct the grid.
-        /// WARNING: could use some optimization. Grid is reconstructed every time
-        /// something gets changed.
-        /// </summary>
         private void ReconstructGrid()
         {
-            // Cant continue if there is no image.
+            // Cant reconstruct if image is null.
             if (image == null) return;
 
-            // To avoid casts.
-            int gridOffsetX = GridOffsetX;
-            int gridOffsetY = GridOffsetY;
+            // Calculate columns.
+            int columns = 0;
+            if (CellWidth == 0) return;
+            
+            columns = (int)((image.Width - GridOffsetX) / CellWidth);
 
-            int cellWidth = CellWidth;
-            int cellHeight = CellHeight;
+            // Calculate rows.
+            int rows = 0;
+            if (CellHeight == 0) return;
+            
+            rows = (int)((image.Height - GridOffsetY) / CellHeight);
 
-            // Move view of the grid to new location.
-            Canvas.SetTop(gridBorder, gridOffsetY);
-            Canvas.SetLeft(gridBorder, gridOffsetX);
+            // Calculate row modulo.
+            int modRows = (int)(image.Height - GridOffsetY) % CellHeight;
+            modRows = modRows > 0 ? 1 : 0;
 
-            gridBorder.Width = image.Width;
-            gridBorder.Height = image.Height;
+            // Calculate column modulo.
+            int modColumns = (int)(image.Width - GridOffsetX) % CellWidth;
+            modColumns = modColumns > 0 ? 1 : 0;
 
-            // Resize the grid canvas.
-            double newWidth = gridBorder.Width - Canvas.GetLeft(gridBorder);
-            double newHeight = gridBorder.Height - Canvas.GetTop(gridBorder);
+            // Calculate width and height.
+            int width = (modColumns + columns) * CellWidth;
+            int height = (modRows + rows) * CellHeight;
 
-            // Check if new size properties are valid.
-            if (newWidth > 0.0) gridBorder.Width = newWidth;
-            if (newHeight > 0.0) gridBorder.Height = newHeight; 
+            tileGridManager.Reconstruct(width, height, CellWidth, CellHeight, GridOffsetX, GridOffsetY);
 
-            if (cellWidth == 0 || cellHeight == 0) return;
-
-            // Calculate space for the grid.
-            int modColumns = (int)image.Width % cellWidth;
-            int modRows = (int)image.Height % cellHeight;
-
-            int columnSpace = (int)image.Width;
-            int rowSpace = (int)image.Height;
-
-            // If modifier is not zero, we need to overlap the image.
-            if (modColumns != 0) columnSpace += cellWidth;
-            if (modRows != 0) rowSpace += cellHeight;
-
-            int columns = columnSpace / cellWidth;
-            int rows = rowSpace / cellHeight;
-
-            // Return to avoid divide by zero.
-            if (columns == 0 || rows == 0) return;
-
-            int spacePerColumn = columnSpace / columns;
-            int spacePerRow = rowSpace / rows;
-
-            // Remove old rows and columns.
-            if (currentRows.Count > 0)
-            {
-                for (int i = 0; i < currentRows.Count; i++) tileGrid.RowDefinitions.Remove(currentRows[i]);
-
-                currentRows.Clear();
-            }
-
-            if (currentColumns.Count > 0)
-            {
-                for (int i = 0; i < currentColumns.Count; i++) tileGrid.ColumnDefinitions.Remove(currentColumns[i]);
-
-                currentColumns.Clear();
-            }
-
-            // Resize the grid.
-            for (int i = 0; i < rows; i++)
-            {
-                // Create new row.
-                RowDefinition rowDefinition = new RowDefinition();
-                rowDefinition.Height = new GridLength(spacePerRow);
-
-                // Add new row.
-                tileGrid.RowDefinitions.Add(rowDefinition);
-
-                currentRows.Add(rowDefinition);
-            }
-
-            for (int i = 0; i < columns; i++)
-            {
-                // Create new column.
-                ColumnDefinition columnDefinition = new ColumnDefinition();
-                columnDefinition.Width = new GridLength(spacePerColumn);
-
-                // Add new column.
-                tileGrid.ColumnDefinitions.Add(columnDefinition);
-                
-                currentColumns.Add(columnDefinition);
-            }
-
-            tileGrid.UpdateLayout();
+            // Set borders size.
+            gridBorder.Width = width;
+            gridBorder.Height = height;
         }
     }
 }

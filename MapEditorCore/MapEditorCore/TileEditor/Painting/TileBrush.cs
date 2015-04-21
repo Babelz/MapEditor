@@ -6,43 +6,78 @@ using System.Text;
 
 namespace MapEditorCore.TileEditor.Painting
 {
+    /*
+     * TODO:
+     *      Brushed have 1 class
+     *      Can resize
+     *      Cant resize
+     *      Stamp
+     *      Single
+     *      Multi
+     *      Range
+     */
+    public enum BrushResizeMode
+    {
+        /// <summary>
+        /// Brush has static size, resizing it will throw an exception.
+        /// </summary>
+        NoResize,
+
+        /// <summary>
+        /// Brush can be resize.
+        /// </summary>
+        CanResize
+    }
+
     /// <summary>
     /// Tool for used to paint tiles.
+    /// TODO: refactor this class?
     /// </summary>
     public abstract class TileBrush
     {
         #region Fields
-        private readonly PaintArgs args;
+        private readonly string name;
 
-        private Tileset tileset;
+        private readonly BrushResizeMode resizeMode;
 
-        private Point index;
+        private readonly Tileset owner;
+
+        private Point selectedIndex;
         private Color color;
+
+        private bool painting;
         #endregion
 
         #region Properties
-        protected Tileset Tileset
+        public string Name
         {
             get
             {
-                return tileset;
+                return name;
             }
         }
-        protected Point Index
+        
+        public Tileset Owner
         {
             get
             {
-                return index;
-            }
-        }
-        protected PaintArgs Args
-        {
-            get
-            {
-                return args;
+                return owner;
             }
         }
 
+        /// <summary>
+        /// Returns resize mode of the brush.
+        /// </summary>
+        public BrushResizeMode ResizeMode
+        {
+            get
+            {
+                return resizeMode;
+            }
+        }
+        /// <summary>
+        /// Gets of sets the color of the brush.
+        /// </summary>
         public Color Color
         {
             get
@@ -54,70 +89,148 @@ namespace MapEditorCore.TileEditor.Painting
                 color = value;
             }
         }
+
+        public int SelectedIndexX
+        {
+            get
+            {
+                return selectedIndex.X;
+            }
+        }
+        public int SelectedIndexY
+        {
+            get
+            {
+                return selectedIndex.Y;
+            }
+        }
+
+        /// <summary>
+        /// Returns width of the brush.
+        /// </summary>
+        public abstract int Width
+        {
+            get;
+        }
+        /// <summary>
+        /// Returns height of the brush.
+        /// </summary>
+        public abstract int Height
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Returns display width of the brush.
+        /// </summary>
+        public abstract int DisplayWidth
+        {
+            get;
+        }
+        /// <summary>
+        /// Returns display height of the brush.
+        /// </summary>
+        public abstract int DisplayHeight
+        {
+            get;
+        }
         #endregion
 
-        public TileBrush()
+        public TileBrush(string name, BrushResizeMode resizeMode, Tileset owner)
         {
-            args = new PaintArgs();
+            this.name = name;
+            this.resizeMode = resizeMode;
+            this.owner = owner;
 
             color = Color.White;
         }
 
-        #region Event handlers
-        private void tileset_Disposing(object sender, EventArgs e)
+        protected virtual void OnResize(int newWidth, int newHeight)
         {
-            // Tile set was deleted, clear the brush.
-            Clear();
-        }
-        #endregion
-
-        /// <summary>
-        /// Clears the brush.
-        /// </summary>
-        public void Clear()
-        {
-            color = Color.White;
-            index = new Point(-1, -1);
-            tileset = null;
+            // Not all brushes can be resized.
         }
 
         /// <summary>
-        /// Returns true if this brush can be used to paint tiles.
-        /// </summary>
-        public bool CanPaint()
-        {
-            return index.X != -1 && tileset != null;
-        }
-
-        /// <summary>
-        /// Selects given index.
-        /// </summary>
-        public virtual void SelectIndex(int x, int y)
-        {
-            index.X = x;
-            index.Y = y;
-        }
-
-        /// <summary>
-        /// Selects given tileset.
-        /// </summary>
-        public virtual void SelectTileset(Tileset tileset)
-        {
-            this.tileset = tileset;
-        }
-
-
-        /// <summary>
-        /// Returns boolean whether brush has finished 
-        /// painting. Some brushes can paint multiple tiles 
-        /// during one paint call.
+        /// Called in paint.
         /// </summary>
         /// <returns></returns>
-        public abstract bool FinishedPainting();
+        protected abstract PaintArgs OnPaint();
 
         /// <summary>
-        /// Paints with this brush.
+        /// Finishes drawing.
         /// </summary>
-        public abstract PaintArgs Paint();
+        protected void FinishPainting()
+        {
+            painting = false;
+        }
+
+        public void Resize(int newWidth, int newHeight)
+        {
+            switch (resizeMode)
+            {
+                case BrushResizeMode.NoResize:
+                    throw new InvalidOperationException("Brush cant be resized.");
+                case BrushResizeMode.CanResize:
+                    OnResize(newWidth, newHeight);
+                    break;
+                default:
+                    throw new InvalidOperationException("Invalid resize mode.");
+            }
+        }
+
+        /// <summary>
+        /// Returns true if brush can be used to paint.
+        /// </summary>
+        /// <returns></returns>
+        public bool CanPaint()
+        {
+            return SelectedIndexX != -1;
+        }
+
+        /// <summary>
+        /// Returns true if brush is painting.
+        /// </summary>
+        public bool Painting()
+        {
+            return painting;
+        }
+
+        /// <summary>
+        /// Should be called when painting starts.
+        /// </summary>
+        public void BeginPainting()
+        {
+            painting = true;
+        }
+
+        /// <summary>
+        /// Returns next paint args of the brush.
+        /// </summary>
+        /// <returns>next args to be used with painting</returns>
+        public PaintArgs Paint()
+        {
+            if (!painting) throw new InvalidOperationException("Begin painting must be called before Paint.");
+
+            return OnPaint();
+        }
+
+        /// <summary>
+        /// Should be called when painting ends.
+        /// </summary>
+        public void EndPainting()
+        {
+            painting = false;
+        }
+
+        /// <summary>
+        /// Selects given index at given location.
+        /// </summary>
+        /// <param name="x">mouse position x</param>
+        /// <param name="y">mouse position y</param>
+        public void SelectIndex(int x, int y)
+        {
+            selectedIndex.X = x;
+            selectedIndex.Y = y;
+        }
     }
 }

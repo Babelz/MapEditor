@@ -32,57 +32,39 @@ namespace MapEditor.UserControls
         #region Fields
         private readonly LayersViewModel layersViewModel;
 
-        private readonly TileEditor tileEditor;
-
-        private readonly Editor editor;
-
         private readonly Action createNewLayerAction;
-        #endregion
-
-        #region Properties
-        private LayersViewModel LayersViewModel
-        {
-            get
-            {
-                return LayersViewModel;
-            }
-        }
+        
+        private readonly Editor editor;
         #endregion
 
         /// <summary>
         /// Creates new instance of layers view for showing tile layers.
         /// </summary>
-        public LayersView(TileEditor tileEditor)
+        public LayersView(Editor editor)
         {
-            this.editor = tileEditor;
-
-            // Get reference of concrete editor type.
-            this.tileEditor = tileEditor;
+            this.editor = editor;
 
             // Initialize view model.
-            layersViewModel = new LayersViewModel(tileEditor);
+            layersViewModel = new LayersViewModel(editor);
 
             // Set data context.
             DataContext = layersViewModel;
 
             InitializeComponent();
 
-            // Set source for view.
-            layersListView.ItemsSource = layersViewModel.Layers;
-
             // Hook create new layer action.
             createNewLayerAction = new Action(CreateTileLayer);
 
-            CollectionView collectioView = (CollectionView)CollectionViewSource.GetDefaultView(layersListView.ItemsSource);
-            collectioView.SortDescriptions.Add(new SortDescription("DrawOrder", ListSortDirection.Descending));
+            CollectionView collectionView = (CollectionView)CollectionViewSource.GetDefaultView(layersListView.ItemsSource);
+            collectionView.SortDescriptions.Add(new SortDescription("DrawOrder", ListSortDirection.Descending));
         }
 
         #region Create new layer actions 
         private void CreateTileLayer()
         {
-            // WARNING: duplication with tile editor GUI configurers addLayerMenuItem_ClickEventHandler!
+            // WARNING: duplication with tile editor GUI configurer addLayerMenuItem_ClickEventHandler!
 
-            NewTileLayerDialog newTileLayerDialog = new NewTileLayerDialog(tileEditor);
+            NewTileLayerDialog newTileLayerDialog = new NewTileLayerDialog(editor as TileEditor);
 
             // Show the dialog, ask for layer properties.
             if (newTileLayerDialog.ShowDialog().Value)
@@ -210,7 +192,12 @@ namespace MapEditor.UserControls
             }
 
             // No layer, return.
-            if (layerViewModel == null) return;
+            if (layerViewModel == null)
+            {
+                editor.SelectLayer(string.Empty);
+
+                return;
+            }
 
             // Notify tile editor that new layer has been selected.
             editor.SelectLayer(layerViewModel.Name);

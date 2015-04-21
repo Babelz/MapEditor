@@ -40,7 +40,6 @@ namespace MapEditorInput.Listener
                 mapping.Value.Callback.Invoke(args);
             }
         }
-        
 
         public override void Update(GameTime gameTime)
         {

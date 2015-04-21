@@ -20,22 +20,15 @@ namespace MapEditorCore.TileEditor
 
         protected override void GenerateSources()
         {
-            // Calculate sources.
-            int areaWidth = Texture.Width - Offset.X;
-            int areaHeight = Texture.Height - Offset.Y;
-
-            int columns = areaWidth / SourceSize.X;
-            int rows = areaHeight / SourceSize.Y;
-
             // Generate source array.
-            sources = new Rectangle[rows][];
+            sources = new Rectangle[IndicesCount.Y][];
 
-            for (int i = 0; i < rows; i++) sources[i] = new Rectangle[columns];
+            for (int i = 0; i < IndicesCount.Y; i++) sources[i] = new Rectangle[IndicesCount.X];
 
             // Generate sources.
-            for (int i = 0; i < rows; i++)
+            for (int i = 0; i < IndicesCount.Y; i++)
             {
-                for (int j = 0; j < columns; j++)
+                for (int j = 0; j < IndicesCount.X; j++)
                 {
                     // Add offset to position.
                     int x = j * SourceSize.X + Offset.X;

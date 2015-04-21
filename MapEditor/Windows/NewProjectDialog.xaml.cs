@@ -28,14 +28,6 @@ namespace MapEditor.Windows
         #endregion
 
         #region Properties
-        private NewProjectPropertiesViewModel NewProjectPropertiesViewModel
-        {
-            get
-            {
-                return newProjectPropertiesViewModel;
-            }
-        }
-
         public NewProjectProperties NewProjectProperties
         {
             get

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,26 +8,64 @@ namespace MapEditorCore.TileEditor.Painting
 {
     public sealed class SingleTileBrush : TileBrush
     {
-        public SingleTileBrush()
+        #region Fields
+        private const int WIDTH = 1;
+        private const int HEIGHT = 1;
+
+        private readonly PaintArgs args;
+        #endregion
+
+        #region Properties
+        public override int Width
         {
+            get
+            {
+                return WIDTH;
+            }
+        }
+        public override int Height
+        {
+            get
+            {
+                return HEIGHT;
+            }
+        }
+        public override int DisplayWidth
+        {
+            get
+            {
+                return WIDTH;
+            }
         }
 
-        public override bool FinishedPainting()
+        public override int DisplayHeight
         {
-            // Just return true since this brush paints once.
-            return true;
+            get
+            {
+                return HEIGHT;
+            }
+        }
+        #endregion
+
+        public SingleTileBrush(Tileset owner)
+            : base("Single", BrushResizeMode.NoResize, owner)
+        {
+            // Initialize non changing data of the args.
+            // TODO: args could have immutable members.
+            args = new PaintArgs();
+            args.PaintType = PaintType.Texture;
+            args.TexturePaintArgs.Tileset = Owner;
         }
 
-        public override PaintArgs Paint()
+        protected override PaintArgs OnPaint()
         {
-            // Set paint argument values.
-            Args.PaintType = PaintType.Texture;
+            args.TexturePaintArgs.Color = Color;
+            args.TexturePaintArgs.SourceIndex.X = SelectedIndexX;
+            args.TexturePaintArgs.SourceIndex.Y = SelectedIndexY;
 
-            Args.TexturePaintArgs.SourceIndex.X = Index.X;
-            Args.TexturePaintArgs.SourceIndex.Y = Index.Y;
-            Args.TexturePaintArgs.Color = Color;
+            FinishPainting();
 
-            return Args;
+            return args;
         }
     }
 }

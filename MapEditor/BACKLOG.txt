@@ -29,3 +29,8 @@
 		- Redo
 		- Undo
 		- Named return points
+
+	- Renaming of the layers
+	
+	- Visual
+		- Icons

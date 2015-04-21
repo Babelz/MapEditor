@@ -18,6 +18,7 @@ namespace MapEditorCore.TileEditor
 
         private readonly Point sourceSize;
         private readonly Point offset;
+        private readonly Point indicesCount;
 
         private string name;
 
@@ -25,6 +26,16 @@ namespace MapEditorCore.TileEditor
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Offset of indices.
+        /// </summary>
+        public Point Offset
+        {
+            get
+            {
+                return offset;
+            }
+        }
         public string Name
         {
             get
@@ -50,7 +61,7 @@ namespace MapEditorCore.TileEditor
         /// <summary>
         /// Size of one source on the set.
         /// </summary>
-        protected Point SourceSize
+        public Point SourceSize
         {
             get
             {
@@ -58,13 +69,13 @@ namespace MapEditorCore.TileEditor
             }
         }
         /// <summary>
-        /// Offset of indices.
+        /// Count of rows and columns.
         /// </summary>
-        protected Point Offset
+        public Point IndicesCount
         {
             get
             {
-                return offset;
+                return indicesCount;
             }
         }
         public bool Deleted
@@ -87,6 +98,20 @@ namespace MapEditorCore.TileEditor
             this.sourceSize = sourceSize;
             this.offset = offset;
 
+            // Calculate offset values.
+            int sourceOffsetX = (texture.Width - offset.X) % sourceSize.X;
+            int sourceOffsetY = (texture.Height - offset.Y) % sourceSize.Y;
+
+            sourceOffsetX = sourceOffsetX > 0 ? sourceSize.X : 0;
+            sourceOffsetY = sourceOffsetY > 0 ? sourceSize.Y : 0;
+
+            sourceOffsetX += 1;
+            sourceOffsetY += 1;
+
+            // Calculate indices count (rows & columns count).
+            indicesCount = new Point((texture.Width - offset.X + sourceOffsetX) / sourceSize.X,
+                                     (texture.Height - offset.Y + sourceOffsetY) / sourceSize.Y);
+
             GenerateSources();
         }
 
@@ -108,11 +133,9 @@ namespace MapEditorCore.TileEditor
         {
             if (deleted) return;
 
-            if (Deleting != null) Deleting();
+            if (Deleting != null) Deleting(this, new TilesetEventArgs(this));
 
             deleted = true;
         }
-
-        public delegate void TilesetEventHandler();
     }
 }

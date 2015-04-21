@@ -8,6 +8,7 @@ using MapEditorInput.Trigger;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,8 @@ namespace MapEditorCore.TileEditor
     public sealed class TileEditor : Editor
     {
         #region Fields
+        private readonly Dictionary<Tileset, BrushBucket> brushBuckets;
+
         private readonly LayerManager<TileLayer> layers;
         private readonly TilesetManager tilesets;
 
@@ -59,11 +62,11 @@ namespace MapEditorCore.TileEditor
             }
         }
 
-        public TilesetManager TilesetManager
+        public IEnumerable<Tileset> Tilesets
         {
             get
             {
-                return tilesets;
+                return tilesets.Tilesets;
             }
         }
 
@@ -103,6 +106,32 @@ namespace MapEditorCore.TileEditor
                 layers.LayerRemoved -= value;
             }
         }
+        
+        /*
+         * Delegates add and remove calls to tileset manager.
+         */
+        public event TilesetEventHandler TilesetAdded
+        {
+            add
+            {
+                tilesets.TilesetAdded += value;
+            }
+            remove
+            {
+                tilesets.TilesetAdded -= value;
+            }
+        }
+        public event TilesetEventHandler TilesetRemoved
+        {
+            add
+            {
+                tilesets.TilesetRemoved += value;
+            }
+            remove
+            {
+                tilesets.TilesetRemoved -= value;
+            }
+        }
         #endregion
 
         public TileEditor(TileEngine tileEngine)
@@ -119,13 +148,74 @@ namespace MapEditorCore.TileEditor
             mouseInputListener = new MouseInputListener();
             inputManager = new InputManager(keyboardInputListener, mouseInputListener);
 
+            brushBuckets = new Dictionary<Tileset, BrushBucket>();
+
             backgroundColor = Color.CornflowerBlue;
         }
 
         private void InitializeInput()
         {
-            mouseInputListener.Map("interact", (args) => 
+            mouseInputListener.Map("paint", (args) => 
             {
+                if (!layers.HasLayerSelected) return;
+                if (!tilesets.HasTilesetSelected) return;
+
+                // Get brush bucket.
+                BrushBucket brushBucket = brushBuckets[tilesets.SelectedTileset];
+
+                // Return if no brush is selected or it cant be used for painting.
+                if (!brushBucket.HasBrushSelected) return;
+                if (!brushBucket.SelectedBrush.CanPaint()) return;
+
+                int fromX = Mouse.GetState().X;
+                int fromY = Mouse.GetState().Y;
+                
+                // Check that mouse is inside editors view port.
+                if (!SpriteBatch.GraphicsDevice.Viewport.Bounds.Contains(fromX, fromY)) return;
+
+                // Calculate index.
+                fromX = fromX / tileEngine.TileSizeInPixels.X;
+                fromY = fromY / tileEngine.TileSizeInPixels.Y;
+                
+                // Check that the index is in bounds.
+                if (fromX < 0 || fromX >= layers.SelectedLayer.Width) return;
+                if (fromY < 0 || fromY >= layers.SelectedLayer.Height) return;
+
+                // Get brush and paint with it.
+                TileBrush brush = brushBucket.SelectedBrush;
+
+                // Transform position relative to the layer.
+                fromX -= layers.SelectedLayer.X / tileEngine.TileSizeInPixels.X;
+                fromY -= layers.SelectedLayer.Y / tileEngine.TileSizeInPixels.Y;
+
+                int toX = fromX + brush.Width;
+                toX = toX >= layers.SelectedLayer.Width ? layers.SelectedLayer.Width : toX;
+
+                int toY = fromY + brush.Height;
+                toY = toY >= layers.SelectedLayer.Height ? layers.SelectedLayer.Height : toY;
+
+                // Begin paint.
+                brush.BeginPainting();
+                
+                for (int i = fromY; i < toY; i++)
+                {
+                    // Check if brush has finished painting.
+                    if (!brush.Painting()) return;
+
+                    for (int j = fromX; j < toX; j++)
+                    {
+                        // Check if brush has finished painting.
+                        if (!brush.Painting()) return;
+
+                        PaintArgs paintArgs = brush.Paint();
+
+                        layers.SelectedLayer.TileAtIndex(j, i).Paint(paintArgs);
+                    }
+                }
+
+                // End paint.
+                brush.EndPainting();
+
             }, new MouseTrigger(MouseButtons.LeftButton));
         }
 
@@ -184,7 +274,11 @@ namespace MapEditorCore.TileEditor
             }
 
             // TODO: only adds textured tile sets.
-            tilesets.AddTileset(new TexturedTileset(name, texture, sourceSize, offset));
+            TexturedTileset tileset = new TexturedTileset(name, texture, sourceSize, offset);
+            tilesets.AddTileset(tileset);
+
+            // Add new brush bucket for this tileset.
+            brushBuckets.Add(tileset, new BrushBucket(tileset));
         }
         public void RemoveTileset(string name)
         {
@@ -192,14 +286,35 @@ namespace MapEditorCore.TileEditor
 
             tilesets.RemoveTileset(tileset);
 
+            // Remove brush bucket.
+            brushBuckets.Remove(tileset);
+
             // Dereference the texture.
             TextureManager.Dereference(tileset.Texture);
+        }
+
+        public string GetTexturePath(Texture2D texture)
+        {
+            return TextureManager.PathToResource(texture);
+        }
+        #endregion
+
+        #region Brush methods
+        public void SelectBrush(string name)
+        {
+            if (!tilesets.HasTilesetSelected) return;
+
+            brushBuckets[tilesets.SelectedTileset].SelectBrush(name);
+        }
+        public BrushBucket GetBrushBucketForSelectedTileset()
+        {
+            if (!tilesets.HasTilesetSelected) return null;
+
+            return brushBuckets[tilesets.SelectedTileset];
         }
         #endregion
 
         #region Editor methods
-        // TODO: add animation methods.
-
         public override Rectangle GetMapBounds()
         {
             return tileEngine.PixelBounds;

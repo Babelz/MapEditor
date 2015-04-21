@@ -20,13 +20,20 @@ namespace MapEditor.Configurers
 {
     public sealed class TileEditorGUIConfigurer : IGUIConfigurer
     {
+        // TODO: closing layers view and set view puts the whole software in invalid state, fix this FIRST!!!!!!
+
         /*
          * Some of the windows are used like dialogs, so no need to instantiate them at the
          * class scope level.
          */
 
         #region Fields
-        private readonly TileEditor tileEditor;
+        // Shared view models.
+        private readonly TilesetsViewModel tilesetsViewModel;
+        private readonly BrushesViewModel brushesViewModel;
+
+        private readonly TileEditor editor;
+
         // Root menu item.
         private MenuItem editMenuItem;
         private MenuItem addMenuItem;
@@ -44,24 +51,29 @@ namespace MapEditor.Configurers
         private MenuItem addMetadataObjectSetMenuItem;
 
         private MenuItem viewLayersMenuItem;
+        private MenuItem viewTilesetsMenuItem;
 
         // Tool windows.
         private LayersView layersView;
+        private TilesetsView tilesetsView;
         #endregion
 
         /// <summary>
         /// Creates new Tile editor GUI configurer. 
         /// </summary>
-        /// <param name="tileEditor">tile editor instance that windows and user controls will need</param>
-        public TileEditorGUIConfigurer(TileEditor tileEditor)
+        /// <param name="editor">tile editor instance that windows and user controls will need</param>
+        public TileEditorGUIConfigurer(TileEditor editor)
         {
-            this.tileEditor = tileEditor;
+            this.editor = editor;
+
+            tilesetsViewModel = new TilesetsViewModel(editor);
+            brushesViewModel = new BrushesViewModel(editor, tilesetsViewModel);
         }
 
         #region Event handlers
         private void addLayerMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            NewTileLayerDialog newTileLayerDialog = new NewTileLayerDialog(tileEditor);
+            NewTileLayerDialog newTileLayerDialog = new NewTileLayerDialog(editor);
 
             // Show the dialog, ask for layer properties.
             if (newTileLayerDialog.ShowDialog().Value)
@@ -69,12 +81,12 @@ namespace MapEditor.Configurers
                 // Dialog OK, create new layer.
                 NewTileLayerProperties newTileLayerProperties = newTileLayerDialog.NewTileLayerProperties;
 
-                tileEditor.AddLayer(newTileLayerProperties.Name, new Point(newTileLayerProperties.Width, newTileLayerProperties.Height));
+                editor.AddLayer(newTileLayerProperties.Name, new Point(newTileLayerProperties.Width, newTileLayerProperties.Height));
             }
         }
         private void addTilesetMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            NewTilesetDialog newTilesetDialog = new NewTilesetDialog(tileEditor);
+            NewTilesetDialog newTilesetDialog = new NewTilesetDialog(editor);
 
             // Show the dialog, ask for tileset properties.
             if (newTilesetDialog.ShowDialog().Value)
@@ -82,31 +94,40 @@ namespace MapEditor.Configurers
                 // Dialog OK, create new tileset.
                 NewTilesetProperties newTilesetProperties = newTilesetDialog.NewTilesetProperties;
 
-                tileEditor.AddTileset(newTilesetProperties.Name, newTilesetProperties.Path, new Point(newTilesetProperties.TileWidth, newTilesetProperties.TileHeight),
+                editor.AddTileset(newTilesetProperties.Name, newTilesetProperties.Path, new Point(newTilesetProperties.TileWidth, newTilesetProperties.TileHeight),
                                                                                             new Point(newTilesetProperties.OffsetX, newTilesetProperties.OffsetY));
             }
         }
         private void resizeLayerMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            ResizeTileLayerDialog resizeTileLayerDialog = new ResizeTileLayerDialog(tileEditor.TileEngine.MaxLayerSizeInTiles.X, 
-                                                                                    tileEditor.TileEngine.MaxLayerSizeInTiles.Y,
-                                                                                    tileEditor.Layers.Select(s => s.Name));
+            ResizeTileLayerDialog resizeTileLayerDialog = new ResizeTileLayerDialog(editor.TileEngine.MaxLayerSizeInTiles.X, 
+                                                                                    editor.TileEngine.MaxLayerSizeInTiles.Y,
+                                                                                    editor.Layers.Select(s => s.Name));
 
             if (resizeTileLayerDialog.ShowDialog().Value)
             {
                 // Dialog OK, resize the layer.
                 ResizeModel resizeModel = resizeTileLayerDialog.ResizeModel;
 
-                Layer layer = tileEditor.Layers.FirstOrDefault(l => l.Name == resizeModel.SelectedLayer);
+                Layer layer = editor.Layers.FirstOrDefault(l => l.Name == resizeModel.SelectedLayer);
 
                 layer.Resize(new Point(resizeModel.NewWidth, resizeModel.NewHeight));
             }
         }
+        private void viewTilesetsMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            tilesetsView.Visibility = tilesetsView.Visibility == Visibility.Hidden ? Visibility.Visible : Visibility.Hidden;
+        }
+        private void viewLayersMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            layersView.Visibility = layersView.Visibility == Visibility.Hidden ? Visibility.Visible : Visibility.Hidden;
+        }
         #endregion
 
-        private void InsertUserControls(Window window)
+        private void InsertControlToPropertiesView(Window window)
         {
-            layersView = new LayersView(tileEditor);
+            layersView = new LayersView(editor);
+            tilesetsView = new TilesetsView(editor, brushesViewModel, tilesetsViewModel);
             
             // Root of the window.
             Grid root = LogicalTreeHelper.FindLogicalNode(window, "root") as Grid;
@@ -116,14 +137,18 @@ namespace MapEditor.Configurers
             LayoutAnchorable propertiesLayoutAnchorable = rootDockingManager.FindName("propertiesView") as LayoutAnchorable;
 
             // Get vies docking manager.
-            DockingManager propertiesDockingManager = propertiesLayoutAnchorable.Content as DockingManager;
-            LayoutPanelControl propertiesLayoutPanel = propertiesDockingManager.LayoutRootPanel;
+            //DockingManager propertiesDockingManager = propertiesLayoutAnchorable.Content as DockingManager;
+            //LayoutPanelControl propertiesLayoutPanel = propertiesDockingManager.LayoutRootPanel;
 
-            // Insert window.
-            propertiesLayoutPanel.Children.Add(layersView);
+            StackPanel stackPanel = propertiesLayoutAnchorable.Content as StackPanel;
+
+            // Insert new controls.
+            stackPanel.Children.Add(layersView);
+            stackPanel.Children.Add(tilesetsView);
         }
         private void InsertMenuItems(Window window)
         {
+            #region Menu item initialization
             // Edit menu items.
             editMapMenuItem = new MenuItem()
             {
@@ -167,14 +192,22 @@ namespace MapEditor.Configurers
 
             viewLayersMenuItem.Click += viewLayersMenuItem_Click;
 
+            viewTilesetsMenuItem = new MenuItem()
+            {
+                Header = "Tilesets"
+            };
+
+            viewTilesetsMenuItem.Click += viewTilesetsMenuItem_Click;
+
             resizeLayerMenuItem = new MenuItem()
             {
                 Header = "Resize layer"
             };
 
             resizeLayerMenuItem.Click += resizeLayerMenuItem_Click;
-            
+
             editMenuSeparator = new Separator();
+            #endregion
 
             // Get root.
             Grid root = LogicalTreeHelper.FindLogicalNode(window, "root") as Grid;
@@ -205,29 +238,16 @@ namespace MapEditor.Configurers
             windowsMenuItem.Items.Add(viewLayersMenuItem);
         }
 
-        private void viewLayersMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            layersView.Visibility = layersView.Visibility == Visibility.Hidden ? Visibility.Visible : Visibility.Hidden;
-        }
         private void InitializeToolBar(Window window)
         {
 
         }
-        private void ConfigurePropertiesWindow(Window window)
-        {
-        }
-        private void ConfigureProjectExplorerWindow(Window window)
-        {
-        }
 
         public void Configure(Window window)
         {
-            InsertUserControls(window);
+            InsertControlToPropertiesView(window);
             InitializeToolBar(window);
             InsertMenuItems(window);
-
-            ConfigurePropertiesWindow(window);
-            ConfigureProjectExplorerWindow(window);
         }
         public void RemoveConfiguration(Window window)
         {
