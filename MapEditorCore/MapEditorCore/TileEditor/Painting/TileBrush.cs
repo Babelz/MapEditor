@@ -145,6 +145,9 @@ namespace MapEditorCore.TileEditor.Painting
             color = Color.White;
         }
 
+        protected virtual void OnSelectedIndexChanged(int newX, int newY)
+        {
+        }
         protected virtual void OnResize(int newWidth, int newHeight)
         {
             // Not all brushes can be resized.
@@ -155,6 +158,7 @@ namespace MapEditorCore.TileEditor.Painting
         /// </summary>
         /// <returns></returns>
         protected abstract PaintArgs OnPaint();
+        
 
         /// <summary>
         /// Finishes drawing.
@@ -231,6 +235,8 @@ namespace MapEditorCore.TileEditor.Painting
         {
             selectedIndex.X = x;
             selectedIndex.Y = y;
+
+            OnSelectedIndexChanged(x, y);
         }
     }
 }

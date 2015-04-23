@@ -11,7 +11,7 @@ namespace MapEditorCore.TileEditor.Painting
     public sealed class BrushBucket
     {
         #region Fields
-        private readonly List<TileBrush> brushes;
+        private readonly TileBrush[] brushes;
         private readonly Tileset owner;
 
         private TileBrush selectedBrush;
@@ -49,15 +49,19 @@ namespace MapEditorCore.TileEditor.Painting
             this.owner = owner;
             
             // TODO: add all brushes by hand.
-            brushes = new List<TileBrush>()
+            brushes = new TileBrush[]
             {
                 new SingleTileBrush(owner),
-                new SingleIndexMultipleTilesBrush(2, 2, BrushResizeMode.NoResize, "2x2", owner),
-                new SingleIndexMultipleTilesBrush(4, 4, BrushResizeMode.NoResize, "4x4", owner)
+                new SingleIndexMultipleTilesBrush(2, 2, BrushResizeMode.NoResize, "Multi: 2x2", owner),
+                new SingleIndexMultipleTilesBrush(4, 4, BrushResizeMode.NoResize, "Multi: 4x4", owner),
+                new SingleIndexMultipleTilesBrush(4, 4, BrushResizeMode.NoResize, "Multi: Resizable", owner),
+                new MultipleIndicesMultipleTilesBrush(2, 2, BrushResizeMode.NoResize, "Stamp: 2x2", owner),
+                new MultipleIndicesMultipleTilesBrush(4, 4, BrushResizeMode.NoResize, "Stamp: 4x4", owner),
+                new MultipleIndicesMultipleTilesBrush(4, 4, BrushResizeMode.NoResize, "Stamp: Resizable", owner),
             };
 
             // Select first brush in the list.
-            selectedBrush = brushes[1];
+            selectedBrush = brushes.Last();
         }
 
         public void SelectBrush(string name)

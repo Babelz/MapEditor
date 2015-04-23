@@ -16,13 +16,12 @@ namespace MapEditorCore.TileEditor
 
         private Tile[][] tiles;
 
-
         // Values used to find tiles that are inside the view.
-        int fromRow;
-        int fromColumn;
+        private int fromRow;
+        private int fromColumn;
 
-        int toRow;
-        int toColumn;
+        private int toRow;
+        private int toColumn;
         #endregion
 
         public TileLayer(string name, Point size, TileEngine tileEngine)

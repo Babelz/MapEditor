@@ -71,12 +71,15 @@ namespace MapEditorCore.TileEditor.Painting
          * Display is always 1, internal height and width can be different.
          */
 
+        protected override void OnSelectedIndexChanged(int newX, int newY)
+        {
+            args.TexturePaintArgs.SourceIndex.X = SelectedIndexX;
+            args.TexturePaintArgs.SourceIndex.Y = SelectedIndexY;
+        }
+
         protected override PaintArgs OnPaint()
         {
             argsCount++;
-
-            args.TexturePaintArgs.SourceIndex.X = SelectedIndexX;
-            args.TexturePaintArgs.SourceIndex.Y = SelectedIndexY;
 
             if (argsCount >= width * height)
             {
