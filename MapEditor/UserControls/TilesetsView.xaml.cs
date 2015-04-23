@@ -1,5 +1,6 @@
 ﻿using MapEditor.Components;
 using MapEditor.Helpers;
+using MapEditor.Windows;
 using MapEditorCore.TileEditor;
 using MapEditorCore.TileEditor.Painting;
 using MapEditorViewModels;
@@ -19,6 +20,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Point = Microsoft.Xna.Framework.Point;
 using TileBrush = MapEditorCore.TileEditor.Painting.TileBrush;
 
 namespace MapEditor.UserControls
@@ -95,7 +97,7 @@ namespace MapEditor.UserControls
             if (brushesViewModel.Selected == null) return;
 
             // Get mouse position
-            Point position = Mouse.GetPosition(gridBorder);
+            System.Windows.Point position = Mouse.GetPosition(gridBorder);
             int positionX = (int)position.X / tilesetsViewModel.Selected.TileWidth;
             int positionY = (int)position.Y / tilesetsViewModel.Selected.TileHeight;
 
@@ -113,6 +115,30 @@ namespace MapEditor.UserControls
             
             // Reconstruct selection grid.
             ReconstructSelectionGrid();
+        }
+        private void newSetButton_Click(object sender, RoutedEventArgs e)
+        {
+            NewTilesetDialog newTilesetDialog = new NewTilesetDialog(editor);
+
+            if (newTilesetDialog.ShowDialog().Value)
+            {
+                // Got properties, create new tileset.
+                NewTilesetProperties newTilesetProperties = newTilesetDialog.NewTilesetProperties;
+
+                editor.AddTileset(newTilesetProperties.Name, newTilesetProperties.Path, new Point(newTilesetProperties.TileWidth, newTilesetProperties.TileHeight),
+                                                                                        new Point(newTilesetProperties.OffsetX, newTilesetProperties.OffsetY));
+
+
+                // Add new tileset to view model.
+                tilesetsViewModel.Tilesets.Add(new TilesetViewModel(editor.Tilesets.FirstOrDefault(t => t.Name == newTilesetProperties.Name)));
+            }
+        }
+        private void deleteSetButton_Click(object sender, RoutedEventArgs e)
+        {
+            editor.RemoveTileset(tilesetsViewModel.Selected.Name);
+
+            tilesetsViewModel.Tilesets.Remove(tilesetsViewModel.Selected);
+            tilesetsViewModel.Selected = null;
         }
         #endregion
 

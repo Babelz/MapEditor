@@ -103,6 +103,8 @@ namespace MapEditorCore.TileEditor
             if (ReferenceEquals(tileset, selectedTileset)) selectedTileset = null;
 
             if (TilesetRemoved != null) TilesetRemoved(this, new TilesetEventArgs(tileset));
+
+            if (!tileset.Deleted) tileset.Delete();
         }
     }
 }

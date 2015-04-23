@@ -12,6 +12,9 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="..\Themes\ExpressionDark.xaml"/>
+                <ResourceDictionary>
+                    <components:ValueToBoolConverter x:Key="converter"/>
+                </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -66,8 +69,9 @@
         </ListView>
 
         <StackPanel Grid.Row="2" Margin="5" Orientation="Horizontal" HorizontalAlignment="Left">
-            <Button Name="newSetButton" Content="New" Padding="10, 0, 10, 0" Margin="0, 0, 5, 0"/>
-            <Button Name="deleteSetButton" Content="Delete" Padding="10, 0, 10, 0" Margin="0, 0, 5, 0"/>
+            <Button Name="newSetButton" Content="New" Padding="10, 0, 10, 0" Margin="0, 0, 5, 0" Click="newSetButton_Click"/>
+            <Button Name="deleteSetButton" Content="Delete" Padding="10, 0, 10, 0" Margin="0, 0, 5, 0" Click="deleteSetButton_Click"
+                    IsEnabled="{Binding SelectedItem, ElementName=setsListView, Converter={StaticResource converter}}"/>
         </StackPanel>
 
         <ScrollViewer Grid.Row="4" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" Margin="5"

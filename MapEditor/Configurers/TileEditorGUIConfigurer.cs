@@ -95,7 +95,7 @@ namespace MapEditor.Configurers
                 NewTilesetProperties newTilesetProperties = newTilesetDialog.NewTilesetProperties;
 
                 editor.AddTileset(newTilesetProperties.Name, newTilesetProperties.Path, new Point(newTilesetProperties.TileWidth, newTilesetProperties.TileHeight),
-                                                                                            new Point(newTilesetProperties.OffsetX, newTilesetProperties.OffsetY));
+                                                                                        new Point(newTilesetProperties.OffsetX, newTilesetProperties.OffsetY));
             }
         }
         private void resizeLayerMenuItem_Click(object sender, RoutedEventArgs e)
