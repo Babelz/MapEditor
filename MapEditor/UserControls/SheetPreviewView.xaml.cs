@@ -111,7 +111,8 @@ namespace MapEditor.UserControls
             // Update view model.
             NewTilesetPropertiesViewModel newTilesetPropertiesViewModel = DataContext as NewTilesetPropertiesViewModel;
 
-            // Return of the view model is not found.
+            // Return if the view model is not found and hide 
+            // the preview window.
             if (newTilesetPropertiesViewModel == null) return;
 
             Point mousePosition = e.GetPosition(previewRootCanvas);

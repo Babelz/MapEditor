@@ -1,4 +1,4 @@
-﻿Backlog for 12.4-26.4.2015
+﻿Backlog
 	- Show, edit and select layers
 		- ViewModel
 		- Control
@@ -34,3 +34,9 @@
 	
 	- Visual
 		- Icons
+
+Bugs
+	- Making sets of different size
+	  (engine has 32x32, set has 64x64) causes
+	  some unwanted behaviour with the set view
+	  control

@@ -63,6 +63,9 @@ namespace MapEditor.UserControls
             selectionGridManager = new TileGridManager(selectionGrid, selectionBorder);
 
             rectangles = new List<Rectangle>();
+
+            // Hide view by default.
+            tilesetView.Visibility = Visibility.Hidden;
         }
 
         #region Event handlers
@@ -83,7 +86,14 @@ namespace MapEditor.UserControls
             }
 
             // No set, return.
-            if (tilesetViewModel == null) return;
+            if (tilesetViewModel == null)
+            {
+                tilesetView.Visibility = Visibility.Hidden;
+
+                return;
+            }
+
+            tilesetView.Visibility = Visibility.Visible;
             
             // Reconstruct grid and selection grid.
             ReconstructGrid(editor.Tilesets.FirstOrDefault(t => t.Name == tilesetViewModel.Name));

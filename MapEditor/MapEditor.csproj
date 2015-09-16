@@ -129,6 +129,7 @@
     <Compile Include="Configurers\TileEditorGUIConfigurer.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="ProjectBuilder.cs" />
+    <Compile Include="UserControls\Args.cs" />
     <Compile Include="UserControls\LayersView.xaml.cs">
       <DependentUpon>LayersView.xaml</DependentUpon>
     </Compile>

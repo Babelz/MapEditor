@@ -157,66 +157,69 @@ namespace MapEditorCore.TileEditor
         {
             mouseInputListener.Map("paint", (args) => 
             {
-                if (!layers.HasLayerSelected) return;
-                if (!tilesets.HasTilesetSelected) return;
+                Paint();
+            }, new MouseTrigger(MouseButtons.LeftButton));
+        }
+        private void Paint()
+        {
+            if (!layers.HasLayerSelected) return;
+            if (!tilesets.HasTilesetSelected) return;
 
-                // Get brush bucket.
-                BrushBucket brushBucket = brushBuckets[tilesets.SelectedTileset];
+            // Get brush bucket.
+            BrushBucket brushBucket = brushBuckets[tilesets.SelectedTileset];
 
-                // Return if no brush is selected or it cant be used for painting.
-                if (!brushBucket.HasBrushSelected) return;
-                if (!brushBucket.SelectedBrush.CanPaint()) return;
+            // Return if no brush is selected or it cant be used for painting.
+            if (!brushBucket.HasBrushSelected) return;
+            if (!brushBucket.SelectedBrush.CanPaint()) return;
 
-                int fromX = Mouse.GetState().X;
-                int fromY = Mouse.GetState().Y;
-                
-                // Check that mouse is inside editors view port.
-                if (!SpriteBatch.GraphicsDevice.Viewport.Bounds.Contains(fromX, fromY)) return;
+            int fromX = Mouse.GetState().X;
+            int fromY = Mouse.GetState().Y;
 
-                // Calculate index.
-                fromX = fromX / tileEngine.TileSizeInPixels.X;
-                fromY = fromY / tileEngine.TileSizeInPixels.Y;
-                
-                // Check that the index is in bounds.
-                if (fromX < 0 || fromX >= layers.SelectedLayer.Width) return;
-                if (fromY < 0 || fromY >= layers.SelectedLayer.Height) return;
+            // Check that mouse is inside editors view port.
+            if (!SpriteBatch.GraphicsDevice.Viewport.Bounds.Contains(fromX, fromY)) return;
 
-                // Get brush and paint with it.
-                TileBrush brush = brushBucket.SelectedBrush;
+            // Calculate index.
+            fromX = fromX / tileEngine.TileSizeInPixels.X;
+            fromY = fromY / tileEngine.TileSizeInPixels.Y;
 
-                // Transform position relative to the layer.
-                fromX -= layers.SelectedLayer.X / tileEngine.TileSizeInPixels.X;
-                fromY -= layers.SelectedLayer.Y / tileEngine.TileSizeInPixels.Y;
+            // Check that the index is in bounds.
+            if (fromX < 0 || fromX >= layers.SelectedLayer.Width) return;
+            if (fromY < 0 || fromY >= layers.SelectedLayer.Height) return;
 
-                int toX = fromX + brush.Width;
-                toX = toX >= layers.SelectedLayer.Width ? layers.SelectedLayer.Width : toX;
+            // Get brush and paint with it.
+            TileBrush brush = brushBucket.SelectedBrush;
 
-                int toY = fromY + brush.Height;
-                toY = toY >= layers.SelectedLayer.Height ? layers.SelectedLayer.Height : toY;
+            // Transform position relative to the layer.
+            fromX -= layers.SelectedLayer.X / tileEngine.TileSizeInPixels.X;
+            fromY -= layers.SelectedLayer.Y / tileEngine.TileSizeInPixels.Y;
 
-                // Begin paint.
-                brush.BeginPainting();
-                
-                for (int i = fromY; i < toY; i++)
+            int toX = fromX + brush.Width;
+            toX = toX >= layers.SelectedLayer.Width ? layers.SelectedLayer.Width : toX;
+
+            int toY = fromY + brush.Height;
+            toY = toY >= layers.SelectedLayer.Height ? layers.SelectedLayer.Height : toY;
+
+            // Begin paint.
+            brush.BeginPainting();
+
+            for (int i = fromY; i < toY; i++)
+            {
+                // Check if brush has finished painting.
+                if (!brush.Painting()) return;
+
+                for (int j = fromX; j < toX; j++)
                 {
                     // Check if brush has finished painting.
                     if (!brush.Painting()) return;
 
-                    for (int j = fromX; j < toX; j++)
-                    {
-                        // Check if brush has finished painting.
-                        if (!brush.Painting()) return;
+                    PaintArgs paintArgs = brush.Paint();
 
-                        PaintArgs paintArgs = brush.Paint();
-
-                        layers.SelectedLayer.TileAtIndex(j, i).Paint(paintArgs);
-                    }
+                    layers.SelectedLayer.TileAtIndex(j, i).Paint(paintArgs);
                 }
+            }
 
-                // End paint.
-                brush.EndPainting();
-
-            }, new MouseTrigger(MouseButtons.LeftButton));
+            // End paint.
+            brush.EndPainting();
         }
 
         protected override void OnInitialize()

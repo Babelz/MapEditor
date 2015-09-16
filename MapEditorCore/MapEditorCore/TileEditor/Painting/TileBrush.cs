@@ -151,6 +151,7 @@ namespace MapEditorCore.TileEditor.Painting
         protected virtual void OnResize(int newWidth, int newHeight)
         {
             // Not all brushes can be resized.
+            // TODO: bad design?
         }
 
         /// <summary>
@@ -159,7 +160,6 @@ namespace MapEditorCore.TileEditor.Painting
         /// <returns></returns>
         protected abstract PaintArgs OnPaint();
         
-
         /// <summary>
         /// Finishes drawing.
         /// </summary>
@@ -202,7 +202,7 @@ namespace MapEditorCore.TileEditor.Painting
         /// <summary>
         /// Should be called when painting starts.
         /// </summary>
-        public void BeginPainting()
+        public virtual void BeginPainting()
         {
             painting = true;
         }
@@ -221,7 +221,7 @@ namespace MapEditorCore.TileEditor.Painting
         /// <summary>
         /// Should be called when painting ends.
         /// </summary>
-        public void EndPainting()
+        public virtual void EndPainting()
         {
             painting = false;
         }

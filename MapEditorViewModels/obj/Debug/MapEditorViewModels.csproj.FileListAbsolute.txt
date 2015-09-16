@@ -51,3 +51,15 @@ C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditorViewModels\bin\Debug\MapEdito
 C:\Users\VoidBab\Gits\mapeditor\MapEditor\MapEditorViewModels\bin\Debug\MapEditorInput.pdb
 C:\Users\TTV14SNikoS\Desktop\gits\mapeditor\MapEditorViewModels\bin\Debug\MapEditorInput.dll
 C:\Users\TTV14SNikoS\Desktop\gits\mapeditor\MapEditorViewModels\bin\Debug\MapEditorInput.pdb
+C:\Users\TTV14SNikoS\Source\Repos\MapEditor2\MapEditorViewModels\bin\Debug\Content\temp.xnb
+C:\Users\TTV14SNikoS\Source\Repos\MapEditor2\MapEditorViewModels\bin\Debug\Content\temp.png
+C:\Users\TTV14SNikoS\Source\Repos\MapEditor2\MapEditorViewModels\bin\Debug\MapEditorViewModels.dll
+C:\Users\TTV14SNikoS\Source\Repos\MapEditor2\MapEditorViewModels\bin\Debug\MapEditorViewModels.pdb
+C:\Users\TTV14SNikoS\Source\Repos\MapEditor2\MapEditorViewModels\bin\Debug\MapEditorCore.dll
+C:\Users\TTV14SNikoS\Source\Repos\MapEditor2\MapEditorViewModels\bin\Debug\XNAControl.dll
+C:\Users\TTV14SNikoS\Source\Repos\MapEditor2\MapEditorViewModels\bin\Debug\MapEditorInput.dll
+C:\Users\TTV14SNikoS\Source\Repos\MapEditor2\MapEditorViewModels\bin\Debug\MapEditorCore.pdb
+C:\Users\TTV14SNikoS\Source\Repos\MapEditor2\MapEditorViewModels\bin\Debug\MapEditorInput.pdb
+C:\Users\TTV14SNikoS\Source\Repos\MapEditor2\MapEditorViewModels\obj\Debug\MapEditorViewModels.csprojResolveAssemblyReference.cache
+C:\Users\TTV14SNikoS\Source\Repos\MapEditor2\MapEditorViewModels\obj\Debug\MapEditorViewModels.dll
+C:\Users\TTV14SNikoS\Source\Repos\MapEditor2\MapEditorViewModels\obj\Debug\MapEditorViewModels.pdb
